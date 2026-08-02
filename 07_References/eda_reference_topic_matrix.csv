@@ -1,0 +1,32 @@
+topic,citation_key,year,short_title,why_include,doi_or_url
+Guidelines,Hochhaus2020ELN,2020,ELN 2020 recommendations,Core CML treatment and monitoring guideline,https://doi.org/10.1038/s41375-020-0776-2
+Review,Jabbour2025JAMAReview,2025,CML review,Modern clinical overview for introduction,https://doi.org/10.1001/jama.2025.0220
+Review,Senapati2023CMLManagement,2023,CML management in 2023,Practical management and monitoring context,https://doi.org/10.1038/s41408-023-00823-9
+Review,Haddad2026Algorithms,2026,Recent treatment algorithms,Latest treatment-algorithm framing,https://doi.org/10.1038/s41408-026-01527-6
+Review,Hochhaus2026FunctionalCure,2026,25 years of TKI therapy,Functional-cure and TKI-era context,https://doi.org/10.1038/s41375-026-02984-5
+Guidelines,Yolcu2026ELNEvolution,2026,ELN evolution,Guideline-history and response-criteria context,https://doi.org/10.1080/17474086.2026.2654720
+Guidelines,Takahashi2024JSHGuidelines,2024,JSH CML/MPN guidelines,Recent regional guideline comparator,https://doi.org/10.1007/s12185-024-03865-2
+Molecular response,Hughes2014EarlyMolecularResponse,2014,Early molecular response,Supports early response trajectory analysis,https://doi.org/10.1182/blood-2013-06-510396
+TFR,Rasekh2026TFRPredictor,2026,BCR-ABL1 <=10% and TFR eligibility,Latest early molecular-response predictor,https://doi.org/10.1016/j.clml.2026.04.007
+TFR,Ono2026MR45,2026,MR4.5 predictors and TKI discontinuation,Directly supports DMR/MR4.5 endpoint,https://doi.org/10.1182/bloodadvances.2026019701
+TFR,Takahashi2026JSKI,2026,J-SKI discontinuation study,Recent long-term TKI discontinuation evidence,https://doi.org/10.1007/s12185-026-04184-4
+TFR,Parihar2026TFR,2026,Real-world TFR strategy,Real-world monitoring and TFR feasibility,https://doi.org/10.1007/s12288-025-02199-1
+TFR,Atallah2021TFR,2021,Treatment-free remission review,Accessible TFR discussion reference,https://doi.org/10.1007/s11899-021-00653-1
+Monitoring,Kim2026BCRABLqPCR,2026,1copy BCR::ABL1 qPCR,Assay performance for molecular monitoring,https://doi.org/10.1016/j.plabm.2026.e00538
+Monitoring,Verweij2026RemoteMonitoring,2026,eHealth remote CML monitoring,Modern remote monitoring workflow,https://doi.org/10.2196/76096
+Monitoring,Uwizeyimana2026Rwanda,2026,Molecular response in Rwanda,Real-world molecular-response evidence,https://doi.org/10.2147/CMAR.S595861
+Cytogenetics,Tokac2026CytogeneticDiversity,2026,Variant Philadelphia translocations,Cytogenetic diversity and Ph+ framing,https://doi.org/10.1111/ijlh.70146
+Cytogenetics,Wang2026AdditionalChromosomal,2026,Additional chromosomal abnormalities,Prognostic cytogenetic findings,https://doi.org/10.1007/s12672-026-05309-1
+Imatinib,Hehlmann2017Imatinib10Year,2017,10-year imatinib outcomes,Long-term imatinib anchor for older cohort,https://doi.org/10.1038/leu.2017.253
+TKI therapy,Hochhaus2024AsciminibNEJM,2024,Asciminib newly diagnosed CML,Modern frontline TKI comparator,https://doi.org/10.1056/NEJMoa2400858
+TKI therapy,Takahashi2025ASC4FIRSTJapan,2025,Japanese ASC4FIRST subgroup,Regional molecular-response evidence,https://doi.org/10.1007/s12185-025-04014-z
+TKI therapy,Takahashi2026ASC4FIRSTEastAsian,2026,East Asian ASC4FIRST subgroup,Recent East Asian response/safety context,https://doi.org/10.1002/cam4.72019
+TKI therapy,GambacortiPasserini2026Bosutinib,2026,Second-line bosutinib 10-year results,Post-imatinib long-term TKI evidence,https://doi.org/10.3324/haematol.2025.300221
+TKI therapy,Oehler2026TKIManagement,2026,TKI adverse events and dosing,TKI tolerability discussion,https://doi.org/10.3324/haematol.2025.288334
+Joint modeling,Wulfsohn1997JointModel,1997,Joint model survival and longitudinal data,Foundational joint modeling reference,https://doi.org/10.2307/2533098
+Joint modeling,Rizopoulos2012JointModels,2012,Joint models book,Standard methodological reference,https://doi.org/10.1201/b12208
+Joint modeling,Rizopoulos2016JMbayes,2016,JMbayes package,Bayesian joint-model implementation,https://doi.org/10.18637/jss.v072.i07
+Joint modeling,Lovblom2026MixedObservationJointModel,2026,Mixed observation joint model,Latest mixed-observation joint-model method,https://doi.org/10.1177/09622802261455480
+Joint modeling,Niu2026QuantileJointModel,2026,Quantile joint modeling,Recent multivariate longitudinal-survival method,https://doi.org/10.1177/09622802261420698
+Joint modeling,Kazantzidis2026BayesianNonlinearJointModels,2026,Bayesian nonlinear joint models,Recent Bayesian nonlinear joint modeling,https://doi.org/10.1002/sim.70574
+Joint modeling,Linden2026JointModelProteomics,2026,Dynamic risk prediction joint modeling,Recent applied dynamic prediction example,https://doi.org/10.1002/pro.70621

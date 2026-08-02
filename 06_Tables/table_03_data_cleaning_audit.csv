@@ -1,0 +1,13 @@
+"Cleaning step","Count"
+"raw_longitudinal_rows",504
+"raw_longitudinal_patients",89
+"dropped_missing_or_invalid_core_fields",9
+"model_ready_longitudinal_rows",495
+"model_ready_longitudinal_patients",87
+"raw_patient_table_rows",87
+"usable_patient_covariate_rows",71
+"patient_level_analysis_rows",87
+"complete_core_covariate_rows",62
+"interval_survival_rows",275
+"dmr_event_patients",68
+"censored_patients",19

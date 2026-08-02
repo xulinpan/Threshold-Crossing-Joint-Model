@@ -1,0 +1,110 @@
+\section{Results}
+
+\subsection{Cohort Assembly and Monitoring Structure}
+
+The privacy-preserving analysis cohort contained 87 coded patients, 495 model-ready longitudinal molecular measurements, and 275 at-risk intervals for first observed deep molecular response (DMR). The data-cleaning audit is summarized in Table~\ref{tab:cleaning-audit}. Sixty-eight patients (78.2\%) reached DMR and 19 patients were censored without observed DMR. Baseline clinical covariates were complete for 62 patients (71.3\%), supporting their use as secondary or sensitivity covariates rather than as mandatory adjustment variables in the primary model (Table~\ref{tab:baseline}).
+
+\input{../06_Tables/table_03_data_cleaning_audit.tex}
+
+\input{../06_Tables/table_01_baseline_characteristics.tex}
+
+Follow-up was heterogeneous, with median follow-up of 39.0 months and a median of 5 visits per patient. The median visit gap was 6.0 months; 50.3\% of visit gaps exceeded 6 months and 20.0\% exceeded 12 months. This irregular monitoring structure is clinically important because DMR is detected at laboratory follow-up visits rather than observed at an exact biological onset time. The cohort therefore matches the methodological setting emphasized by recent CML monitoring and treatment-free remission literature: patients with CML increasingly require long-term molecular monitoring, dynamic assessment of response depth, and careful identification of those approaching DMR or treatment-free remission eligibility \cite{Jabbour2025JAMAReview,Haddad2026Algorithms,Rasekh2026TFRPredictor,Ono2026MR45,Takahashi2026JSKI,Verweij2026RemoteMonitoring}.
+
+\subsection{Longitudinal Molecular Response Patterns}
+
+Across all longitudinal observations, 239 measurements (48.3\%) were at or below the log-MRD floor of -5.0. DMR and complete molecular response became increasingly frequent over follow-up: DMR was present in 3.0\% of observations during months 0--3, 32.9\% during months 6--12, 53.7\% during months 12--24, and 74.7\% after 60 months (Table~\ref{tab:longitudinal-time}). Figure~\ref{fig:log-mrd-trajectories} shows a marked population-level decline in log-MRD, with substantial patient-level heterogeneity around the smoothed trajectory.
+
+\input{../06_Tables/table_02_longitudinal_by_time.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.92\linewidth]{../05_Figures/figure_01_log_mrd_trajectories.pdf}
+\caption{Patient-level log-MRD trajectories with smoothed population trend and DMR/CMR thresholds.}
+\label{fig:log-mrd-trajectories}
+\end{figure}
+
+The Kaplan--Meier summary of first observed DMR (Figure~\ref{fig:time-to-dmr}) showed rapid early accumulation of DMR events followed by a longer tail of delayed or censored responders. Because the event time in this figure is the visit time at which DMR was first documented, it should be interpreted as a descriptive visualization rather than an exact-event survival analysis. This feature motivates the interval-observed DMR component of the joint model.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.78\linewidth]{../05_Figures/figure_02_time_to_dmr_km.pdf}
+\caption{Kaplan--Meier curve for time until first observed DMR. Event times correspond to monitoring visits at which DMR was first documented.}
+\label{fig:time-to-dmr}
+\end{figure}
+
+\subsection{Primary Joint Longitudinal--Interval Model}
+
+The Bayesian joint model combined a latent longitudinal log-MRD trajectory with an interval DMR submodel. The longitudinal component included nonlinear time terms, specimen source, patient-specific random intercepts and slopes, and left-censoring for assay-floor observations. The interval component modeled the probability of first DMR during each at-risk monitoring interval using interval midpoint time, visit-gap length, and the current latent log-MRD trajectory. This structure extends standard joint longitudinal--survival ideas \cite{Wulfsohn1997JointModel,Rizopoulos2016JMbayes} to the practical CML monitoring setting in which biomarker values are floor-limited and response onset is interval-observed. Recent joint-modeling work continues to emphasize mixed observation schemes and flexible longitudinal-event associations \cite{Lovblom2026MixedObservationJointModel,Niu2026QuantileJointModel}, supporting the relevance of this modeling direction.
+
+The model was computationally stable for the main clinical-statistical parameters. Four chains produced 4000 post-warmup draws, with no divergent transitions, maximum treedepth of 7, minimum approximate E-BFMI of 0.500, and maximum R-hat of 1.019. The only notable weakly estimated parameter was the random-effect correlation, which was near zero and had lower effective sample size; it was therefore treated as a nuisance parameter rather than a substantive clinical result.
+
+Table~\ref{tab:joint-model-posterior} summarizes the primary posterior estimates. The longitudinal time effect was strongly negative (\(\beta_{\mathrm{time}}=-3.539\), 95\% posterior interval -4.497 to -2.613), indicating a marked decline in latent log-MRD over follow-up. The quadratic log-time term was positive on average (\(\beta_{\mathrm{time}^2}=0.499\), 95\% posterior interval -0.005 to 1.012), consistent with nonlinear response dynamics rather than a simple linear decline. The bone marrow sample-source effect was positive on average but uncertain (\(\beta_{\mathrm{BM}}=0.613\), 95\% posterior interval -0.826 to 2.065), and was interpreted as measurement-source adjustment rather than a confirmed clinical effect.
+
+\input{table_05_joint_model_posterior_results.tex}
+
+The main clinical association was the link between latent molecular burden and DMR. The association parameter was negative (\(\alpha_{\mathrm{MRD}}=-1.256\), 95\% posterior interval -1.851 to -0.809), indicating that lower latent log-MRD was associated with higher interval probability of DMR. On the multiplicative hazard-component scale, a one-unit lower latent log-MRD value corresponded to an approximately 3.5-fold higher interval DMR hazard component. This finding is clinically coherent and aligns with recent evidence that early and deep molecular responses are central to long-term CML management and treatment-free remission eligibility \cite{Rasekh2026TFRPredictor,Ono2026MR45,Takahashi2026JSKI}.
+
+\subsection{Posterior Predictive Checks, Calibration, and Sensitivity Analyses}
+
+Posterior predictive checks supported the adequacy of the longitudinal component (Table~\ref{tab:model-checks}). Among non-floor observations, the 90\% posterior predictive coverage was 0.961 and the 95\% coverage was 0.988. The observed floor rate was 0.483, while the posterior mean floor probability was 0.414. Figure~\ref{fig:posterior-predictive} shows the non-floor posterior predictive comparison and the model-estimated probability of being at the assay floor over follow-up. This check is important because recent laboratory work continues to emphasize the analytical behavior of BCR::ABL1 assays near deep molecular response levels \cite{Kim2026BCRABLqPCR}.
+
+\input{table_06_model_check_summary.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{figure_08_posterior_predictive_longitudinal.pdf}
+\caption{Posterior predictive check for longitudinal log-MRD and posterior mean probability of assay-floor response. Points in the right panel distinguish observed floor and non-floor measurements.}
+\label{fig:posterior-predictive}
+\end{figure}
+
+Interval-level calibration was close in aggregate: the observed interval event rate was 0.247 and the mean predicted interval probability was 0.247, with Brier score 0.082. Patient-level cumulative DMR probability was lower than the observed patient-level DMR rate (mean predicted probability 0.581 versus observed rate 0.782), indicating that the patient-level probabilities require recalibration or external validation before use as decision thresholds. Grouped calibration plots are shown in Figure~\ref{fig:dmr-calibration}.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{figure_09_dmr_calibration.pdf}
+\caption{Grouped calibration of model-estimated DMR probabilities. Interval-level calibration is close in aggregate, whereas patient-level cumulative DMR probability is underpredicted in the development cohort.}
+\label{fig:dmr-calibration}
+\end{figure}
+
+Sensitivity analyses evaluated the dependence of the conclusions on assay-floor handling and interval-model specification. Longitudinal benchmark models treating floor values as exact -5.0 and as shifted values at -5.5 showed qualitatively consistent time-response patterns. A non-floor-only stress test became rank deficient for sample source and is therefore best treated as supplemental evidence rather than a competing primary model. Interval-level logistic benchmark models showed that baseline log-MRD and visit timing contributed meaningful information, supporting the broader conclusion that serial molecular burden and monitoring structure are clinically informative.
+
+\section{Discussion}
+
+\subsection{Principal Findings}
+
+This study demonstrates that a joint longitudinal--interval modeling framework can translate real-world serial MRD monitoring into clinically interpretable estimates of molecular response dynamics and DMR probability. The primary findings are threefold. First, log-MRD declined markedly over follow-up, with evidence of nonlinear response dynamics and substantial patient-level heterogeneity. Second, lower latent molecular burden was strongly associated with higher interval probability of DMR. Third, the model handled features that are common in routine CML monitoring but are often simplified in standard analyses: irregular visit spacing, assay-floor measurements, patient-specific response trajectories, and interval-observed DMR onset.
+
+These findings are consistent with contemporary CML literature. Modern reviews and treatment algorithms emphasize that long-term outcomes in CML are shaped by sustained molecular control, adverse-effect management, treatment adherence, and the possibility of treatment-free remission in carefully selected patients \cite{Jabbour2025JAMAReview,Haddad2026Algorithms,Oehler2026TKIManagement}. Recent studies further connect early molecular response and MR4.5 attainment with future treatment-free remission eligibility \cite{Rasekh2026TFRPredictor,Ono2026MR45}. The present analysis does not claim to determine treatment discontinuation eligibility, but it addresses a prerequisite for future decision support: estimating the evolving latent molecular state from real-world monitoring data.
+
+\subsection{Model Novelty and Methodological Contribution}
+
+The novelty of the model lies in the integration of four clinically important data features into one likelihood-based framework. First, repeated log-MRD values are modeled as a latent patient-specific trajectory rather than as isolated measurements. Second, assay-floor values are treated as left-censored observations, which is more appropriate than treating deep-response measurements as exact values at the reporting limit. Third, first DMR is modeled as interval-observed, reflecting that response onset is only known to have occurred between monitoring visits. Fourth, the latent MRD trajectory is directly linked to the interval DMR process through an association parameter.
+
+This combination distinguishes the proposed framework from descriptive Kaplan--Meier analyses, landmark response summaries, baseline-only prognostic models, and exact-time survival approximations. It also provides a practical applied extension of joint modeling methods to a real-world hematology monitoring problem \cite{Wulfsohn1997JointModel,Rizopoulos2016JMbayes,Lovblom2026MixedObservationJointModel}. For a methodological healthcare journal, the contribution is not merely that a joint model was applied to CML. Rather, the contribution is a reproducible modeling workflow for irregular biomarker monitoring with floor-limited longitudinal measurements and interval-observed response onset.
+
+\subsection{Clinical Contribution}
+
+Clinically, the model supports a monitoring-oriented interpretation of CML molecular response. The strong negative association between latent log-MRD and DMR probability indicates that the evolving molecular trajectory contains information about deep response beyond a single baseline or landmark measurement. This supports the clinical logic of using serial BCR::ABL1/MRD histories to identify patients with rapid molecular control, delayed response, or persistently higher molecular burden.
+
+The framework also aligns with the emerging need for scalable, patient-centered monitoring systems. Recent remote-monitoring work in CML shows that digital dashboards and patient-facing platforms may support guideline adherence and long-term care, but that data completeness, inconsistent monitoring time points, and integration with clinical workflows remain key barriers \cite{Verweij2026RemoteMonitoring}. The present model addresses the statistical side of the same problem: how to analyze irregularly timed and incomplete monitoring data without forcing them into an exact-time structure.
+
+The immediate clinical value is therefore best described as monitoring support and risk stratification. The model can identify intervals and patients with different estimated DMR probabilities, and it provides a framework that could be updated as new MRD values become available. However, because patient-level cumulative DMR probabilities were underpredicted in the development cohort and no external validation cohort was available, the model should not be used as a treatment-decision rule or treatment-free remission eligibility tool without recalibration and prospective validation.
+
+\subsection{Interpretation of Calibration and Sensitivity Checks}
+
+The added posterior predictive and calibration analyses strengthen the credibility of the model for peer review. The longitudinal posterior predictive check showed high predictive coverage among non-floor observations and a clinically plausible separation between floor and non-floor measurements. Interval-level calibration was close in aggregate, suggesting that the interval DMR component captured the observed event frequency well at the monitoring-interval level. The underprediction of patient-level cumulative DMR probability is an important limitation, but it is also informative: it indicates that model-derived probabilities should be treated as descriptive and monitoring-oriented in the current cohort rather than deployed as uncalibrated clinical thresholds.
+
+Sensitivity analyses supported the robustness of the main qualitative interpretation. Alternative assay-floor treatments preserved the broad time-response pattern, and benchmark interval models supported the relevance of baseline molecular burden and monitoring time structure. These analyses help address likely reviewer concerns that the primary results might be artifacts of one floor-value convention or one interval-model specification.
+
+\subsection{Limitations}
+
+Several limitations should be acknowledged. The cohort was modest, with 87 patients and complete core covariates in 62 patients. The analysis was based on a single real-world dataset without an external validation cohort. Monitoring schedules were irregular, and patients with longer follow-up had more opportunity to document DMR, which reinforces the need for interval-aware modeling but also limits naive comparisons between event and censored patients. The model adjusted for sample source, but the sample-source effect was uncertain. The random-effect correlation was weakly estimated and should not be interpreted clinically. Finally, the calibration analyses were internal development-cohort checks, not independent validation.
+
+\subsection{Implications for Future Research}
+
+The next step is external or temporal validation of the dynamic DMR probabilities. Future work should evaluate calibration in an independent cohort, compare the joint model against exact-time and landmark alternatives, and assess whether model-updated DMR probabilities improve monitoring decisions or patient counseling. A simulation study could further quantify bias and coverage when event onset is interval-observed and longitudinal measurements are floor-limited. Such work would strengthen the manuscript's methodological contribution and support broader application to other diseases with irregular biomarker monitoring and threshold-defined response endpoints.
+
+\subsection{Conclusion}
+
+In a real-world CML monitoring cohort, the joint longitudinal--interval model showed that serial latent MRD trajectories are strongly associated with interval-observed DMR. By combining repeated molecular measurements, assay-floor handling, irregular visit timing, patient-level heterogeneity, and interval response modeling, the framework provides a clinically interpretable and methodologically coherent approach to molecular-response monitoring. The results support individualized monitoring and future dynamic prediction, while also emphasizing that external validation and calibration are required before clinical decision use.
+

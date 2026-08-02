@@ -1,0 +1,1788 @@
+%% =====================================================================
+%% ANONYMIZED MAIN MANUSCRIPT — SMMR double-anonymized review
+%% Generated from 02_LaTeX/glw_full_manuscript_smmr_rev10.tex
+%% Do not edit directly; edit the source manuscript and regenerate.
+%% =====================================================================
+%% =====================================================================
+%% Statistical Methods in Medical Research (SMMR) submission version
+%% Restructured from glw_full_manuscript_renewed.tex to SAGE / SMMR
+%% author instructions: methods-led structure, unstructured abstract
+%% (<=200 words), >=5 keywords, Sage Vancouver references, anonymized
+%% main file, Statements and Declarations block.
+%%
+%% NOTE ON ANONYMIZATION (SMMR is double-anonymized):
+%% The author/affiliation block below is commented out. Move it to a
+%% SEPARATE Title Page file at submission; the main manuscript sent to
+%% reviewers must not contain identifying information.
+%% =====================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage[super,sort&compress]{natbib}  % Sage Vancouver: numbered
+\usepackage{amsmath}
+\usepackage{array}
+
+\captionsetup{font=small,labelfont=bf}
+\graphicspath{{../figures/}{../../05_Figures/}{../../08_Model/}}
+\makeatletter
+\def\input@path{{../../06_Tables/}{../../08_Model/}{../../10_Final/reproducibility_package/results/}}
+\makeatother
+
+\title{A Bayesian Threshold-Crossing Joint Model for Irregular,
+Assay-Floor-Censored Molecular Monitoring in Chronic Myeloid Leukemia}
+
+%% ANONYMIZED: authors and affiliations are on the separate Title Page file.
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Tyrosine kinase inhibitor (TKI) therapy has made chronic myeloid leukemia a
+condition managed over decades, so that the therapeutic goal is now
+\emph{sustained} deep molecular response, the prerequisite for treatment-free
+remission; its attainment is challenged by resistance-driven changes of therapy
+and by the cost of continuous treatment and monitoring, by both of which
+response may be interrupted.
+
+Response is tracked by routine molecular monitoring, whose data are irregular,
+censored and heterogeneous: measurable residual disease (log-MRD) is recorded
+only at response-adaptive visits, so the endpoint is interval-censored; deep
+values are left-censored at the assay floor ($48\%$ of observations); covariates
+are incompletely recorded; and patients differ markedly in the depth and timing
+of response. A further difficulty is definitional: deep molecular response (DMR)
+is \emph{defined} as log-MRD crossing $-4.5$, so its prediction from the same
+biomarker is circular.
+
+The novelty of the model developed here lies in dissolving that circularity. One
+latent trajectory is shared by the measurements and the event process, and DMR
+is read off it as a threshold crossing (first-hitting time) rather than coded as
+a separate event. Because the trajectory is piecewise-quadratic, the running
+extrema defining crossings are closed-form, so sampling is divergence-free; a
+conventional interval-censored hazard and a multi-state extension (onset,
+durability, relapse) are obtained as options of the same program, which makes
+the alternatives directly comparable.
+
+The model was applied to an in-house, single-centre cohort assembled from
+routine clinical monitoring (87 patients, 495 observations). The
+biomarker--event association was strong
+($\alpha_{\mathrm{MRD}}=-1.27$, $95\%$ credible interval $-1.72$ to $-0.89$) and
+stable across the censoring point and across prior families for the scale
+parameters, though simulation shows it is sensitive to the width of its own
+location prior and is therefore prior-informed. Coding assay-floor values as
+exact rather than left-censored halved the recovered between-patient
+heterogeneity and attenuated the residual scale by a quarter, with zero
+credible-interval coverage for both; the bias did not diminish with sample size,
+so left-censoring is a requirement of the likelihood rather than a refinement.
+Simulation also identifies the estimated \emph{rate} of decline as the quantity
+most exposed to the schedule-conditional assumption (coverage $0.44$ under
+response-adaptive monitoring). Interval-level risks were calibrated in the large
+(Brier $0.082$); patient-level DMR was under-predicted and recalibration was
+required. Residual variability was large ($\sigma_y=1.81$) and was \emph{not}
+explained by serial correlation. Refitting with Student-$t$ measurement error
+drives the degrees of freedom to its lower bound ($\nu=2.20$) yet predicts no
+better, so the two specifications describe the data equally well while implying
+different variance decompositions ($\tau_{b0}$ $0.97$ versus $0.31$;
+$\tau_{b1}$ $2.20$ versus $3.05$): the split between measurement error and
+between-patient heterogeneity is not identified independently of the tail
+assumption. Quantities sensitive to it are reported under both. Clinically, landmark probabilities of attaining and sustaining DMR---the basis
+of treatment-free-remission eligibility---are obtained as monitoring support
+rather than a treatment-decision rule, being internal (apparent), with the
+relapse component exploratory.
+\end{abstract}
+
+\noindent\textbf{Keywords:} joint longitudinal--survival models;
+left-censored biomarkers; interval-censored events; Bayesian hierarchical
+modelling; chronic myeloid leukemia.
+
+\section{Introduction}
+
+Chronic myeloid leukemia (CML) is driven by the BCR::ABL1 fusion gene and, without effective treatment, may progress from chronic phase to accelerated phase and blast crisis. Tyrosine kinase inhibitor (TKI) therapy has substantially altered this prognosis, making CML a chronic condition managed through long-term suppression of the leukemic clone. Continued disease control nevertheless depends on treatment adherence and regular molecular monitoring. The therapeutic objective has therefore expanded from survival and hematologic control to the attainment and maintenance of deep molecular response, which is a prerequisite for considering treatment-free remission
+\cite{Hochhaus2020ELN,Jabbour2025JAMAReview,Haddad2026Algorithms,Senapati2023CMLManagement}.
+
+The depth, timing, and durability of molecular response are clinically important. Deep and sustained responses, including MR4.5, inform response assessment and treatment-discontinuation discussions
+\cite{Hughes2014EarlyMolecularResponse,Rasekh2026TFRPredictor,Ono2026MR45,Takahashi2026JSKI}. Early molecular response, commonly defined as BCR::ABL1 $\leq 10\%$ at three months, is associated with improved progression-free and overall survival
+\cite{Hanfstein2012EMR,Ohm2012Landmark}. Conversely, later response attainment and subsequent loss of response are associated with poorer outcomes
+\cite{Li2014TKIEfficacy}. Statistical analysis of longitudinal molecular monitoring data should therefore quantify not only the average response trajectory but also between-patient variation and uncertainty in the timing of deep response.
+
+Routine molecular monitoring data create several related statistical difficulties. First, measurements are obtained at irregular and partly response-adaptive visits. Biological response may occur between visits, so the time at which a patient crosses a molecular-response threshold is not directly observed. The first visit documenting deep response provides only an upper bound on its latent onset time.
+
+Second, measurements near the lower range of quantification are subject to assay-floor censoring. A result reported at the assay floor does not generally represent an exact molecular value; instead, it indicates that the unobserved value lies at or below the laboratory reporting limit. Treating every floor-coded result as an exact number can distort the estimated mean trajectory, residual variability, and between-patient heterogeneity.
+
+Third, patients differ substantially in their baseline molecular burden and rate of response, while treatment changes, interruptions, adherence, and other potentially relevant covariates may be incompletely recorded. A useful model must accommodate patient heterogeneity while avoiding clinical interpretations that are unsupported by the available covariates.
+
+Finally, deep molecular response (DMR) is defined through the same biomarker being modelled. If $y_{ij}$ denotes the molecular measurement obtained for patient $i$ at visit $j$, the recorded response indicator is determined by whether that measurement falls below a specified threshold. Consequently, a DMR indicator constructed from $y_{ij}$ does not provide an independent event observation in addition to $y_{ij}$. Entering both the quantitative measurement and a separately coded event derived from that measurement into conditionally independent likelihood components would reuse the same information and could produce over-precise inference.
+
+Joint longitudinal--survival models provide a general framework for connecting repeated biomarkers with independently observed event processes
+\cite{Wulfsohn1997JointModel,Rizopoulos2016JMbayes}. Extensions accommodate multistate outcomes, mixed observation schemes, and flexible biomarker--event associations
+\cite{Lovblom2026MixedObservationJointModel,Niu2026QuantileJointModel}. Separately, threshold-regression and first-passage-time methods define an event as the first time a latent process reaches a boundary
+\cite{LeeWhitmore2006ThresholdRegression,AalenGjessing2001ProcessView,AalenBorganGjessing2008}, while interval-censoring methods address events known only to occur between observation times
+\cite{Sun2006IntervalCensored}. These literatures provide important components of the present analysis, but they do not by themselves resolve the observed-data problem that arises when the clinical endpoint is deterministically constructed from the same assay measurements used to estimate the latent trajectory.
+
+The specific problem considered here is therefore narrower than general joint longitudinal--event modelling. We consider a longitudinal biomarker that is observed irregularly and censored at an assay floor, together with a clinically relevant response time defined as a threshold-crossing functional of that biomarker. Because the response classification is derived from the molecular measurements, we do not introduce it as a second, conditionally independent survival outcome. Instead, each assay result contributes once through the longitudinal observed-data likelihood, and the latent time of DMR attainment is derived from the posterior distribution of the underlying molecular trajectory.
+
+Let $m_i(t)$ denote the latent log-MRD trajectory for patient $i$, and let $c_D=-4.5$ denote the nominal DMR threshold. We define the latent threshold-crossing time as
+
+\[
+T_i^D=\inf\{t\geq 0:\ m_i(t)\leq c_D\}.
+\]
+
+The posterior distribution of $T_i^D$ is induced by the posterior distribution of the longitudinal-model parameters and patient-specific random effects. Thus, uncertainty in the trajectory is propagated directly into uncertainty about response timing without multiplying the longitudinal likelihood by an additional likelihood constructed from the same observations. Recorded response status remains useful for describing the cohort and checking the correspondence between model-implied crossings and observed assay classifications, but it is not treated as independent information for parameter estimation.
+
+The primary analysis conditions on the realized monitoring times. This schedule-conditional formulation avoids interpreting the visit process as a biological event mechanism, although it does not eliminate possible bias from response-adaptive monitoring. The implications of informative observation schedules must therefore be investigated through sensitivity analysis and acknowledged when interpreting the results. The proposed model is intended for inference about latent molecular trajectories and threshold-crossing times; it is not presented as a validated treatment-decision or TKI-discontinuation rule.
+
+The methodological contributions of this study are threefold. First, we formulate a coherent Bayesian observed-data model for an irregular longitudinal biomarker subject to assay-floor left-censoring. Patient-specific random effects represent heterogeneity in baseline molecular burden and response rate, while floor-coded measurements contribute cumulative normal probabilities rather than exact-value densities.
+
+Second, we define DMR attainment as a posterior threshold-crossing functional of the latent trajectory. For the quadratic trajectory on the $\log(1+t)$ time scale used here, the running minimum over any finite interval can be evaluated analytically by considering the interval endpoints and, when the trajectory is convex and its vertex lies within the interval, the vertex value. This calculation remains valid without assuming positive curvature for every posterior draw and avoids a numerical time grid or soft-minimum approximation.
+
+Third, we evaluate the consequences of assay-floor handling and trajectory assumptions through simulation and illustrate the resulting inference using a single-centre CML molecular-monitoring cohort. The empirical analysis focuses on posterior trajectory estimation, between-patient heterogeneity, uncertainty in latent DMR-attainment times, posterior predictive assessment of the longitudinal measurements, and sensitivity to the assumed assay-reporting boundary. Comparisons with models that treat floor-coded measurements as exact values are used to isolate the inferential consequences of ignoring censoring rather than to claim clinical predictive superiority.
+
+The available cohort cannot by itself establish the laboratory reporting convention responsible for the absence of measurements between the nominal DMR threshold and the recorded assay floor. We therefore distinguish the nominal clinical threshold $c_D$ from the assumed censoring boundary $c_F$ and examine plausible values of $c_F$ in sensitivity analyses. Inferences about response timing are interpreted as model-based estimates conditional on the assumed reporting rule, the observed monitoring schedule, and the recorded molecular histories. External validation, prospective landmark prediction, and modelling of molecular relapse are outside the scope of the present study.
+
+
+\section{Statistical framework}
+\label{sec:methods}
+
+We first describe the cohort that motivates the model, since three of its
+features determine the three modelling choices that follow, and then develop the
+model itself.
+
+\subsection{Motivating data}
+\label{sec:motivating}
+
+The methodology is motivated and illustrated with an in-house CML monitoring
+cohort assembled from routine tyrosine kinase inhibitor monitoring at a single
+haematology centre in China, followed under the 2011 Chinese CML guideline
+\cite{CSH2011CMLGuideline}, which prescribes response-adaptive testing---quarterly
+BCR::ABL1 quantification, intensified to every one-to-three months if the
+transcript rises---so that visit times are irregular and partly response-driven
+by design. Of 504 raw visit-level records on 89 patients, 495 complete
+observations on 87 patients were retained after removal of records with missing
+or invalid essential fields, yielding 275 at-risk intervals for first documented
+DMR (full cleaning audit in the Supplementary Material; coded identifiers were
+used throughout, with direct identifiers held only in a private linkage file).
+DMR was defined as $\text{log-MRD}\le-4.5$ and complete molecular response as
+$\text{log-MRD}\le-5.0$, both audited by recomputation. Three features of these
+data drive the modelling. First, $239$ of $495$ observations ($48.3\%$) lay at
+or below the log-MRD floor of $-5.0$ and none fell in $(-5.0,-4.5]$, so
+DMR-positive and CMR-positive counts coincide---not through a coding error, but
+because every DMR-positive value was reported at the floor---which motivates
+left-censored modelling and limits what the data alone can say about depth
+beyond DMR. Second, monitoring was heterogeneous: median follow-up was $39.0$
+months with a median of $5$ visits per patient, and the median visit gap was
+$6.0$ months, with $50.3\%$ of gaps exceeding $6$ months and $20.0\%$ exceeding
+$12$. Third, DMR is documented only at visits, so its timing is known only to
+within the bracketing interval. Treatment time was recorded in months and
+converted to years for all likelihood components; with $t^{(m)}$ denoting months
+since imatinib initiation, the model uses $t=t^{(m)}/12$ and time effects on the
+$\log(1+t)$ scale.
+
+\subsection{Longitudinal sub-model with assay-floor left-censoring}
+\label{sec:long}
+
+Let $m_i(t)$ denote the latent biological log-MRD trajectory for patient
+$i$ at treatment time $t$ (years):
+\[
+m_i(t)=\beta_0+\beta_1\log(1+t)+\beta_2\{\log(1+t)\}^2
++b_{0i}+b_{1i}\log(1+t),
+\]
+with independent patient-specific random effects
+\[
+b_{0i}\sim N(0,\tau_{b0}^2), \qquad b_{1i}\sim N(0,\tau_{b1}^2).
+\]
+An earlier specification included a random intercept--slope correlation;
+because it was weakly identified in this cohort, the final model treats the
+random effects as independent, which improved computational stability
+without materially changing the fit. The observation-scale mean includes a
+sample-source adjustment for bone-marrow versus peripheral-blood assays:
+\[
+\mu_{ij}=m_i(t_{ij})+\beta_{\mathrm{BM}}\,I(\mathrm{bone\ marrow}_{ij}).
+\]
+For observations above the reporting floor,
+$y_{ij}\sim N(\mu_{ij},\sigma_y^2)$. For observations reported at the
+assay floor $c_F=-5.0$, the likelihood contribution is left-censored,
+carrying the information that the true value lies at or below the floor:
+\[
+\Pr(y_{ij}^{\ast}\le c_F)=
+\Phi\!\left\{\frac{c_F-\mu_{ij}}{\sigma_y}\right\}.
+\]
+
+The numerical value of $c_F$ is a property of the laboratory's reporting
+convention, not a modelling choice, and it warrants explicit treatment here
+because assay-floor censoring is central to this paper. Every deep value in this
+cohort was reported at $-5.0$ and no retained observation fell in
+$(-5.0,-4.5]$; the absence of that interval is a signature of the reporting
+convention rather than of biology, and is consistent with values at or below
+MR4.5 having been collapsed to a single reported code. We take $c_F=-5.0$, the
+recorded value, for the analyses reported below, and refit the primary
+specification with $c_F=-4.5$ as a sensitivity analysis
+(Section~\ref{sec:sens-extra}). The two agree on the biomarker--event
+association---the quantity this paper draws conclusions from---and differ
+moderately in the trajectory variance components, which we report. Establishing
+the reporting rule from the laboratory standard operating procedure would remove
+this ambiguity and we recommend it for future series; in its absence we report
+both and rely on the association.
+
+\subsection{Interval-observed sub-model for first documented DMR}
+\label{sec:interval}
+
+The event sub-model is an interval-observed likelihood for the time of first
+\emph{documented} DMR. Because DMR is detected only at monitoring visits, the
+event is interval-observed. For each patient the first at-risk interval ending in a
+DMR-positive measurement is coded as the event interval, and preceding
+intervals as at risk without event; patients without documented DMR by
+last follow-up are right-censored. Let $L_{ik}$ and $R_{ik}$ be the start
+and end of at-risk interval $k$, with $\Delta_{ik}=R_{ik}-L_{ik}$ and
+$t_{ik}^{mid}=(L_{ik}+R_{ik})/2$. The interval hazard links the latent
+trajectory to DMR:
+\[
+h_{ik}^{\mathrm{DMR}}=
+\exp\{\gamma_0+\gamma_1\log(1+t_{ik}^{mid})
++\gamma_2\log(1+\Delta_{ik})
++\alpha\, m_i(t_{ik}^{mid})\},
+\qquad
+p_{ik}^{\mathrm{DMR}}=
+1-\exp\{-h_{ik}^{\mathrm{DMR}}\Delta_{ik}\}.
+\]
+The interval length $\Delta_{ik}$ enters in two distinct roles that should
+not be conflated. It first enters as \emph{exposure time} through the
+cumulative-hazard form
+$p_{ik}^{\mathrm{DMR}}=1-\exp\{-h_{ik}^{\mathrm{DMR}}\Delta_{ik}\}$, the
+standard complementary log--log likelihood for a grouped or interval-censored
+event; this encodes the baseline assumption that the opportunity to document
+DMR accumulates \emph{proportionally} with time at risk. The additional term
+$\gamma_2\log(1+\Delta_{ik})$ sits inside the log-hazard and does not
+re-express interval length as exposure: it modulates the per-unit-time
+documentation \emph{intensity} and therefore measures \emph{departure from
+proportional exposure accumulation}. A negative $\gamma_2$ indicates that
+longer at-risk gaps carry a lower documentation intensity per unit time than
+proportional accumulation would predict---an observation- and
+monitoring-process feature (for example, sparser or less informative sampling
+across long gaps), not a biological property of molecular response. Because
+the two contributions enter multiplicatively and in different roles---exposure
+duration versus a log-linear modifier of intensity---the specification does
+not double-count interval length. The shared latent value
+$m_i(t_{ik}^{mid})$ couples the two sub-models, so that lower latent MRD raises
+the probability of documented DMR; this coupling carries the biological
+interpretation. To confirm that the substantive association is not an artefact
+of the observation-process term, we refit the event sub-model without
+$\gamma_2\log(1+\Delta_{ik})$ as a sensitivity analysis (reported in
+Section~\ref{sec:application}).
+
+\subsection{Latent threshold-crossing and multi-state model}
+\label{sec:threshold}
+
+The interval sub-model treats first DMR as an interval-censored event whose
+likelihood is driven by the biomarker, but DMR is \emph{defined} by the latent
+log-MRD trajectory crossing $c_D=-4.5$. Our second model represents this
+directly as a first-hitting-time process
+\cite{LeeWhitmore2006ThresholdRegression,AalenGjessing2001ProcessView}, which
+removes the definitional circularity between the biomarker predictor and the
+endpoint. Writing $M_i(t)=\min_{0\le u\le t}m_i(u)$ for the running minimum of
+the latent trajectory, first DMR is
+$T_i^D=\inf\{t\ge 0:m_i(t)\le c_D\}=\inf\{t:M_i(t)\le c_D\}$, so a patient with
+documented first DMR in $(L_i,R_i]$ satisfies $M_i(L_i)>c_D$ and
+$M_i(R_i)\le c_D$, and a censored patient satisfies $M_i(C_i)>c_D$. For
+gradient-based sampling we replace the hard indicators by a probabilistic
+crossing with an effective patient-level threshold
+$C_i\sim N(c_D,\sigma_{\mathrm{thr}}^2)$: an event documented in $(L_i,R_i]$
+contributes
+$\Phi\{(M_i(L_i)-c_D)/\sigma_{\mathrm{thr}}\}-\Phi\{(M_i(R_i)-c_D)/\sigma_{\mathrm{thr}}\}$
+and a censored patient the corresponding tail. Separating the threshold width
+$\sigma_{\mathrm{thr}}$ (threshold ambiguity) from the residual observation-level
+variability $\sigma_y$ makes both identifiable, whereas a single width confounds
+them. We emphasise that $\sigma_y$ here is the total observation-level residual
+standard deviation, not analytical assay error alone: in this cohort it is larger
+than assay variability implies and is not reduced by allowing within-patient serial
+correlation (Section~\ref{sec:sens-extra}). The identifiability argument therefore
+concerns the separation of threshold ambiguity from this total residual, and does
+not depend on $\sigma_y$ being pure measurement error. In
+this cohort every documented DMR was reported at the $-5.0$ floor, so the
+observed endpoint is operationally first attainment of the floor and
+$\sigma_{\mathrm{thr}}$ additionally absorbs the gap between the nominal $-4.5$
+cut-point and the recorded value.
+
+\paragraph{Multi-state extension.}
+Molecular response has depth and is reversible: a patient may attain DMR,
+sustain it, or lose it, and treatment-free-remission eligibility depends on
+\emph{durable} response \cite{Li2014TKIEfficacy,Hanfstein2012EMR}. We therefore
+extend the crossing model to a bidirectional multi-state process on the same
+latent trajectory, with states $0$ (not yet DMR), $1$ (in DMR) and $2$
+(molecular relapse). Onset ($0\to1$) is the downward crossing above; durable
+response over a window $w$ is the event $\max_{u\in[T_i^D,T_i^D+w]}m_i(u)\le c_D$
+(the running \emph{maximum} after onset staying below threshold); and relapse
+($1\to2$) is the first upward crossing
+$T_i^R=\inf\{t>T_i^D:m_i(t)>c_D\}$. Each transition enters the likelihood
+through the same probit crossing device with width $\sigma_{\mathrm{thr}}$.
+Because $m_i$ is quadratic in $\log(1+t)$, both extrema are available in
+\emph{closed form}---the running minimum is the value at the vertex
+$\ell^\ast=-(\beta_1+b_{1i})/(2\beta_2)$ clamped to the observed range, and past
+the vertex $m_i$ is monotone, so the upward crossing and the durability maximum
+are point evaluations. This removes the soft-minimum grid approximation
+entirely and yields a smooth log density that samples without the divergent
+transitions the grid induces.
+
+To capture individual molecular relapse the trajectory itself is made flexible
+while retaining the closed form: adding a patient-specific slope change
+$\zeta_i\sim N(0,\sigma_\zeta^2)$ after a knot $\kappa$,
+$m_i(\ell)\mathrel{+}{=}\zeta_i(\ell-\kappa)_+$, makes the trajectory
+piecewise-quadratic, so patients may rebound after $\kappa$ and thereby relapse
+while onset and post-knot values remain analytic. The knot $\kappa$ is
+\emph{fixed a priori} at two years ($\kappa=24$ months) rather than estimated,
+on clinical grounds: in TKI-treated CML the initial molecular decline is
+typically achieved and consolidated within the first two years, so a rebound
+permitted after this point coincides with the clinically relevant window for
+loss of response. Fixing $\kappa$ also preserves the computational advantages of
+the formulation. Estimating $\kappa$ as a free parameter would make the location
+of the trajectory's vertex, and hence the closed-form running minimum and
+maximum, depend on a quantity that is itself being inferred; with only a handful
+of confirmed relapses the knot is weakly identified and the likelihood becomes
+multimodal---distinct knot positions explain the sparse post-onset data almost
+equally well---inducing label-switching between the pre- and post-knot slope
+regimes and destroying the smooth, divergence-free geometry that the closed-form
+extrema provide. Sensitivity to the knot location is instead examined by
+refitting at neighbouring values ($18$ and $30$ months), which leaves the
+longitudinal and onset estimates essentially unchanged. An optional Gaussian frailty
+$\rho_i\sim N(0,\sigma_\rho^2)$ on the relapse threshold is equivalent to a
+wider relapse-specific width
+$\sigma_{\mathrm{rel}}=\sqrt{\sigma_{\mathrm{thr}}^2+\sigma_\rho^2}$ and
+preserves the closed form (Supplementary Material).
+
+\subsection{Dynamic prediction and recalibration}
+\label{sec:dynamic}
+
+For clinical use the framework produces individualized dynamic predictions by
+landmarking \cite{vanHouwelingen2007Landmarking,Rizopoulos2011DynamicPredictions}.
+At landmark time $s$ the target is
+\[
+\Pr(T_i^D\le s+H\mid T_i^D>s,\mathcal H_i(s)),
+\]
+where $\mathcal H_i(s)$ is the MRD history available up to $s$, with
+landmarks $s\in\{6,12,18,24\}$ months and horizons $H\in\{6,12,24\}$
+months. Because absolute probabilities from a mechanistic joint model can
+be miscalibrated, we apply horizon-specific logistic recalibration,
+\[
+\mathrm{logit}\{p_{i,\mathrm{cal}}(s,H)\}
+=a_H+b_H\,\mathrm{logit}\{p_{i,\mathrm{orig}}(s,H)\},
+\]
+with the recalibration layer assessed by patient-clustered bootstrap optimism
+correction, since each patient contributes several landmark--horizon records.
+Strict prospective prediction requires that patient-specific random
+effects be updated using only $\mathcal H_i(s)$; the internal analysis in
+Section~\ref{sec:application} conditions on the full longitudinal record
+and is therefore an apparent (upper-bound) assessment of calibration,
+which we treat accordingly.
+
+\subsection{Priors, estimation, and computation}
+\label{sec:computation}
+
+Estimation is fully Bayesian via Hamiltonian Monte Carlo in Stan.
+Priors were fixed before fitting. They are weakly informative for the scale
+parameters, but at the sample sizes studied here the location-scale priors on
+$\beta_{\mathrm{time}}$, $\beta_{\mathrm{time}^2}$, $\gamma_{\mathrm{gap}}$ and
+$\alpha_{\mathrm{MRD}}$ are moderately informative: widening them changes
+credible-interval coverage by $15$--$20$ percentage points and moves the
+posterior mean of $\alpha_{\mathrm{MRD}}$ by more than two posterior standard
+deviations (Section~\ref{sec:priorsens}). The priors are
+\[
+\beta_0\sim N(-2.5,2^2),\quad
+\beta_1\sim N(-1,1^2),\quad
+\beta_2\sim N(0,0.5^2),\quad
+\beta_{\mathrm{BM}}\sim N(0,1^2),
+\]
+\[
+\sigma_y\sim \mathrm{Exponential}(1),\quad
+\tau_{b0},\tau_{b1}\sim \mathrm{Exponential}(1),\quad
+\gamma_0\sim N(-2,2^2),\quad
+\gamma_1,\gamma_2\sim N(0,1^2),\quad
+\alpha\sim N(-0.5,0.75^2).
+\]
+The $\mathrm{Exponential}(1)$ priors on the scale parameters
+$\sigma_y,\tau_{b0},\tau_{b1}$ are weakly informative but place their mass
+below the fitted values; because every model compared here uses identical
+priors, prior choice does not confound the floor-censored versus exact-floor
+contrast, though a prior-sensitivity analysis (for example half-normal or
+half-Cauchy scales) is advisable when the absolute magnitude of
+between-patient heterogeneity is of primary interest.
+Convergence was assessed by $\widehat{R}$, bulk and tail effective sample
+size, divergent-transition counts, tree depth, and E-BFMI. In the multi-state threshold-crossing model the running minimum and maximum
+are evaluated in closed form from the piecewise-quadratic trajectory, so no
+grid or soft-minimum approximation is needed and the log density is smooth;
+the probabilistic crossing device (width $\sigma_{\mathrm{thr}}$) preserves
+differentiability of the interval-transition terms.
+
+\subsection{Model assessment and comparison}
+\label{sec:assessment}
+
+Model adequacy was evaluated with posterior predictive checks for the
+longitudinal component (predictive coverage; observed versus predicted
+assay-floor rate) and with calibration of DMR probabilities at both the
+interval and patient level (calibration-in-the-large, calibration slope,
+and grouped calibration plots). Discrimination and overall accuracy were
+summarized by the Brier score, a strictly proper scoring rule
+\cite{GneitingRaftery2007ProperScoring}. The joint model was compared against four
+simpler alternatives that a practitioner might otherwise use: a
+descriptive Kaplan--Meier analysis of first observed DMR; an interval-only
+model with timing and visit-gap terms; a landmark MRD model; and a joint
+model that treats floor observations as exact $-5.0$. The Kaplan--Meier
+comparator yields a marginal survival curve rather than covariate-specific
+risks; its interval- and patient-level probabilities were obtained by
+evaluating the fitted curve at each unit's follow-up, and its calibration is
+correspondingly limited. Refittable simpler models were internally validated
+by patient-cluster bootstrap with optimism correction; for the Bayesian joint
+models, fixed-posterior bootstrap summaries are reported.
+
+\subsection{Simulation study design}
+\label{sec:sim}
+
+We evaluate the framework with a simulation study structured according to the
+ADEMP framework (aims, data-generating mechanisms, estimands, methods,
+performance measures) \cite{GneitingRaftery2007ProperScoring}. The
+\emph{aim} is to assess bias, interval coverage and width, calibration, and
+computational reliability of the proposed estimators, under both correctly
+specified and misspecified conditions, and to compare them with established
+alternatives.
+
+\paragraph{Data-generating mechanisms.} The baseline mechanism generates a
+latent quadratic trajectory in $\log(1+t)$ with random intercept and slope,
+Gaussian measurement error, and reporting at a single assay floor $c_F=-5.0$.
+Visit gaps are lognormal with a median of six months and follow-up is uniform on
+$1.5$ to $7$ years, chosen to reproduce the monitoring intensity of the cohort
+(observed median gap $6.5$ months). Events are drawn from the same
+complementary log-log interval hazard that the model fits, so the baseline is
+correctly specified. The generating parameter vector is a fixed plausible choice
+for this setting rather than an empirical calibration
+(Section~\ref{sec:sim:coverage}).
+
+Departures are introduced one at a time: (i) \emph{trajectory
+specification}---a smoother monotone decline, and a sharper exponential approach
+to an asymptote, so that the working quadratic is wrong; (ii) \emph{assay
+floor}---patient-specific rather than a single fixed floor; (iii)
+\emph{measurement error and random effects}---heavy-tailed ($t_3$) in place of
+Gaussian, rescaled to the same standard deviation so that only tail shape
+differs; and (iv) \emph{visit process}---a non-homogeneous Poisson process whose
+intensity is an explicit function of the patient's own latent MRD, in place of a
+schedule independent of the biomarker. Separately, the assay-floor contrast of
+Section~\ref{sec:sim:floor} fits each dataset twice, with floor-coded
+observations entering as left-censored or as exact values, so that the two arms
+are paired. Sample sizes are $n\in\{87,150,300\}$ for the baseline and the floor
+contrast, and $n=150$ for the departures.
+
+\paragraph{Estimands and methods.} The estimands are the longitudinal and
+event-submodel parameters. All scenarios are fitted with the \emph{same
+Hamiltonian Monte Carlo} procedure used in the application (four chains, $600$
+warmup and $500$ sampling iterations, target acceptance $0.95$), so that
+posterior bias, Bayesian credible-interval coverage and computational behaviour
+of the reported estimator are assessed directly rather than through a
+marginal-MAP proxy. We additionally run simulation-based calibration at $n=87$
+to verify the posterior, and vary the prior scales to separate prior influence
+from estimator behaviour (Section~\ref{sec:priorsens}).
+
+Under a departure a working-model parameter may have no counterpart in the
+generating mechanism, in which case bias and coverage are undefined rather than
+poor; such cells are reported as missing rather than as failures.
+
+\paragraph{Performance measures.} We report bias, posterior interval coverage,
+interval width and the frequency of computational failures (divergent
+transitions, low E-BFMI, non-convergence), each with its Monte Carlo standard
+error. Convergence diagnostics are computed over the reported parameters rather
+than over all quantities the program declares, since the maximum $\widehat R$
+across the $2N$ latent random effects exceeds conventional thresholds by
+multiplicity alone. Two hundred replicates are used for the central scenarios,
+giving a Monte Carlo standard error near $0.015$ for a coverage estimate close
+to $0.95$, and $100$ for the departures and the floor contrast.
+
+Comparison against a standard shared-parameter joint model and an
+interval-censored survival model was planned but is not reported here; the
+comparisons in Section~\ref{sec:modelcomparison} are made on the cohort rather
+than in simulation.
+
+\section{Application to the CML cohort}
+\label{sec:application}
+
+All fits use Hamiltonian Monte Carlo. As set out in
+Section~\ref{sec:unified}, the threshold-crossing formulation and the
+interval-censored hazard are options of one model sharing a single latent
+trajectory and one set of random effects; the crossing formulation is the
+primary specification of this paper, and the interval hazard is retained as a
+comparator because it is the specification a practitioner would otherwise reach
+for and because its association parameter $\alpha_{\mathrm{MRD}}$ has a direct
+clinical reading.
+
+The reporting order below is dictated by what each specification can support.
+We first present the cohort and the longitudinal sub-model, which is common to
+every specification. We then report the interval-hazard comparator in detail,
+because the calibration, model-comparison and dynamic-prediction machinery is
+defined on its interval-level risks and is the basis on which this framework can
+be compared with existing joint models. Section~\ref{sec:ms-real} reports the
+multi-state fit, and Section~\ref{sec:unified} brings the specifications
+together, establishes that they agree where they should, and examines the
+stability of the threshold width $\sigma_{\mathrm{thr}}$ and of the trajectory
+curvature. Readers interested primarily in the threshold-crossing model as such
+may read Section~\ref{sec:unified} directly.
+
+\subsection{Cohort and endpoint summary}
+
+The final cohort comprised 87 patients, 495 longitudinal log-MRD
+observations, and 275 at-risk intervals; 68 patients had documented DMR
+and 19 were censored. Median age was 44.6 years, 61.3\% were male, and
+baseline clinical covariates were complete for 62 patients (71.3\%); because
+the model conditions on the sample-source indicator alone, these covariates are
+descriptive and full baseline summaries are given in the Supplementary Material.
+Molecular response deepened over follow-up, and the assay-floor share rose with
+time (Table~\ref{tab:longitudinal-time}), consistent with the trajectory and
+floor-censoring structure in Figure~\ref{fig:log-mrd-trajectories}.
+
+\input{table_02_longitudinal_by_time.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.92\linewidth]{figure_01_log_mrd_trajectories.pdf}
+\caption{Patient-level log-MRD trajectories with smoothed population trend
+and DMR/CMR thresholds. Lines and thresholds are distinguishable in
+grayscale.}
+\label{fig:log-mrd-trajectories}
+\end{figure}
+
+The descriptive Kaplan--Meier curve for first observed DMR
+(Figure~\ref{fig:time-to-dmr}) is retained only as a summary, because its
+event times correspond to visits at which DMR was first documented and
+should not be read as exact biological onset.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.78\linewidth]{figure_02_time_to_dmr_km.pdf}
+\caption{Descriptive Kaplan--Meier curve for time until first observed
+DMR. Event times correspond to monitoring visits and should not be
+interpreted as exact biological onset.}
+\label{fig:time-to-dmr}
+\end{figure}
+
+\subsection{Fitted joint model}
+\label{sec:fitted}
+
+Computation was stable: no divergent transitions, maximum tree depth 7,
+minimum approximate E-BFMI 0.610, maximum $\widehat{R}$ 1.003, minimum
+bulk effective sample size 1359, and minimum tail effective sample size
+1395; no parameter had $\widehat{R}>1.01$ or effective sample size below
+400. Posterior summaries are given in
+Table~\ref{tab:joint-model-posterior}; reported intervals are 95\% credible
+intervals. The latent time effect was strongly negative
+($\beta_{\mathrm{time}}=-3.561$; 95\% credible interval $-4.500$ to
+$-2.641$), indicating marked decline in latent log-MRD over follow-up. The
+quadratic log-time term was positive but only weakly supported
+($\beta_{\mathrm{time}^2}=0.502$; $-0.002$ to $0.999$, marginally including
+zero), so the evidence for curvature beyond a log-linear decline is weak; under the
+Student-$t$ observation model of Section~\ref{sec:sens-extra} it falls further,
+to $0.156$ with interval $(-0.35,0.65)$.
+Because almost all assays were bone-marrow samples, the sample-source term
+$\beta_{\mathrm{BM}}$ is weakly identified ($0.607$; $-0.805$ to $2.031$) and
+should not be over-interpreted. The association parameter was negative
+($\alpha_{\mathrm{MRD}}=-1.275$; $-1.848$ to $-0.838$), so lower latent MRD
+was associated with higher interval probability of documented DMR. In a
+sensitivity analysis that removed the interval-length term
+$\gamma_2\log(1+\Delta_{ik})$ from the log-hazard---so that interval length
+entered only as exposure time---the association parameter remained negative
+and, if anything, larger in magnitude, confirming that the latent-MRD--DMR
+association is not an artefact of the observation-process term. These
+are monitoring-oriented associations, not externally validated
+treatment-decision thresholds.
+
+We retain the Gaussian specification as the primary analysis, and state the
+reasoning here rather than leaving it to a sensitivity subsection. A
+Student-$t$ observation model with the degrees of freedom estimated fits these
+data no better by leave-one-out cross-validation, despite the likelihood
+preferring heavy tails: the difference in expected log pointwise predictive
+density is $4.2$ with a standard error of $9.0$, because the gain in pointwise
+fit is offset by the additional effective parameters
+(Section~\ref{sec:sens-extra}). There is thus no predictive basis for preferring
+it. The degrees-of-freedom parameter is
+in any case weakly identified, since $48\%$ of observations are censored and the
+lower tail is unobserved, so a boundary estimate of $\nu$ is a poor foundation
+for a primary specification. And the quantities carrying the substantive claims
+are stable across the two fits: $\alpha_{\mathrm{MRD}}$ retains its sign,
+magnitude and exclusion of zero, the visit-gap coefficient is unchanged, and the
+response-slope heterogeneity $\tau_{b1}$ is larger under the Student-$t$ fit
+rather than smaller.
+
+What the two fits do not agree on is the decomposition of variability. Readers
+will find every parameter under both specifications in
+Table~\ref{tab:studentt}; the quantities we would not defend at the precision
+the Gaussian intervals suggest---the residual scale, the baseline heterogeneity
+$\tau_{b0}$, and the trajectory curvature---are identified as such in
+Section~\ref{sec:limits}.
+
+\input{table_05_joint_model_posterior_results.tex}
+
+\subsection{Posterior predictive checks and calibration}
+\label{sec:ppc}
+\label{sec:ppc-calibration}
+
+Among non-floor observations, 90\% posterior predictive coverage was 0.957
+and 95\% coverage was 0.984; the observed assay-floor rate (0.483) was
+close to the posterior mean floor probability (0.414)
+(Figure~\ref{fig:ppc}). Interval-level
+calibration was close in the large (observed interval event rate 0.247
+versus mean predicted 0.247, Brier score 0.082), although the interval
+calibration slope exceeded one ($1.78$; Table~\ref{tab:model-comparison-validation}),
+indicating that predicted interval risks were somewhat too moderate and
+required amplification rather than a shift in level. Patient-level cumulative
+DMR probability was underpredicted (observed 0.782 versus mean predicted
+0.581; calibration slope $2.82$; Figure~\ref{fig:calibration}), which
+motivated the dynamic prediction and recalibration analysis below. Two
+sensitivity variants are reported in the Supplementary Material: refitting
+under alternative full-data treatments of the assay floor left the estimated
+longitudinal decline qualitatively unchanged, while a non-floor-only variant
+is rank-deficient and is retained only as a stress test.
+
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{figure_08_posterior_predictive_longitudinal.pdf}
+\caption{Posterior predictive check for longitudinal log-MRD (left) and
+posterior mean probability of assay-floor response (right); points
+distinguish observed floor and non-floor measurements.}
+\label{fig:ppc}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{figure_09_dmr_calibration.pdf}
+\caption{Grouped calibration of model-estimated DMR probabilities.
+Interval-level calibration is close in aggregate, whereas patient-level
+cumulative DMR probability is underpredicted.}
+\label{fig:calibration}
+\end{figure}
+
+The under-prediction of patient-level cumulative DMR
+(Figure~\ref{fig:calibration}) is not merely a nuisance to be corrected by
+recalibration but has at least one candidate structural cause, which we set out
+here and then qualify. A
+single quadratic in $\log(1+t)$ is convex, so every patient's fitted trajectory
+must eventually turn upward; the model therefore imposes a \emph{symmetric
+rebound} on all responders and, over long horizons, assigns non-trivial mass to
+loss of response even for patients whose molecular burden is in fact durably
+suppressed. This structurally depresses the modelled probability of
+\emph{sustained} DMR and hence the cumulative patient-level DMR probability,
+producing the observed under-prediction. The piecewise-spline trajectory
+(Section~\ref{sec:threshold}) mitigates this: by allowing a patient-specific
+slope change after the knot, it permits genuinely flat, durable responses
+rather than forcing a rebound, and it correspondingly improves relapse and
+durability calibration. This flexibility comes at the cost of an additional
+variance component ($\sigma_\zeta$) and hence greater posterior variance, so the
+quadratic and spline trajectories trade bias in the cumulative probabilities
+against variance in the individual fits.
+
+This mechanism requires the fitted trajectory to be convex, and that
+requirement is weaker than it appears. Under the Gaussian observation model
+$\beta_{\mathrm{time}^2}=0.50$ with an interval that already touches zero
+$(-0.00,1.00)$, and under the Student-$t$ model it falls to $0.16$ with interval
+$(-0.35,0.65)$ (Table~\ref{tab:studentt}). Curvature is therefore not firmly
+established, and the symmetric-rebound account should be read as a plausible
+contributing mechanism rather than a demonstrated one. It does not affect the
+closed-form running minimum, which is valid without assuming positive curvature
+for every posterior draw (Section~\ref{sec:threshold}); it does mean that the
+spline trajectory's improvement in relapse calibration may owe more to added
+flexibility in general than to correcting a specific convexity artefact.
+
+The mechanism is in any case specific to cumulative patient-level DMR read from the
+trajectory model. A second, distinct under-prediction appears in the
+interval-hazard model's probability of documented DMR by end of follow-up, and
+that one is present in simulation even when the trajectory is correctly
+specified (Section~\ref{sec:sim:calib}), so it cannot be attributed to
+trajectory convexity. The two estimands are different---latent cumulative
+attainment versus documented attainment under the observed schedule---and we do
+not claim a single cause for both; horizon-specific recalibration is applied to
+the reported predictions in either case.
+
+\subsection{Prior sensitivity}
+\label{sec:priorsens}
+
+Because the cohort is modest ($N=87$) and nearly half of the longitudinal
+observations lie at the assay floor, the variance components are the parameters
+most exposed to prior influence. We therefore refitted the joint model under
+two alternative prior families for the scale parameters
+$\sigma_y,\tau_{b0},\tau_{b1}$: a weakly informative $\mathrm{Half\text{-}Normal}(0,1)$
+and a heavy-tailed $\mathrm{Half\text{-}Cauchy}(0,1)$, replacing the
+$\mathrm{Exponential}(1)$ priors of the primary analysis while leaving all
+location priors unchanged. The three fits are compared in
+Table~\ref{tab:prior-sensitivity}.
+
+The estimates were stable across prior families. The random-slope heterogeneity
+$\tau_{b1}$---the least well-identified parameter---varied by at most about
+$4\%$ across the three priors, $\tau_{b0}$ and $\sigma_y$ were unchanged to two
+significant figures, and the longitudinal slope $\beta_{\mathrm{time}}$ and the
+association $\alpha_{\mathrm{MRD}}$ were invariant to two significant figures.
+The corresponding $95\%$ credible intervals overlapped almost completely,
+indicating that, despite the small sample, the likelihood dominates the prior
+for the \emph{scale} parameters; in particular the heavy-tailed
+$\mathrm{Half\text{-}Cauchy}$ prior, which permits larger variances a priori,
+did not inflate the recovered heterogeneity. The multi-state threshold width
+$\sigma_{\mathrm{thr}}$ is stable across
+relapse definitions ($0.17$--$0.18$). For computational speed this prior-sensitivity
+check was performed with a marginal-likelihood re-fit rather than the full
+Hamiltonian Monte Carlo estimator, so its point estimates differ slightly in level
+from the primary posterior (for example $\alpha_{\mathrm{MRD}}=-1.18$ here versus the
+primary $-1.27$); it is the \emph{invariance across prior families}, not the absolute
+level, that this table establishes.
+
+\begin{table}[!htbp]
+\centering
+\caption{Prior-sensitivity analysis: parameter estimates under three prior
+families on the scale parameters $(\sigma_y,\tau_{b0},\tau_{b1})$; location
+priors are unchanged throughout. Values are posterior summaries from the
+marginal-likelihood re-fit used for this check.}
+\label{tab:prior-sensitivity}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Parameter & Exponential(1) & Half-Normal(0,1) & Half-Cauchy(0,1)\\
+\midrule
+$\tau_{b0}$              & 0.94 & 0.94 & 0.94\\
+$\tau_{b1}$              & 2.03 & 1.97 & 2.05\\
+$\sigma_y$               & 1.79 & 1.78 & 1.79\\
+$\beta_{\mathrm{time}}$  & $-3.54$ & $-3.55$ & $-3.54$\\
+$\alpha_{\mathrm{MRD}}$  & $-1.18$ & $-1.18$ & $-1.18$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The scale priors are, however, not the priors that carry the substantive
+conclusions. The simulation of Section~\ref{sec:sim:coverage} shows
+under-coverage concentrated in $\beta_{\mathrm{time}}$,
+$\beta_{\mathrm{time}^2}$, $\gamma_{\mathrm{gap}}$ and $\alpha_{\mathrm{MRD}}$,
+whose generating values lie between $1.4$ and $1.9$ prior standard deviations
+from their prior means, with every bias directed towards the prior mean. We
+therefore repeated the exercise on the \emph{location-scale} priors, multiplying
+the prior standard deviations on those parameters and on
+$\gamma_0,\gamma_{\mathrm{time}}$ by $2$, $4$ and $10$ while holding all prior
+locations fixed, so that widening cannot move a prior towards the value being
+recovered. Table~\ref{tab:prior-widening} reports coverage over $40$ replicates
+per prior set at $n=150$.
+
+Widening removes most of the under-coverage, at a small cost elsewhere:
+$\sigma_y$ and $\tau_{b1}$, which are nominal under the published priors, become
+slightly conservative ($1.00\to0.88$ and $0.97\to0.90$ at twice the scales).
+With $40$ replicates these differences are within about two Monte Carlo standard
+errors and may be noise, and several cells at $1.00$ indicate over- rather than
+exact coverage; the contrast that is resolved is published-versus-widened, not
+one widened set against another. At twice the published scales,
+$\gamma_{\mathrm{gap}}$ rises from $0.78$ to $0.93$, $\beta_{\mathrm{time}^2}$
+from $0.78$ to $0.95$, $\beta_{\mathrm{time}}$ from $0.85$ to $1.00$ and
+$\alpha_{\mathrm{MRD}}$ from $0.88$ to $0.97$, while the $\gamma_{\mathrm{gap}}$
+bias falls from $+0.891$ to $+0.508$ and the $\beta_{\mathrm{time}}$ bias from
+$+0.408$ to $+0.110$.
+
+Two qualifications are important. First, the effect on the posterior itself is
+large for the association parameter: on a single dataset the posterior mean of
+$\alpha_{\mathrm{MRD}}$ moves by $2.58$ posterior standard deviations between
+the published and the $10\times$ priors (final column of
+Table~\ref{tab:prior-widening}), and $\gamma_0$ by $2.32$. The reported
+$\alpha_{\mathrm{MRD}}$ should therefore be read as prior-informed, and its
+credible interval as narrower than a weakly informative analysis would give.
+Second, this exercise is conducted on simulated data at a parameter vector that
+sits in the tails of the published priors; widening helps partly by
+construction, and it establishes that the priors are informative enough to
+matter at plausible parameter values rather than that any particular width is
+correct. A prior-widening refit of the cohort itself, reporting how far
+$\alpha_{\mathrm{MRD}}$ moves, is the appropriate confirmation and we report it
+as a limitation that it is not yet available.
+
+\input{table_14_prior_widening.tex}
+
+\subsection{Sensitivity to the censoring point, serial correlation, and the
+error distribution}
+\label{sec:sens-extra}
+
+Because the reporting rule that produced the assay floor determines the numerical
+censoring point, and because no retained observation falls in $(-5.0,-4.5]$, we
+refitted the primary independent model with the left-censoring point moved from
+$c_F=-5.0$ to $c_F=-4.5$---the MR4.5 cut-point implied if deep values were collapsed
+at MR4.5. The refit was computationally clean (no divergent transitions across four
+chains; minimum E-BFMI $0.58$). The biomarker--event association was essentially
+unchanged ($\alpha_{\mathrm{MRD}}=-1.30$ versus $-1.27$), confirming that the
+substantive conclusion is robust to the censoring point. The latent-trajectory
+variance and shape parameters shifted moderately, as expected when the censored
+mass is reassigned upward: the residual standard deviation fell from $1.81$ to
+$1.57$, the random-slope heterogeneity from $2.20$ to $1.96$, and the quadratic
+log-time term rose from $0.50$ to $0.62$, while the linear slope changed little
+($-3.56$ to $-3.43$). We therefore report the association as censoring-robust and
+the trajectory variance components as mildly censoring-sensitive.
+
+The residual standard deviation ($\sigma_y\approx1.81$ on the $\log_{10}$ scale) is
+large relative to analytical assay variability, raising the possibility that
+within-patient serial fluctuation not captured by the quadratic mean and two random
+effects is absorbed into the measurement-error term. To test this we refitted the
+model with an added within-patient continuous-time AR(1)/Ornstein--Uhlenbeck
+residual on the observation mean, so that $\sigma_y$ would capture only assay error.
+The decomposition did not materially reduce the measurement-error component: the
+serial standard deviation was small and weakly identified ($\sigma_u=0.43$, with a
+wide $95\%$ credible interval and low effective sample size; correlation length
+$\approx1.1$ years), the pure-assay $\sigma_y$ remained $\approx1.73$, and the
+marginal observation standard deviation $\sqrt{\sigma_y^2+\sigma_u^2}=1.82$ was
+unchanged from the primary $\sigma_y$. The association and random-slope
+heterogeneity were stable ($\alpha_{\mathrm{MRD}}=-1.25$, $\tau_{b1}=2.19$). The
+large residual variance is therefore not an artefact of ignoring serial
+correlation.
+
+It is nonetheless a large quantity relative to the biomarker. On the
+$\log_{10}$ scale the observed range is roughly $-5$ to $0$, so
+$\sigma_y\approx1.81$ is about a third of the entire dynamic range, and
+$\tau_{b1}=2.20$ is larger still. One implication for interpretation follows
+immediately: the latent trajectory $m_i(t)$ is smoothed to the degree this
+residual variance forces, so the threshold-crossing time
+$T_i^D=\inf\{t: m_i(t)\le c_D\}$ should be read as the crossing of a shrunk
+conditional-mean curve rather than of observed molecular burden. Our claim is
+that this is a more coherent target than an event coded from the same
+measurements, which it remains; it is not a claim that $m_i(t)$ reproduces the
+underlying disease trajectory at the resolution of individual assays.
+
+A second possibility is that the magnitude of $\sigma_y$ depends on the assumed
+shape of the error distribution rather than on the data. This is not idle:
+heavy tails are the departure under which $\sigma_y$ and the variance components
+are least reliably recovered, with simulated coverage of $0.27$ and $0.63$
+respectively under $t_3$ errors and random effects rescaled to the same standard
+deviation (Section~\ref{sec:sim:misspec}). Because $48\%$ of observations are
+censored, the shape assumed below the floor is doing real inferential work. We
+therefore refitted the primary model with a Student-$t$ observation model and
+the degrees of freedom $\nu$ estimated, leaving the data, the priors and the
+event sub-model unchanged (Table~\ref{tab:studentt}).
+
+The likelihood prefers heavy tails. The posterior for $\nu$ concentrates at its
+lower bound, $2.20$ with $95\%$ interval $(2.00,2.84)$, so the data prefer tails
+at least as heavy as the parameterisation permits---heavier than the $t_3$ used
+in the simulation, and heavy enough that the implied variance is barely defined.
+The residual scale falls correspondingly, from $1.813$ to $1.085$. Neither fit
+produced a divergent transition.
+
+The Student-$t$ specification does not, however, predict better. Compared by
+Pareto-smoothed importance-sampling leave-one-out cross-validation on the
+longitudinal contributions, the two specifications are not distinguishable: the
+difference in expected log pointwise predictive density is $4.2$ in favour of
+the Student-$t$ model with a standard error of $9.0$, less than half a standard
+error. The reason is visible in the effective number of parameters, which rises
+from $75.6$ to $116.7$ on $495$ observations: heavy tails buy pointwise fit by
+allowing the model to follow individual observations, and the penalty for that
+flexibility cancels the gain. Eight and four of the $495$ Pareto-$k$ diagnostics
+respectively exceeded $0.7$, and none exceeded $1$, so the approximation is
+adequate for this comparison. We therefore do not claim that the Gaussian assumption should be
+replaced.
+
+What the comparison does establish is more consequential than a change of
+specification would have been. Two observation models that describe these data
+equally well imply materially different variance components:
+$\tau_{b0}$ is $0.97$ under one and $0.31$ under the other, and $\tau_{b1}$ is
+$2.20$ against $3.05$. The decomposition of variability into measurement error,
+baseline heterogeneity and response-rate heterogeneity is therefore not
+identified independently of an assumption about the tails---an assumption the
+data are not able to adjudicate. Neither fit's credible intervals convey this,
+because each is computed conditional on its own error distribution.
+
+Three consequences follow for the individual parameters, and they differ in
+direction. The biomarker--event association is attenuated but unambiguous
+($\alpha_{\mathrm{MRD}}$ from $-1.275$ to $-1.066$, interval excluding zero
+throughout), and the visit-gap coefficient is unchanged ($-1.83$ to $-1.81$).
+Between-patient heterogeneity is redistributed rather than removed: the baseline
+component collapses ($\tau_{b0}$ $0.97\to0.31$), having absorbed outlying
+observations under the Gaussian model, while the response-slope component
+\emph{increases} ($\tau_{b1}$ $2.20\to3.05$). The heterogeneity in response rate
+on which the assay-floor argument of Section~\ref{sec:sim:floor} rests is thus
+larger, not smaller, under the heavier-tailed specification, so that argument
+does not depend on the choice. Finally, the quadratic log-time
+coefficient is no longer distinguishable from zero ($\beta_{\mathrm{time}^2}$
+$0.50\to0.16$, interval $(-0.35,0.65)$), which bears on the trajectory-shape
+argument of Section~\ref{sec:ppc} and to which we return there.
+
+Two qualifications bound how far this should be taken. The parameter $\nu$ is
+itself weakly identified: with $48\%$ of observations at the assay floor the
+lower tail is unobserved, so $\nu$ is determined partly by extrapolation into
+that region together with a small number of extreme recorded values, and its
+boundary value should not be read as an estimate of tail behaviour. And the two
+fits are not competing candidates between which the data have chosen; they are
+two defensible descriptions the data cannot separate. We therefore retain the
+Gaussian specification as primary (Section~\ref{sec:fitted}), report every
+parameter under both in Table~\ref{tab:studentt}, and treat the width of the
+disagreement between them---rather than either interval alone---as the
+description of what is known about the variance components.
+
+\input{table_16_studentt.tex}
+
+\subsection{Model comparison}
+\label{sec:modelcomparison}
+
+The comparison on which we rest a substantive claim is the like-for-like
+contrast with the exact-floor joint model: an otherwise identical specification
+differing only in whether assay-floor values are left-censored or treated as
+exact. On that contrast the primary model is better at both levels
+(interval Brier $0.082$ versus $0.094$; patient $0.116$ versus $0.123$;
+Table~\ref{tab:model-comparison-validation}), isolating the contribution of
+left-censored assay-floor handling. The joint model also attains lower Brier
+scores than the descriptive Kaplan--Meier, interval-only and landmark
+alternatives, but those comparisons will not bear weight. The Bayesian joint
+models are summarised at the fixed posterior rather than
+bootstrap-optimism-corrected like the simpler models; the landmark model is
+scored on a smaller eligible sample (55 intervals, 32 patients) than the
+interval-level comparators (275 intervals, 87 patients); and, most tellingly,
+the Kaplan--Meier and interval-only comparators have \emph{negative}
+patient-level calibration slopes ($-0.124$ and $-0.345$;
+Table~\ref{tab:model-comparison-validation}), so their covariate-free
+predictions are not positively aligned with individual outcome. We therefore
+read them as descriptive references rather than as competitive predictive
+models, and do not claim predictive superiority over them. The
+patient-level Brier of the primary model, $0.116$ here, differs slightly from
+the $0.123$ obtained in the model-checking analysis above
+(Section~\ref{sec:ppc-calibration}) because of the different scoring samples. This supports the joint framework
+for monitoring-oriented inference; it does not by itself establish clinical
+decision readiness.
+
+\input{table_07_model_comparison_validation.tex}
+
+\subsection{Dynamic prediction and recalibration}
+
+The internal dynamic-prediction analysis generated 300 eligible
+landmark--horizon records. Before recalibration, the joint model
+overpredicted 6-month DMR probability (mean predicted 0.506 versus
+observed 0.361; Brier 0.179), modestly overpredicted the 12-month horizon
+(0.626 versus 0.576; Brier 0.162), and underpredicted the 24-month horizon
+(0.721 versus 0.828; Brier 0.081). Horizon-specific logistic recalibration
+aligned mean predicted probabilities with observed rates; bootstrap
+optimism-corrected recalibrated Brier scores were 0.167, 0.172, and 0.063
+at 6, 12, and 24 months (Table~\ref{tab:dynamic-prediction-validation},
+Figure~\ref{fig:dynamic}). Because these predictions used patient-specific
+random effects estimated from the full longitudinal record, they are
+apparent performance; strict prospective prediction requires posterior
+updating restricted to the history available at each landmark.
+
+\input{table_09_dynamic_prediction_validation.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{figure_13_dynamic_prediction_calibration.pdf}
+\caption{Dynamic DMR calibration before and after horizon-specific
+logistic recalibration. Points are quantile-based prediction bins, sized by
+bin count; the diagonal indicates perfect calibration.}
+\label{fig:dynamic}
+\end{figure}
+
+\subsection{Multi-state threshold-crossing model}
+\label{sec:ms-real}
+
+Fitting the multi-state model to the same 87-patient cohort resolved the
+endpoint into onset, durability, and relapse (Table~\ref{tab:ms-real}).
+Documented transitions comprised 68 DMR onsets ($78\%$) and, under a confirmed
+definition requiring two consecutive measurements above $c_D$, 9 molecular
+relapses ($13\%$ of responders); a raw definition counting any single
+post-onset measurement above $c_D$ gave 30 apparent relapses ($44\%$), most of
+which are single-visit assay fluctuations rather than true relapse. The
+longitudinal estimates reproduced the joint-model fit ($\sigma_y=1.84$,
+$\beta_{\mathrm{time}}=-3.62$, $\beta_{\mathrm{time}^2}=0.46$), and---in
+contrast to a single-width formulation in which it is not identified---the
+threshold width was cleanly identified at $\sigma_{\mathrm{thr}}=0.18$ and stable
+across relapse definitions ($0.17$--$0.18$). Onset was reasonably calibrated
+(mean predicted $0.66$ versus observed $0.78$; Brier $0.087$), but the
+convex-quadratic trajectory rebounds only modestly within follow-up and
+under-predicted confirmed relapse ($0.02$ versus $0.10$).
+
+Fitting the linear-spline trajectory (Section~\ref{sec:threshold}; a
+patient-specific slope change after a two-year knot) resolved the
+under-prediction: the negative log-likelihood fell by $253$ for one additional
+variance parameter $\sigma_\zeta$, and relapse calibration improved by Brier
+score ($0.082\to0.054$), although the direction of miscalibration reverses
+rather than resolves (mean predicted $0.15$ versus observed $0.10$),
+while the trajectory remained piecewise-quadratic and hence divergence-free.
+Full Hamiltonian Monte Carlo for the spline model converged cleanly (all
+$\widehat R\le1.002$, bulk effective sample size $>2000$): the rebound
+heterogeneity was strongly identified ($\sigma_\zeta=6.4$; 90\% credible
+interval $5.0$--$8.0$), and with the flexible trajectory explaining the
+crossings the threshold width fell to near zero ($\sigma_{\mathrm{thr}}=0.06$).
+The multi-state model thus adds onset, durability, and relapse to the
+documented-DMR analysis while remaining computationally stable.
+
+\begin{table}[!htbp]
+\centering
+\caption{Multi-state model fitted to the CML cohort ($N=87$; confirmed-relapse specification). Estimates are marginal posterior modes under the model priors with asymptotic $95\%$ intervals; the final column defines relapse from any single post-onset measurement above $c_D$ (raw). Full posterior intervals for the spline model are from Hamiltonian Monte Carlo.}
+\label{tab:ms-real}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Parameter & Estimate & $95\%$ interval & Raw-relapse\\
+\midrule
+$\beta_0$ & $-1.77$ & $(-1.85,-1.69)$ & $-1.93$\\
+$\beta_{\mathrm{time}}$ & $-3.62$ & $(-3.71,-3.54)$ & $-4.22$\\
+$\beta_{\mathrm{time}^2}$ & $0.46$ & $(0.33,0.59)$ & $0.77$\\
+$\beta_{\mathrm{BM}}$ & $0.73$ & $(0.50,0.96)$ & $0.52$\\
+$\sigma_y$ & $1.84$ & $(1.66,2.02)$ & $1.91$\\
+$\tau_{b0}$ & $1.05$ & $(1.00,1.11)$ & $1.51$\\
+$\tau_{b1}$ & $2.06$ & --- & $2.03$\\
+$\sigma_{\mathrm{thr}}$ & $0.18$ & $(0.12,0.24)$ & $0.17$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{A unified single-process formulation}
+\label{sec:unified}
+
+The three models above share one latent trajectory but were fitted as
+separate programs, which left three inconsistencies: the threshold width
+$\sigma_{\mathrm{thr}}$ was estimated under two parameterisations that
+disagreed, the prior-sensitivity check used a different estimator from the
+primary analysis, and the residual $\sigma_y$ carried a different
+interpretation in the crossing model than in the interval model. We therefore
+re-express the framework as a \emph{single} model in which the alternatives
+are data options rather than separate programs, and refit the cohort as a
+ladder of nested specifications.
+
+\subsection{Formulation}
+
+One latent trajectory and one set of patient random effects serve every
+endpoint. Writing $\ell=\log(1+t)$ with $t$ in years,
+\[
+m_i(\ell)=\beta_0+\beta_{\mathrm{time}}\ell+\beta_{\mathrm{time}^2}\ell^2
++b_{0i}+b_{1i}\ell+\zeta_i(\ell-\kappa_\ell)_+ ,
+\]
+the event contribution is selected by a switch: either the interval
+complementary log--log hazard with association $\alpha_{\mathrm{MRD}}$, or the
+probabilistic threshold crossing with width $\sigma_{\mathrm{thr}}$. Durability
+and relapse transitions are added by supplying the corresponding rows, and the
+patient-specific slope change $\zeta_i$ is enabled by a flag. This yields four
+nested specifications:
+\begin{itemize}\itemsep2pt
+\item[\textbf{M1}] interval hazard, no spline (the model of Section~\ref{sec:application});
+\item[\textbf{M2}] threshold crossing, no spline;
+\item[\textbf{M3}] threshold crossing with durability and relapse (multi-state);
+\item[\textbf{M3s}] M3 with the patient-specific slope change.
+\end{itemize}
+Because $\beta_{\mathrm{time}^2}>0$, the running minimum is the vertex value
+clamped to the observed range and the running maximum is attained at a segment
+endpoint, so both remain closed-form in every specification. Fitting the
+specifications as a ladder is deliberate: the full model asks
+$\sigma_{\mathrm{thr}}$, $\sigma_\zeta$, $\tau_{b0}$, $\tau_{b1}$ and
+$\sigma_y$ to separate simultaneously on 87 patients with roughly half of the
+observations at the assay floor, and the ladder localises any identifiability
+failure to the step that causes it. Two changes accompany the unification: the
+prior on $\sigma_\zeta$ is regularised to $\mathrm{Half\text{-}Normal}(0,1)$,
+and the trajectory is reported in vertex form, so that the curvature is
+summarised by the clinically meaningful \emph{time to nadir}
+$t^\ast=\exp\{-\beta_{\mathrm{time}}/(2\beta_{\mathrm{time}^2})\}-1$ and the
+\emph{depth at nadir} rather than by $\beta_{\mathrm{time}^2}$ itself.
+
+\subsection{Results of the ladder}
+
+All four specifications converged ($\widehat R\le1.01$; minimum bulk effective
+sample size 420, in $\sigma_{\mathrm{thr}}$ under M3). Table~\ref{tab:unified}
+reports the ladder.
+
+\begin{table}[!htbp]
+\centering
+\caption{Unified formulation fitted as a ladder of nested specifications
+(posterior mean, $90\%$ interval). M1 is the interval-hazard model of
+Section~\ref{sec:application}; M2 replaces the hazard by a threshold crossing;
+M3 adds durability and relapse; M3s adds the patient-specific slope change.
+Entries are omitted where a parameter is not part of that specification.}
+\label{tab:unified}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Parameter & M1 & M2 & M3 & M3s\\
+\midrule
+$\beta_0$                 & $-2.08$ & $-2.15$ & $-1.69$ & $-2.01$\\
+$\beta_{\mathrm{time}}$   & $-3.57$ & $-3.47$ & $-4.48$ & $-3.97$\\
+$\beta_{\mathrm{time}^2}$ & $0.52$  & $0.26$  & $1.06$  & $0.83$\\
+$\beta_{\mathrm{BM}}$     & $0.61$  & $0.86$  & $0.57$  & $0.71$\\
+$\sigma_y$                & $1.81$  & $1.88$  & $1.77$  & $1.58$\\
+$\tau_{b0}$               & $0.97$  & $0.67$  & $1.50$  & $1.05$\\
+$\tau_{b1}$               & $2.20$  & $2.10$  & $2.33$  & $2.30$\\
+$\alpha_{\mathrm{MRD}}$   & $-1.27$ & ---     & ---     & ---\\
+$\sigma_{\mathrm{thr}}$   & ---     & $0.78$  & $0.29$  & $0.27$\\
+$\sigma_\zeta$            & ---     & ---     & ---     & $4.88$\\
+\midrule
+Time to nadir, years      & $\infty$ & $\infty$ & $7.6$ & $15.4$\\
+Depth at nadir            & $-12.6$ & $-36.1$ & $-6.4$ & $-7.0$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{The unified program reproduces the primary analysis.}
+Under M1 every parameter matches the separately fitted primary model of
+Section~\ref{sec:application} to within Monte Carlo error
+($\beta_{\mathrm{time}}$ $-3.57$ versus $-3.56$; $\sigma_y$ $1.81$ versus
+$1.81$; $\alpha_{\mathrm{MRD}}$ $-1.27$ versus $-1.27$; $\tau_{b0}$ $0.97$
+versus $0.97$; $\tau_{b1}$ $2.20$ versus $2.20$). The unification is therefore
+a re-expression rather than a different analysis, and the remaining columns of
+Table~\ref{tab:unified} are directly comparable with it.
+
+\paragraph{The threshold width is stable once transitions are included.}
+$\sigma_{\mathrm{thr}}$ moves substantially between M2 ($0.78$) and M3
+($0.29$): adding the durability and relapse transitions supplies information
+about the threshold that onset alone does not, and sharpens it. It then
+changes little when the spline is added (M3s, $0.27$; intervals overlapping).
+This is the material improvement over the separately fitted models, in which
+introducing the spline drove $\sigma_{\mathrm{thr}}$ from $0.18$ to $0.06$. In
+the unified formulation, with $\sigma_\zeta$ regularised, the flexible
+trajectory and the threshold width are no longer competing for the same
+information.
+
+\paragraph{The quadratic curvature is not identified without the
+multi-state transitions.} Reported in vertex form, the time to nadir is
+\emph{unbounded} under M1 and M2 (posterior mean infinite; upper $90\%$ limits
+of order $10^{4}$ years and beyond), with implied nadir depths of $-12.6$ and
+$-36.1$ log units---values far below the assay floor and without physical
+meaning. Only when durability and relapse enter does the vertex become finite
+($7.6$ years under M3; $15.4$ years under M3s), and even then the interval is
+wide and the depth ($-7.0$) lies about two log units below the reporting
+floor. We therefore regard $\beta_{\mathrm{time}^2}$ as a shape device that
+makes the running extrema closed-form, not as an interpretable description of
+long-run molecular dynamics, and we do not extrapolate the trajectory beyond
+the observed follow-up.
+
+\paragraph{How stable is the threshold width?}
+Because $\sigma_{\mathrm{thr}}$ is the parameter that carries the crossing
+formulation, its stability deserves direct scrutiny. Across the specifications
+fitted here it takes the values $0.78$ (M2, onset only), $0.29$ (M3), $0.27$
+(M3s), and $0.18$ in the separately parameterised multi-state fit of
+Section~\ref{sec:ms-real}---a spread of roughly fourfold. That spread is not
+noise: it is systematic and interpretable. The large value under M2 reflects
+onset information alone; adding durability and relapse transitions supplies
+direct information about how sharply the threshold operates and reduces it by a
+factor of about two and a half, after which the flexible trajectory leaves it
+essentially unchanged. The residual difference from the separately
+parameterised fit reflects that specification's different handling of the
+post-onset process. We therefore regard $\sigma_{\mathrm{thr}}$ as
+\emph{conditionally} identified---well determined given the set of transitions
+included, but not a specification-free constant---and we report it with the
+specification stated rather than as a single number. This is a weaker claim than
+we made previously and, in our view, the claim the data support: what the
+unified formulation establishes is that the threshold width and a flexible
+trajectory are no longer competing for the same information, not that
+$\sigma_{\mathrm{thr}}$ is invariant to how the event process is specified.
+
+\paragraph{The spline improves longitudinal fit, but on thin leverage.}
+Comparing M3s with M3 by leave-one-out expected log predictive density on the
+longitudinal block gives $\Delta\mathrm{elpd}=29.9$ ($\mathrm{SE}\ 7.0$) in
+favour of the spline, at a cost of about $13$ effective parameters
+($p_{\mathrm{loo}}$ $37.0\to49.9$). Nine of $495$ pointwise terms had Pareto
+$\hat k>0.7$; excluding them the difference is $33.1$ ($\mathrm{SE}\ 5.7$), so
+the conclusion is not an artefact of unreliable approximations. Notably, none
+of these influential observations is an assay-floor value: all nine are
+non-floor measurements at mid-to-late follow-up ($17$--$89$ months) with
+shallow log-MRD ($-0.8$ to $-4.1$), that is, precisely the elevated late
+readings that a rebound term exists to accommodate. The spline therefore earns
+its place, but its advantage rests on a small number of high-leverage
+observations, consistent with the large recovered $\sigma_\zeta$ ($4.88$ even
+under the regularised prior) and with the small number of confirmed relapses.
+We report the flexible trajectory as a supported \emph{longitudinal}
+refinement and continue to treat the relapse component as exploratory. This
+comparison concerns the longitudinal block only; the event contributions of M1
+and M2 differ in dimension ($275$ intervals versus $87$ patients) and are not
+compared by leave-one-out.
+
+\section{Simulation results}
+\label{sec:simresults}
+
+The principal scenarios are fitted with the \emph{same Hamiltonian Monte Carlo}
+procedure used in the application, so that posterior bias, Bayesian
+credible-interval coverage, and computational behaviour of the reported
+estimator are assessed directly. Every result below comes from the same
+estimator; no marginal maximum-\emph{a-posteriori} proxy is used anywhere,
+including in the assay-floor contrast, whose two arms differ only in the
+likelihood contribution of floor-coded observations.
+
+We use $200$ replicates for the central scenario at $n=87$ and $n=150$ and
+$100$ at $n=300$, and $100$ for each misspecification and for each arm of the
+floor contrast; the Monte Carlo standard error of a coverage estimate near
+$0.95$ is then about $0.015$ and $0.022$ respectively, and every summary is
+reported with its own Monte Carlo standard error. Across the $1000$ fits of the
+central and misspecification grids there were no divergent transitions and $9$
+fits ($0.9\%$) failed convergence diagnostics and were excluded.
+
+The generating parameter vector is a fixed plausible choice rather than the
+fitted posterior means, so the study characterises the estimator at a parameter
+vector of this kind rather than certifying the cohort estimates. Because that
+vector lies in the tails of several priors, the study \emph{can} detect
+prior-induced bias, and does: the prior-sensitivity analysis of
+Section~\ref{sec:priorsens} separates that component from estimator behaviour
+and is reported alongside.
+
+\subsection{The assay floor cannot be ignored}
+\label{sec:sim:floor}
+
+Table~\ref{tab:sim-bias} isolates the cost of mishandling the assay floor. Each
+simulated dataset is fitted twice with identical data, differing only in whether
+floor-coded observations enter the likelihood as left-censored or as exact
+values at $c_F$, so the two arms are paired and the contrast is free of
+between-replicate variation.
+
+Treating floor values as exact collapses the estimated random-slope
+heterogeneity $\tau_{b1}$ by half (bias $-1.12$ against a truth of $2.22$, i.e.\
+a recovered value of $1.10$) and attenuates the residual standard deviation
+$\sigma_y$ by a quarter (bias $-0.43$ on $1.69$), with credible-interval
+coverage of $0.00$ for both at every sample size. Left-censoring the floor
+removes this almost entirely: $\tau_{b1}$ has bias $+0.042$, $+0.031$ and
+$+0.007$ at $n=87,150,300$ with coverage $0.95$, $0.94$, $0.94$, and $\sigma_y$
+has bias within $0.006$ of zero throughout with coverage $0.91$--$0.98$.
+
+The decisive feature is that the exact-floor bias \emph{does not diminish with
+sample size}: $-1.130$, $-1.125$ and $-1.123$ for $\tau_{b1}$ across the three
+cohort sizes, and $-0.421$, $-0.429$, $-0.434$ for $\sigma_y$. This is
+asymptotic, not finite-sample: coding floor observations as exact values does
+not converge to the right answer with more patients, so no amount of additional
+data repairs it. Left-censoring is therefore a requirement of the likelihood
+rather than a refinement of it.
+
+The time slope behaves differently. Both arms are biased---$+0.651$ censored
+against $+0.932$ exact at $n=87$---and both improve with sample size, so
+censoring reduces but does not remove the attenuation in
+$\beta_{\mathrm{time}}$; the residual component is the prior shrinkage
+documented in Sections~\ref{sec:sim:coverage} and~\ref{sec:priorsens}. We
+therefore claim the necessity of left-censoring for the \emph{variance
+components and residual scale}, where the evidence is unambiguous, and not for
+the trajectory slope. Figure~\ref{fig:sim-bias} shows the sample-size behaviour.
+
+\input{table_10_sim_bias.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\linewidth]{figure_15_sim_floor_bias.pdf}
+\caption{Simulation estimates of the random-slope SD $\tau_{b1}$ (left) and
+the time slope $\beta_{\mathrm{time}}$ (right) versus sample size, for the
+assay-floor left-censored estimator and the estimator that treats floor
+values as exact $-5.0$. Error bars are $\pm1.96$ Monte Carlo standard
+errors; dashed lines are the true values.}
+\label{fig:sim-bias}
+\end{figure}
+
+\subsection{Bias and credible-interval coverage under Hamiltonian Monte Carlo}
+\label{sec:sim:coverage}
+
+Full Hamiltonian Monte Carlo credible-interval coverage for the central
+scenario is given in Table~\ref{tab:sim-coverage}, over $1000$ fits at
+$n=87$, $150$ and $300$. Data are generated with the visit spacing of the
+study cohort---lognormal gaps with a median of six months, against an observed
+median of $6.5$---so the operating characteristics below are those of the
+estimator under a monitoring intensity comparable to that of the application.
+The simulated visit \emph{count} is nonetheless higher than observed ($7.9$
+versus $5.0$ per patient) and the simulated assay-floor rate lower ($0.38$
+versus $0.48$), because follow-up is generated from a bounded distribution
+while the cohort has a long tail; the study is therefore mildly optimistic
+about the information available per patient.
+
+The generating parameter vector is a fixed, plausible choice for this setting
+rather than an empirical calibration. It is not the posterior mean vector of
+Table~\ref{tab:joint-model-posterior} and the two should not be compared
+numerically. What follows establishes how the estimator behaves at a parameter
+vector of this kind and at these sample sizes; it does not establish that the
+cohort estimates are themselves unbiased.
+
+The observation-level parameters are recovered essentially exactly. The residual
+standard deviation and both variance components are unbiased with nominal
+coverage at every sample size ($\sigma_y$ $0.95$, $\tau_{b0}$ $0.96$,
+$\tau_{b1}$ $0.95$ at $n=87$), as are the event-process intercept and time term
+($\gamma_0$ $0.95$, $\gamma_{\mathrm{time}}$ $0.97$). The longitudinal
+sub-model, which carries the assay-floor censoring, is therefore well
+calibrated at single-centre cohort sizes.
+
+Three parameters under-cover, and they are the three whose generating values lie
+furthest into the tails of the priors of Section~\ref{sec:computation}. At $n=87$ the
+latent time trend has coverage $0.73$ ($\beta_{\mathrm{time}}$, bias $+0.673$)
+and $0.79$ ($\beta_{\mathrm{time}^2}$, bias $-0.318$), the visit-gap coefficient
+$\gamma_{\mathrm{gap}}$ has coverage $0.75$ (bias $+1.069$), and the association
+parameter $\alpha_{\mathrm{MRD}}$ has coverage $0.88$ (bias $+0.278$). Every one
+of these biases is directed towards its prior mean. The time-trend and curvature
+terms recover with sample size ($\beta_{\mathrm{time}}$ reaching $0.90$ and
+$\beta_{\mathrm{time}^2}$ $0.92$ at $n=300$), but $\gamma_{\mathrm{gap}}$ does
+not: its coverage moves only from $0.75$ to $0.83$ as $n$ more than triples.
+
+This pattern is prior shrinkage rather than an artefact of interval construction
+or of floor censoring, and Section~\ref{sec:priorsens} establishes it directly:
+refitting under priors whose scales are doubled, with locations unchanged,
+raises $\gamma_{\mathrm{gap}}$ coverage from $0.78$ to $0.93$,
+$\beta_{\mathrm{time}}$ from $0.85$ to $1.00$ and $\beta_{\mathrm{time}^2}$ from
+$0.78$ to $0.95$ at $n=150$, while reducing the $\gamma_{\mathrm{gap}}$ bias
+from $+0.891$ to $+0.508$ (Table~\ref{tab:prior-widening}). We report the published priors here because they are
+the priors used in the application; the consequence is that at cohort sizes of
+this order the estimated \emph{rate} of latent decline and the visit-gap
+coefficient should be read as prior-informed, and the association parameter
+interpreted with the caveat that its interval is somewhat narrow. The variance
+components and the residual scale are unaffected.
+
+The exclusions noted above were applied on the following basis. We compute
+$\widehat R$ and effective sample size over the eleven reported
+parameters. Taken instead over all $4N+11$ quantities the model declares---which
+includes the $2N$ standardized random effects---the maximum $\widehat R$ exceeds
+$1.01$ in most fits purely by multiplicity, a diagnostic that carries no
+information about the estimates being reported.
+
+These results supersede two earlier assessments. The first used marginal
+maximum-\emph{a-posteriori} estimation with Wald intervals, under which the same
+coverages appeared far from nominal (e.g.\ $0.50$ for $\beta_{\mathrm{time}}$);
+that discrepancy reflected the symmetric Wald approximation and a joint-mode
+estimator whose variance-component bias \emph{grows} with sample size, not the
+Bayesian estimator used in the application. The second generated visits at a
+three-month spacing, roughly twice the density of the cohort, and consequently
+overstated coverage throughout (for example $\alpha_{\mathrm{MRD}}$ $0.96$
+rather than $0.88$ at $n=87$).
+
+\input{table_11_sim_coverage.tex}
+
+\subsection{Simulation-based calibration}
+\label{sec:sim:sbc}
+
+Coverage assesses the estimator; simulation-based calibration assesses the
+posterior computation itself. Drawing $\theta$ from the prior, simulating a
+cohort of $n=87$ from it and recording the rank of each true value among $L=100$
+thinned posterior draws, the ranks are Uniform$\{0,\dots,L\}$ if the posterior is
+computed exactly. Over $150$ such draws no parameter shows evidence of
+miscalibration (Table~\ref{tab:sbc}): the smallest unadjusted $p$-value is
+$0.033$ for $\beta_0$ and $0.054$ for $\beta_{\mathrm{time}}$, and after Holm
+adjustment across the eleven parameters none is significant.
+
+The expected bin counts are computed exactly rather than assumed equal. The
+$L+1$ integer ranks divide into equiprobable bins only when the number of bins
+divides $L+1$; with $L=100$ and $20$ bins one bin holds six ranks and nineteen
+hold five, and treating them as equiprobable inflates the statistic. Under the
+equal-count assumption $\beta_{\mathrm{time}}$ would appear to fail
+($\chi^2=35.6$, $p=0.012$); it does not.
+
+\input{table_15_sbc.tex}
+
+\subsection{Robustness to misspecification}
+\label{sec:sim:misspec}
+
+To probe robustness we refit the same Hamiltonian Monte Carlo estimator under
+one departure at a time ($n=150$, $100$ replicates each): a misspecified
+trajectory (a smoother monotone decline and a sharper exponential approach in
+place of the working quadratic), patient-specific (heterogeneous) assay floors,
+heavy-tailed ($t_3$) measurement errors and random effects, and an informative,
+response-adaptive visit process in which the visit intensity is a function of
+the patient's own latent MRD. Results are in Table~\ref{tab:sim-misspec}.
+
+Under a departure, a working-model parameter may have no counterpart in the
+generating mechanism at all, in which case its coverage is undefined rather than
+poor. A monotone trajectory has no quadratic coefficient; under an exponential
+trajectory neither the time slope nor the random-slope standard deviation is on
+a comparable scale. We report a dash for these rather than a coverage computed
+against a value that does not exist.
+
+Two findings stand out. Heavy-tailed measurement error and random effects break
+the variance components: $\sigma_y$ coverage falls to $0.27$ and $\tau_{b1}$ to
+$0.63$, even though the $t_3$ draws are rescaled to the same standard deviation
+as the Gaussian case, so the departure is tail shape alone. Gaussian assumptions
+in the observation model are therefore consequential for the reported
+heterogeneity, and residual diagnostics for heavy tails are advisable in
+practice.
+
+The second is more consequential for this application. Under an informative,
+response-adaptive visit process, coverage of the latent time slope collapses to
+$0.44$---the worst figure anywhere in the study---while the observation-level
+parameters are unaffected ($\sigma_y$ $0.98$, $\tau_{b1}$ $0.90$). Conditioning
+on the observed visit schedule is not innocuous when monitoring intensity
+responds to the biomarker, and it is the estimated \emph{rate} of decline that
+absorbs the violation. Because CML monitoring is response-adaptive by design,
+this bears directly on the interpretation of $\beta_{\mathrm{time}}$ in
+Section~\ref{sec:application}; we return to it in the Discussion. Heterogeneous
+assay floors are comparatively benign, with the fitted single floor costing some
+coverage on the curvature term ($0.76$) but leaving the association parameter at
+$0.88$, the same value it attains under correct specification.
+
+Convergence was essentially unaffected by misspecification: $98$--$100\%$ of
+fits met all diagnostics in every departure, with no divergent transitions.
+
+\input{table_13_sim_misspec.tex}
+
+\subsection{Patient-level calibration}
+\label{sec:sim:calib}
+
+Table~\ref{tab:sim-calibration} and Figure~\ref{fig:sim-calibration}
+summarize patient-level DMR calibration over $100$ replicates per cell.
+
+The primary floor model reproduces the under-prediction observed in the cohort,
+and does so at every sample size: mean predicted $0.585$, $0.587$ and $0.587$
+against observed rates of $0.723$, $0.730$ and $0.726$ at $n=87,150,300$, a
+shortfall of about $14$ percentage points that does not diminish as the cohort
+grows. Because these data are generated from the model's own event mechanism,
+the shortfall is not attributable to the cohort.
+
+The patient-level probability is obtained by combining posterior mean interval
+hazards across a patient's at-risk intervals. This plug-in ignores the posterior
+dependence between intervals induced by the shared random effects; since those
+hazards are positively dependent within a patient, it \emph{over}-states the
+predicted probability relative to the posterior mean of the patient-level
+quantity. The shortfall reported here is therefore conservative, and its exact
+magnitude should not be read too closely. The calibration slope is correspondingly above one throughout
+($1.85$, $1.72$, $1.78$, Monte Carlo standard errors $\le0.07$), indicating
+predictions that are too concentrated rather than merely displaced. This is a
+positive result for the horizon-specific recalibration of
+Section~\ref{sec:dynamic}: recalibration is correcting a structural feature of
+the estimator, not compensating for a peculiarity of these patients.
+
+Under informative monitoring the documented-DMR rate falls markedly ($0.517$
+versus $0.730$), the shortfall in mean predicted probability narrows to about
+$5$ percentage points, and the calibration slope rises further, to $2.33$
+($0.05$). Response-adaptive visiting therefore changes what is being predicted
+as well as how well it is predicted, which is consistent with the coverage
+result of Section~\ref{sec:sim:misspec}.
+
+The final row records the latent threshold-crossing model in its
+soft-minimum grid formulation, and is reported for a different reason. Every
+one of the $17$ fits attempted produced divergent transitions (mean $128$ of
+$2000$), and each fit cost roughly fifty times as much as the interval model,
+so its calibration summaries are not interpretable and are not interpreted
+here. This quantifies the motivation for the closed-form running minimum of
+Section~\ref{sec:threshold}: the grid approximation with sharpness $\kappa=50$
+renders the log density effectively non-differentiable where the arg-minimum
+switches between grid points, and Hamiltonian Monte Carlo cannot integrate
+across it. The closed-form formulation, which evaluates the running minimum at
+the interval endpoints and the vertex, samples without divergences
+(Section~\ref{sec:ms-real}).
+
+\input{table_12_sim_calibration.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.7\linewidth]{figure_16_sim_calibration.pdf}
+\caption{Simulation calibration-in-the-large: mean predicted DMR
+probability versus observed documented-DMR rate, by estimator, sample size,
+and monitoring scheme. Points below the diagonal indicate under-prediction.}
+\label{fig:sim-calibration}
+\end{figure}
+
+\subsection{Multi-state recovery}
+\label{sec:msresults}
+
+We report a small-scale recovery check for the multi-state estimator on data
+simulated from the model with a convex trajectory so that onset, durable
+response, and relapse are all present (onset rate $0.50$, relapse among
+responders $0.26$). This check used only 12 replicates at $n=300$ and is
+therefore illustrative rather than definitive: with 12 replicates the Monte
+Carlo error on a coverage estimate near $0.95$ is approximately $0.06$, and on a
+bias estimate is the reported MCse (Table~\ref{tab:ms-recovery}). Within this
+limited precision the point estimates were close to their generating values and
+the threshold width $\sigma_{\mathrm{thr}}$ showed small bias ($-0.001$),
+consistent with separating threshold ambiguity from residual observation-level variability; a
+full-scale study ($\ge200$ replicates with Hamiltonian Monte Carlo, below) is
+required before any claim of reliable recovery or identifiability. We note
+further that this check was run at an earlier stage of the project, under a
+generating parameter vector different from that of
+Section~\ref{sec:sim:coverage} ($\sigma_y=0.80$, $\tau_{b1}=0.75$), and that its
+output is not regenerated by the archived analysis code; it should be read as a
+record of an exploratory check rather than as a reproducible result. Model-implied transition
+probabilities matched empirical rates for all three transitions (onset $0.503$
+versus $0.502$; durable DMR $0.467$ versus $0.494$; relapse $0.134$ versus
+$0.129$), as illustrated in Figure~\ref{fig:multistate}.
+
+\begin{table}[!htbp]
+\centering
+\caption{Multi-state extension: parameter recovery over 12 simulation replicates at $n=300$. Bias and Monte Carlo standard error (MCse) are on the natural scale; $\beta_{\mathrm{time}}$ and $\beta_{\mathrm{time}^2}$ are the linear and quadratic $\log(1+t)$ coefficients.}
+\label{tab:ms-recovery}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Parameter & Truth & Mean & Bias & MCse\\
+\midrule
+$\beta_0$ & $-2.00$ & $-2.009$ & $-0.009$ & $0.023$\\
+$\beta_{\mathrm{time}}$ & $-3.60$ & $-3.615$ & $-0.015$ & $0.028$\\
+$\beta_{\mathrm{time}^2}$ & $1.30$ & $1.280$ & $-0.020$ & $0.028$\\
+$\sigma_y$ & $0.80$ & $0.780$ & $-0.020$ & $0.016$\\
+$\tau_{b0}$ & $0.55$ & $0.553$ & $0.003$ & $0.015$\\
+$\tau_{b1}$ & $0.75$ & $0.757$ & $0.007$ & $0.012$\\
+$\sigma_{\mathrm{thr}}$ & $0.15$ & $0.149$ & $-0.001$ & $0.003$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.98\linewidth]{figure_17_multistate.pdf}
+\caption{Bidirectional multi-state threshold model. (a) Example latent log-MRD
+trajectories: a sustained deep responder, a patient who attains then relapses
+(with onset and relapse crossings of $c_D$ and the durability window $w$
+shaded), and a non-responder whose minimum never reaches $c_D$. (b) Model-implied
+versus empirical probabilities for the onset, durable-DMR, and relapse
+transitions.}
+\label{fig:multistate}
+\end{figure}
+
+\section{Discussion}
+
+\subsection{Principal findings}
+
+We have developed a Bayesian framework that aligns the statistical model
+with the structure of routine CML molecular monitoring: repeated MRD
+measurements, assay-floor reporting, irregular visits, and
+interval-observed DMR. In the motivating cohort, the fitted joint
+longitudinal--interval model was computationally stable and calibrated in the
+large at the interval level. On the like-for-like contrast that we treat as
+substantive---an otherwise identical specification differing only in whether
+assay-floor values are left-censored or treated as exact---the primary model
+attained the lower Brier score at both levels, showing that treating deep values
+as left-censored measurably improves fit. Both arms of that contrast assume
+Gaussian observation error, so the comparison is conditional on the observation
+model; the simulation evidence below, which is not, points the same way. It also scored better than the
+Kaplan--Meier, interval-only and landmark alternatives, but those comparators
+are not bootstrap-comparable and two of them have negative patient-level
+calibration slopes, so we read them as descriptive references and claim no
+predictive superiority over them (Section~\ref{sec:modelcomparison}). A simulation study confirms this is a necessity
+rather than a refinement: ignoring floor censoring halves the recovered
+random-slope heterogeneity and attenuates the residual scale by a quarter, with
+zero credible-interval coverage for both, and---decisively---the bias does not
+diminish as the cohort grows (Section~\ref{sec:simresults}).
+
+A second finding concerns what these data can and cannot determine. Refitting
+with Student-$t$ measurement error drives the degrees of freedom to the boundary
+of the admissible range ($\nu=2.20$), so the likelihood prefers heavy tails; yet
+the Student-$t$ specification predicts no better than the Gaussian one by
+leave-one-out cross-validation (difference $4.2$, standard error $9.0$), the
+gain in fit being offset by the additional effective parameters
+(Section~\ref{sec:sens-extra}). Two observation models the data cannot
+distinguish nevertheless imply different variance decompositions---baseline
+heterogeneity $0.97$ against $0.31$, response-slope heterogeneity $2.20$ against
+$3.05$. The division of variability between measurement error and between-patient
+heterogeneity is therefore not identified independently of an assumption about
+the tails, and no single fit's intervals convey that. This is a limitation of
+what a cohort of this size and censoring can support rather than of the
+framework, and we regard the width of the disagreement between the two fits as
+the more honest description of what is known. Two implications follow: the
+assay-floor conclusion above is unaffected, since the response-slope component
+on which it rests is larger under the heavier-tailed fit; and the evidence for
+curvature in the mean trajectory, already weak, becomes weaker still, which
+bears on how much of the patient-level under-prediction can be attributed to
+trajectory shape.
+
+The companion multi-state threshold-crossing model resolved the same endpoint into
+onset, durable response, and molecular relapse; separating the threshold width
+from residual observation-level variability improved its identifiability, and a piecewise-quadratic
+trajectory made the running minimum and maximum closed-form, so the model
+sampled without divergences and---with a spline trajectory---captured molecular
+relapse in the cohort.
+
+\subsection{Methodological contribution}
+
+The methodological contribution is a joint model that couples a
+left-censored longitudinal sub-model for log-MRD with an interval-observed
+likelihood for first documented DMR through shared random effects, fitted in
+a fully Bayesian way. Treating assay-floor measurements as left-censored,
+rather than as exact $-5.0$ values, is not a refinement but a necessity: in
+simulation the exact-floor coding halves the recovered between-patient
+heterogeneity, and the bias is asymptotic rather than finite-sample, so it
+persists however large the cohort becomes. The second, and more novel, contribution is the latent threshold-crossing
+formulation and its multi-state extension. Reading DMR as a first-hitting time
+of the latent trajectory removes the definitional circularity between the
+biomarker predictor and the endpoint; separating the threshold width
+$\sigma_{\mathrm{thr}}$ from the residual observation-level variability $\sigma_y$ makes both
+identifiable; and, because the trajectory is piecewise-quadratic, the running
+minimum and maximum that define onset, durability, and relapse are available in
+closed form, eliminating the soft-minimum grid and the divergences it induces.
+A patient-specific spline slope change lets the trajectory rebound and thereby
+reproduce molecular relapse while preserving the closed form. Together these
+give a single latent process from which onset, durable response, and relapse
+are read off as successive threshold crossings.
+
+\subsection{Clinical interpretation}
+
+The fitted model should be read as a monitoring-support framework, not a
+treatment-decision rule. The negative association between latent MRD and
+interval DMR probability is biologically coherent and supports using
+serial molecular history for response assessment, but it does not validate
+the model for TKI discontinuation, treatment-free-remission eligibility,
+or changes in treatment. Dynamic prediction with recalibration improves
+calibration-in-the-large and provides individualized horizon
+probabilities, but the current estimates are apparent rather than strictly
+prospective.
+
+\subsection{Informative monitoring}
+
+Molecular monitoring in CML is response-adaptive by design---guidelines
+intensify testing when the transcript rises---so the visit process is
+potentially informative, and we assessed its impact directly rather than
+relegating it entirely to the appendix.
+
+In the cohort itself, jointly modelling the visit process with the longitudinal
+and event sub-models left the estimated longitudinal decline
+($\beta_{\mathrm{time}}$) and the threshold-crossing probabilities essentially
+unchanged relative to the schedule-conditional analysis, with the visible effect
+falling on calibration-in-the-large rather than on the structural parameters.
+
+The simulation gives a less reassuring answer, and we weight it more heavily.
+When data are generated with a visit intensity that is an explicit function of
+the patient's own latent MRD, coverage of $\beta_{\mathrm{time}}$ falls to
+$0.44$ (Table~\ref{tab:sim-misspec}), the largest departure from nominal
+anywhere in this study, while the observation-level parameters remain well
+calibrated. The single-cohort comparison and the simulation are not in conflict:
+one dataset cannot detect a coverage failure, and the visit-intensity parameters
+are only weakly identified at $n=87$, so an unchanged point estimate there is
+weak evidence of robustness. We therefore no longer regard conditioning on the
+observed visit schedule as demonstrably innocuous. It remains the analysis we
+report, because the joint visit-process model is not estimable with precision in
+a cohort of this size, but the estimated \emph{rate} of latent decline is the
+quantity most exposed to this assumption and should be interpreted accordingly.
+The association parameter $\alpha_{\mathrm{MRD}}$ and the variance components
+are considerably less affected ($0.85$ and $0.90$ coverage under the same
+departure). A fully joint visit-process analysis is the appropriate route for
+larger series, and we regard it as a requirement rather than an option for any
+study seeking to interpret the decline rate causally.
+
+\subsection{Limitations}
+\label{sec:limits}
+
+Several limitations temper these findings. The cohort was modest (87
+patients; complete core covariates in 62) and came from a single tertiary
+haematology centre in China, with no external validation cohort; the
+relatively young age distribution is typical of Chinese CML series and may
+limit transportability. The finite-sample interval coverage of the estimator
+was imperfect at the cohort sizes studied, so we describe the floor-censored
+estimator as recovering the generating parameters more closely than the
+exact-floor coding rather than as unbiased. Specifically, at $n=87$ the latent
+time trend, the visit-gap coefficient and the association parameter under-cover
+($0.73$, $0.75$ and $0.88$ against a nominal $0.95$), with every bias directed
+towards its prior mean; the observation-level parameters are nominal. Widening
+the prior scales removes most of this (Section~\ref{sec:priorsens}), so these
+three estimates are prior-informed at cohort sizes of this order and their
+intervals should be read as somewhat narrow. Gaussian assumptions in the
+observation model matter more than we had assumed, and are not satisfied here:
+refitting with Student-$t$ errors drives $\nu$ to its lower bound and moves the
+variance components substantially (Section~\ref{sec:sens-extra},
+Table~\ref{tab:studentt}). We report both fits and treat quantities that differ
+between them---the residual scale, the baseline heterogeneity $\tau_{b0}$, and
+the trajectory curvature---as not established at the precision the Gaussian
+intervals suggest. The association $\alpha_{\mathrm{MRD}}$ and the response-slope
+heterogeneity $\tau_{b1}$ are robust in sign and order of magnitude, and the
+latter is larger under the Student-$t$ fit. Monitoring was irregular, so
+patients with longer or denser follow-up had more opportunity to document
+DMR, and the analysis conditions on the observed visit schedule---an assumption
+that simulation shows is consequential for the decline rate specifically
+(coverage $0.44$; Section~\ref{sec:sim:misspec}). The
+retained data contained no observations in $(-5.0,-4.5]$, limiting the
+ability to distinguish DMR from CMR descriptively.
+
+Treatment history deserves separate emphasis, because its absence is not only a
+gap in adjustment but a candidate explanation for the paper's largest
+quantitative feature. These records contain no TKI agent, dose, switch,
+interruption or adherence information. Patients whose transcript moves two to
+three $\log_{10}$ units between consecutive visits are plausibly changing or
+pausing therapy, and such movements are absorbed into $\sigma_y$ and
+$\tau_{b1}$, which we then interpret as measurement error and between-patient
+heterogeneity in response \emph{rate}. Since $\sigma_y$ is about a third of the
+biomarker's dynamic range (Section~\ref{sec:sens-extra}) and since the latent
+trajectory---and hence the threshold-crossing estimand---is defined conditional
+on it, this is the assumption on which the interpretation of the whole model
+most depends. A cohort with treatment exposure recorded would allow the
+between-patient variance to be partitioned into biological response
+heterogeneity and treatment-driven variation, which these data cannot separate. The dynamic predictions
+use each patient's full longitudinal record to estimate random effects and
+are therefore internal (apparent) rather than strictly prospective. Molecular
+relapse was uncommon (9 confirmed events) and was captured only after enriching
+the trajectory with a spline slope change, so the relapse estimates are the
+least certain part of the analysis and warrant larger cohorts. Informative
+monitoring is not modelled in the primary analyses and is left to future work
+(Supplementary Material); on the simulation evidence this is the most material
+of the assumptions we make. The interval-observed joint model links the
+documented-DMR event to the latent trajectory through the association parameter
+$\alpha$; the threshold-crossing model removes the residual definitional
+circularity between predictor and endpoint directly. The models are intended to
+support monitoring, not to serve as a treatment-decision rule.
+
+\subsection{Future work}
+\label{sec:future}
+
+The Student-$t$ refit of Section~\ref{sec:sens-extra} establishes that Gaussian
+measurement error is untenable here but leaves the source of the heavy tails
+open. Distinguishing genuine assay outliers from unrecorded treatment change,
+from transient biological rebound, and from a trajectory too rigid to follow
+individual patients, requires either a cohort with treatment exposure recorded
+or a mixture formulation in which an outlier component is modelled explicitly.
+This matters because the three have different implications: the first is
+measurement, the second is confounding, and the third is misspecification of the
+mean structure. We regard this as the most informative next step.
+
+Several further extensions follow naturally. The informative visit process can be
+modelled jointly with the trajectory as a sensitivity analysis in larger
+cohorts (Supplementary Material). The multi-state relapse component would
+benefit from cohorts with more confirmed relapses and from priors elicited for
+the spline rebound. Most importantly, strict prospective landmark prediction
+with history-restricted posterior updating, and external or temporal
+validation, are needed before the recalibrated dynamic probabilities could
+support clinical decisions.
+
+\section{Conclusions}
+
+We have presented a Bayesian joint model for CML molecular monitoring in which a
+single latent log-MRD trajectory serves both the repeated measurements and the
+event process, and deep molecular response is read directly off that trajectory
+as a threshold crossing. Reading the endpoint this way removes the definitional
+circularity that arises when an endpoint defined by a biomarker threshold is
+predicted from the same biomarker; because the trajectory is
+piecewise-quadratic, the running extrema that define crossings are closed-form
+and the model samples without divergences. The conventional interval-censored
+hazard and a multi-state extension arise as options of the same program, which
+makes them directly comparable and allows the threshold width and trajectory
+curvature to be assessed for stability.
+
+Three findings are robust. The biomarker--event association is stable across the
+censoring point and across prior families. Treating
+assay-floor values as left-censored rather than exact is a necessity rather than
+a refinement: coding them as exact roughly halves the recovered between-patient
+heterogeneity. And the single-program formulation reproduces the conventional
+specification exactly, so the alternatives differ in what they assume, not in
+how they were fitted. Three claims are correspondingly limited: the threshold
+width is conditionally rather than universally identified, varying with which
+transitions are modelled (0.78 with onset alone, 0.27--0.29 once durability and
+relapse are included, and 0.18 under the separately parameterised multi-state
+fit, against a simulation truth of 0.15); the trajectory curvature is identified only when
+multi-state transitions are included, so we do not interpret it as a description
+of long-run dynamics; and the relapse component rests on few confirmed events
+and is exploratory. Dynamic predictions are reported as internal accuracy;
+informative-visit modelling, prospective calibration, and external validation
+are required before clinical decision use.
+
+\section*{Data and Code Availability}
+
+The raw clinical molecular-monitoring records cannot be shared publicly because
+they constitute identifiable patient health information and are subject to
+institutional and national privacy regulations. To support reproducibility, we
+provide (i) a fully synthetic dataset of the same structure, simulated from the
+fitted model's posterior predictive distribution, which reproduces the
+qualitative features of the analysis without disclosing any patient data, and
+(ii) the complete, fully commented Stan code for the joint
+longitudinal--interval model and for the closed-form piecewise-quadratic
+multi-state threshold-crossing model, together with the R scripts that prepare
+the data, fit the models, and generate all tables and figures. These materials
+are included in the Supplementary Material and are maintained in a public
+repository (URL provided on acceptance; archived at Zenodo with a DOI to be
+assigned). The synthetic-data workflow allows the full analysis pipeline to be
+executed end-to-end without access to the confidential clinical data.
+
+\section*{Statements and Declarations}
+
+\emph{Ethical approval, consent, funding, and conflict-of-interest statements
+are provided on the separate, non-anonymized Title Page, as the approving
+institution and the funding award numbers would identify the authors and the
+study centre.}
+
+\subsection*{Consent for publication}
+Not applicable; the manuscript reports de-identified aggregate analyses and
+contains no individually identifying data.
+
+\subsection*{Data availability}
+The analysis workflow generated privacy-preserving processed datasets,
+model code, tables, and figures. Direct identifiers are excluded from all
+analysis files and retained only in a private linkage file; processed data
+and code supporting the findings are available from the corresponding
+author on reasonable request, subject to institutional and ethical
+approval.
+
+\subsection*{Reporting guidelines}
+Development and reporting of the prediction model followed the TRIPOD
+recommendations; the completed checklist is provided as a supplementary
+file.
+
+% Sage Vancouver style: numbered references by order of appearance.
+% For final submission, replace with the official Sage Vancouver .bst if required.
+\bibliographystyle{unsrtnat}
+\bibliography{peer_reviewed_papers_selected}
+
+\end{document}

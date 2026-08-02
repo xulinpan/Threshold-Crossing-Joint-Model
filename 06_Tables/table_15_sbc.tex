@@ -1,0 +1,23 @@
+\begin{table}[!htbp]
+\centering
+\caption{Simulation-based calibration at $n=87$, $150$ draws from the prior. The rank of each true value among $L=100$ thinned posterior draws is Uniform$\{0,\dots,L\}$ under exact posterior computation. Expected bin counts are computed exactly: the $L+1$ integer ranks divide into equiprobable bins only when the number of bins divides $L+1$, and assuming equal expected counts otherwise inflates the statistic. $p_{\mathrm{Holm}}$ adjusts for testing all eleven parameters simultaneously. No parameter shows evidence of miscalibration.}
+\label{tab:sbc}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Parameter & $\chi^2_{19}$ & $p$ & $p_{\mathrm{Holm}}$\\
+\midrule
+$\beta_0$ & 31.78 & 0.033 & 0.364\\
+$\beta_{\mathrm{time}}$ & 29.82 & 0.054 & 0.541\\
+$\beta_{\mathrm{BM}}$ & 26.39 & 0.120 & 1.000\\
+$\gamma_0$ & 23.90 & 0.200 & 1.000\\
+$\gamma_{\mathrm{time}}$ & 22.89 & 0.242 & 1.000\\
+$\alpha_{\mathrm{MRD}}$ & 22.62 & 0.254 & 1.000\\
+$\sigma_y$ & 19.32 & 0.436 & 1.000\\
+$\beta_{\mathrm{time}^2}$ & 19.05 & 0.454 & 1.000\\
+$\gamma_{\mathrm{gap}}$ & 17.86 & 0.532 & 1.000\\
+$\tau_{b1}$ & 11.24 & 0.915 & 1.000\\
+$\tau_{b0}$ & 10.59 & 0.937 & 1.000\\
+\bottomrule
+\end{tabular}
+\end{table}

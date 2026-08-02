@@ -1,0 +1,34 @@
+\begin{table}[!htbp]
+\centering
+\caption{Diagnostics, posterior predictive checks, calibration, and sensitivity summaries for the renewed independent-random-effects joint model.}
+\label{tab:model-checks}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llr}
+\toprule
+Domain & Metric & Value \\
+\midrule
+MCMC diagnostics & Post-warmup draws & 8000 \\
+MCMC diagnostics & Divergent transitions & 0 \\
+MCMC diagnostics & Maximum treedepth & 7 \\
+MCMC diagnostics & Minimum approximate E-BFMI & 0.610 \\
+MCMC diagnostics & Maximum R-hat & 1.003 \\
+MCMC diagnostics & Minimum bulk ESS & 1359.258 \\
+MCMC diagnostics & Minimum tail ESS & 1395.463 \\
+Longitudinal PPC & Non-floor RMSE to posterior mean & 1.494 \\
+Longitudinal PPC & Non-floor 90\% predictive coverage & 0.957 \\
+Longitudinal PPC & Non-floor 95\% predictive coverage & 0.984 \\
+Assay-floor PPC & Observed floor rate & 0.483 \\
+Assay-floor PPC & Posterior mean floor probability & 0.414 \\
+Interval calibration & Observed event rate & 0.247 \\
+Interval calibration & Mean predicted probability & 0.247 \\
+Interval calibration & Brier score & 0.082 \\
+Patient calibration & Observed DMR rate & 0.782 \\
+Patient calibration & Mean predicted DMR probability & 0.581 \\
+Patient calibration & Brier score & 0.123 \\
+Sensitivity & Full-data floor variants & Qualitatively consistent longitudinal decline \\
+Sensitivity & Non-floor-only variant & Rank-deficient stress test; supplemental only \\
+\bottomrule
+\end{tabular}
+}%
+\end{table}
+

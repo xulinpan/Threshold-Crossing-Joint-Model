@@ -1,0 +1,3 @@
+"model","num_divergent","num_max_treedepth","ebfmi_min","max_rhat","min_ess"
+"threshold",219,0,0.519380184747838,1.00711305213079,1347.86885423012
+"interval",0,0,0.565685768952672,1.00155331372436,2105.64803430359

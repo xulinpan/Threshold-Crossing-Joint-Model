@@ -1,0 +1,18 @@
+\begin{table}[!htbp]
+\centering
+\caption{Screening comparison of longitudinal time functions. This table is an approximate mixed-model benchmark for time-function selection; floor observations are treated as observed at \(-5.0\) and final inference should be based on the Bayesian joint model with censoring.}
+\label{tab:time-function-comparison}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrrr}
+\toprule
+Time function & Time parameters & AIC & Non-floor RMSE & Interval Brier & Interval calibration slope & Patient Brier & Patient calibration slope \\
+\midrule
+Log-quadratic in log(1+t) & 2 & 1726.9 & 1.095 & 0.123 & 1.00 & 0.179 & 1.62 \\
+Piecewise linear knots 3, 6, 12, 24, 60 months & 6 & 1735.0 & 1.134 & 0.123 & 1.00 & 0.179 & 1.47 \\
+Low-rank spline proxy (4 df) & 4 & 1723.4 & 1.102 & 0.127 & 1.00 & 0.187 & 1.41 \\
+Soft monotone-decline constrained spline & 4 & -- & -- & -- & -- & -- & -- \\
+\bottomrule
+\end{tabular}
+}%
+\end{table}
+

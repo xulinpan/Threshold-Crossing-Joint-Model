@@ -1,0 +1,78 @@
+GLW benchmark model summary
+Generated: 2026-07-08 22:39:37 EDT 
+
+Interval-censored Weibull model: molecular-only
+
+Call:
+survival::survreg(formula = t_event ~ baseline_log_mrd, data = patient_interval, 
+    dist = "weibull")
+                  Value Std. Error     z      p
+(Intercept)      3.5215     0.2630 13.39 <2e-16
+baseline_log_mrd 0.2471     0.1104  2.24  0.025
+Log(scale)       0.0792     0.1084  0.73  0.465
+
+Scale= 1.08 
+
+Weibull distribution
+Loglik(model)= -142.4   Loglik(intercept only)= -145.2
+	Chisq= 5.52 on 1 degrees of freedom, p= 0.019 
+Number of Newton-Raphson Iterations: 5 
+n= 87 
+
+
+Interval-censored Weibull model: complete-case clinical adjustment
+
+Call:
+survival::survreg(formula = t_event ~ baseline_log_mrd + age + 
+    sex_male + duration_years, data = clinical_dat, dist = "weibull")
+                    Value Std. Error     z       p
+(Intercept)       2.57164    0.44003  5.84 5.1e-09
+baseline_log_mrd  0.18063    0.09867  1.83 0.06716
+age              -0.00682    0.00740 -0.92 0.35726
+sex_male         -0.00227    0.22660 -0.01 0.99200
+duration_years    0.17347    0.05081  3.41 0.00064
+Log(scale)       -0.37408    0.13164 -2.84 0.00449
+
+Scale= 0.688 
+
+Weibull distribution
+Loglik(model)= -90.4   Loglik(intercept only)= -95.5
+	Chisq= 10.19 on 4 degrees of freedom, p= 0.037 
+Number of Newton-Raphson Iterations: 5 
+n= 62 
+
+
+Longitudinal mixed model: random_intercept_slope 
+Linear mixed-effects model fit by REML
+  Data: long 
+       AIC      BIC    logLik
+  1741.057 1778.806 -861.5283
+
+Random effects:
+ Formula: ~1 + t_years | patient_id
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev    Corr  
+(Intercept) 0.7626546 (Intr)
+t_years     0.2350363 0.27  
+Residual    1.1845964       
+
+Fixed effects:  log_mrd ~ splines::ns(t_years, df = 3) + sample_bm 
+                                  Value Std.Error  DF   t-value p-value
+(Intercept)                   -2.701510 0.6853881 404 -3.941577  0.0001
+splines::ns(t_years, df = 3)1 -1.071553 0.3846919 404 -2.785483  0.0056
+splines::ns(t_years, df = 3)2 -3.938177 0.5637191 404 -6.986062  0.0000
+splines::ns(t_years, df = 3)3 -0.313333 0.7738688 404 -0.404891  0.6858
+sample_bm                      1.244901 0.6626142 404  1.878772  0.0610
+ Correlation: 
+                              (Intr) s::(_,d=3)1 s::(_,d=3)2 s::(_,d=3)3
+splines::ns(t_years, df = 3)1  0.019                                    
+splines::ns(t_years, df = 3)2 -0.149  0.061                             
+splines::ns(t_years, df = 3)3 -0.017 -0.124       0.835                 
+sample_bm                     -0.973 -0.024       0.050      -0.001     
+
+Standardized Within-Group Residuals:
+        Min          Q1         Med          Q3         Max 
+-2.78358317 -0.52706596 -0.05210951  0.52592641  2.61726013 
+
+Number of Observations: 495
+Number of Groups: 87 

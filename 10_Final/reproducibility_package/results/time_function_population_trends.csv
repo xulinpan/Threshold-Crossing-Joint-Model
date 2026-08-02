@@ -1,0 +1,1201 @@
+"model_key","model","t_months","predicted_log_mrd"
+"log_quadratic","Log-quadratic in log(1+t)",0,-2.61938814513164
+"log_quadratic","Log-quadratic in log(1+t)",0.452596952195201,-2.75109132159836
+"log_quadratic","Log-quadratic in log(1+t)",0.905193904390401,-2.87479856148484
+"log_quadratic","Log-quadratic in log(1+t)",1.3577908565856,-2.99117281302561
+"log_quadratic","Log-quadratic in log(1+t)",1.8103878087808,-3.10080341803909
+"log_quadratic","Log-quadratic in log(1+t)",2.262984760976,-3.20421630647703
+"log_quadratic","Log-quadratic in log(1+t)",2.7155817131712,-3.3018825121477
+"log_quadratic","Log-quadratic in log(1+t)",3.1681786653664,-3.3942253277122
+"log_quadratic","Log-quadratic in log(1+t)",3.62077561756161,-3.48162634931841
+"log_quadratic","Log-quadratic in log(1+t)",4.07337256975681,-3.56443060942881
+"log_quadratic","Log-quadratic in log(1+t)",4.52596952195201,-3.6429509564371
+"log_quadratic","Log-quadratic in log(1+t)",4.97856647414721,-3.71747180860119
+"log_quadratic","Log-quadratic in log(1+t)",5.43116342634241,-3.78825238548656
+"log_quadratic","Log-quadratic in log(1+t)",5.88376037853761,-3.85552950092256
+"log_quadratic","Log-quadratic in log(1+t)",6.33635733073281,-3.91951998623574
+"log_quadratic","Log-quadratic in log(1+t)",6.78895428292801,-3.98042280035152
+"log_quadratic","Log-quadratic in log(1+t)",7.24155123512321,-4.03842087357172
+"log_quadratic","Log-quadratic in log(1+t)",7.69414818731841,-4.09368272392925
+"log_quadratic","Log-quadratic in log(1+t)",8.14674513951361,-4.14636387859749
+"log_quadratic","Log-quadratic in log(1+t)",8.59934209170881,-4.19660812758632
+"log_quadratic","Log-quadratic in log(1+t)",9.05193904390402,-4.24454863265272
+"log_quadratic","Log-quadratic in log(1+t)",9.50453599609922,-4.29030891080587
+"log_quadratic","Log-quadratic in log(1+t)",9.95713294829442,-4.33400370884972
+"log_quadratic","Log-quadratic in log(1+t)",10.4097299004896,-4.37573978296336
+"log_quadratic","Log-quadratic in log(1+t)",10.8623268526848,-4.41561659528193
+"log_quadratic","Log-quadratic in log(1+t)",11.31492380488,-4.45372693773206
+"log_quadratic","Log-quadratic in log(1+t)",11.7675207570752,-4.49015749194
+"log_quadratic","Log-quadratic in log(1+t)",12.2201177092704,-4.52498933281801
+"log_quadratic","Log-quadratic in log(1+t)",12.6727146614656,-4.55829838240834
+"log_quadratic","Log-quadratic in log(1+t)",13.1253116136608,-4.5901558196916
+"log_quadratic","Log-quadratic in log(1+t)",13.577908565856,-4.62062845132376
+"log_quadratic","Log-quadratic in log(1+t)",14.0305055180512,-4.64977904763
+"log_quadratic","Log-quadratic in log(1+t)",14.4831024702464,-4.67766664763985
+"log_quadratic","Log-quadratic in log(1+t)",14.9356994224416,-4.70434683647924
+"log_quadratic","Log-quadratic in log(1+t)",15.3882963746368,-4.7298719980321
+"log_quadratic","Log-quadratic in log(1+t)",15.840893326832,-4.75429154543521
+"log_quadratic","Log-quadratic in log(1+t)",16.2934902790272,-4.77765213166802
+"log_quadratic","Log-quadratic in log(1+t)",16.7460872312224,-4.79999784223692
+"log_quadratic","Log-quadratic in log(1+t)",17.1986841834176,-4.82137037172482
+"log_quadratic","Log-quadratic in log(1+t)",17.6512811356128,-4.84180918577822
+"log_quadratic","Log-quadratic in log(1+t)",18.103878087808,-4.86135166992913
+"log_quadratic","Log-quadratic in log(1+t)",18.5564750400032,-4.88003326649723
+"log_quadratic","Log-quadratic in log(1+t)",19.0090719921984,-4.89788760068334
+"log_quadratic","Log-quadratic in log(1+t)",19.4616689443936,-4.91494659684734
+"log_quadratic","Log-quadratic in log(1+t)",19.9142658965888,-4.93124058586023
+"log_quadratic","Log-quadratic in log(1+t)",20.366862848784,-4.94679840432779
+"log_quadratic","Log-quadratic in log(1+t)",20.8194598009792,-4.96164748640248
+"log_quadratic","Log-quadratic in log(1+t)",21.2720567531744,-4.97581394882829
+"log_quadratic","Log-quadratic in log(1+t)",21.7246537053696,-4.98932266979918
+"log_quadratic","Log-quadratic in log(1+t)",22.1772506575648,-5.00219736215531
+"log_quadratic","Log-quadratic in log(1+t)",22.62984760976,-5.01446064139045
+"log_quadratic","Log-quadratic in log(1+t)",23.0824445619552,-5.026134088899
+"log_quadratic","Log-quadratic in log(1+t)",23.5350415141504,-5.03723831085082
+"log_quadratic","Log-quadratic in log(1+t)",23.9876384663456,-5.04779299304571
+"log_quadratic","Log-quadratic in log(1+t)",24.4402354185408,-5.05781695206756
+"log_quadratic","Log-quadratic in log(1+t)",24.892832370736,-5.06732818302883
+"log_quadratic","Log-quadratic in log(1+t)",25.3454293229312,-5.0763439041701
+"log_quadratic","Log-quadratic in log(1+t)",25.7980262751264,-5.08488059855616
+"log_quadratic","Log-quadratic in log(1+t)",26.2506232273216,-5.09295405308861
+"log_quadratic","Log-quadratic in log(1+t)",26.7032201795168,-5.10057939503647
+"log_quadratic","Log-quadratic in log(1+t)",27.155817131712,-5.10777112626853
+"log_quadratic","Log-quadratic in log(1+t)",27.6084140839072,-5.11454315535607
+"log_quadratic","Log-quadratic in log(1+t)",28.0610110361024,-5.12090882770021
+"log_quadratic","Log-quadratic in log(1+t)",28.5136079882977,-5.12688095382557
+"log_quadratic","Log-quadratic in log(1+t)",28.9662049404928,-5.13247183597029
+"log_quadratic","Log-quadratic in log(1+t)",29.418801892688,-5.13769329309189
+"log_quadratic","Log-quadratic in log(1+t)",29.8713988448833,-5.14255668439896
+"log_quadratic","Log-quadratic in log(1+t)",30.3239957970784,-5.14707293150999
+"log_quadratic","Log-quadratic in log(1+t)",30.7765927492736,-5.15125253933259
+"log_quadratic","Log-quadratic in log(1+t)",31.2291897014689,-5.15510561574929
+"log_quadratic","Log-quadratic in log(1+t)",31.6817866536641,-5.15864189018926
+"log_quadratic","Log-quadratic in log(1+t)",32.1343836058592,-5.16187073115964
+"log_quadratic","Log-quadratic in log(1+t)",32.5869805580545,-5.16480116280414
+"log_quadratic","Log-quadratic in log(1+t)",33.0395775102497,-5.16744188055201
+"log_quadratic","Log-quadratic in log(1+t)",33.4921744624449,-5.16980126591546
+"log_quadratic","Log-quadratic in log(1+t)",33.9447714146401,-5.17188740048961
+"log_quadratic","Log-quadratic in log(1+t)",34.3973683668353,-5.17370807920496
+"log_quadratic","Log-quadratic in log(1+t)",34.8499653190305,-5.175270822879
+"log_quadratic","Log-quadratic in log(1+t)",35.3025622712257,-5.17658289011002
+"log_quadratic","Log-quadratic in log(1+t)",35.7551592234209,-5.17765128855336
+"log_quadratic","Log-quadratic in log(1+t)",36.2077561756161,-5.17848278561746
+"log_quadratic","Log-quadratic in log(1+t)",36.6603531278113,-5.17908391861442
+"log_quadratic","Log-quadratic in log(1+t)",37.1129500800065,-5.17946100439758
+"log_quadratic","Log-quadratic in log(1+t)",37.5655470322017,-5.17962014851623
+"log_quadratic","Log-quadratic in log(1+t)",38.0181439843969,-5.17956725391573
+"log_quadratic","Log-quadratic in log(1+t)",38.4707409365921,-5.17930802920922
+"log_quadratic","Log-quadratic in log(1+t)",38.9233378887873,-5.17884799654557
+"log_quadratic","Log-quadratic in log(1+t)",39.3759348409825,-5.17819249909657
+"log_quadratic","Log-quadratic in log(1+t)",39.8285317931777,-5.17734670818466
+"log_quadratic","Log-quadratic in log(1+t)",40.2811287453729,-5.17631563007155
+"log_quadratic","Log-quadratic in log(1+t)",40.7337256975681,-5.1751041124262
+"log_quadratic","Log-quadratic in log(1+t)",41.1863226497633,-5.17371685049013
+"log_quadratic","Log-quadratic in log(1+t)",41.6389196019585,-5.17215839295635
+"log_quadratic","Log-quadratic in log(1+t)",42.0915165541537,-5.1704331475774
+"log_quadratic","Log-quadratic in log(1+t)",42.5441135063489,-5.16854538651718
+"log_quadratic","Log-quadratic in log(1+t)",42.9967104585441,-5.16649925146004
+"log_quadratic","Log-quadratic in log(1+t)",43.4493074107393,-5.16429875849005
+"log_quadratic","Log-quadratic in log(1+t)",43.9019043629345,-5.16194780275245
+"log_quadratic","Log-quadratic in log(1+t)",44.3545013151297,-5.15945016290863
+"log_quadratic","Log-quadratic in log(1+t)",44.8070982673249,-5.1568095053952
+"log_quadratic","Log-quadratic in log(1+t)",45.2596952195201,-5.15402938849736
+"log_quadratic","Log-quadratic in log(1+t)",45.7122921717153,-5.15111326624574
+"log_quadratic","Log-quadratic in log(1+t)",46.1648891239105,-5.1480644921459
+"log_quadratic","Log-quadratic in log(1+t)",46.6174860761057,-5.14488632274859
+"log_quadratic","Log-quadratic in log(1+t)",47.0700830283009,-5.14158192106892
+"log_quadratic","Log-quadratic in log(1+t)",47.5226799804961,-5.13815435986164
+"log_quadratic","Log-quadratic in log(1+t)",47.9752769326913,-5.13460662475982
+"log_quadratic","Log-quadratic in log(1+t)",48.4278738848865,-5.13094161728342
+"log_quadratic","Log-quadratic in log(1+t)",48.8804708370817,-5.12716215772396
+"log_quadratic","Log-quadratic in log(1+t)",49.3330677892769,-5.12327098791146
+"log_quadratic","Log-quadratic in log(1+t)",49.7856647414721,-5.11927077386903
+"log_quadratic","Log-quadratic in log(1+t)",50.2382616936673,-5.11516410836044
+"log_quadratic","Log-quadratic in log(1+t)",50.6908586458625,-5.11095351333585
+"log_quadratic","Log-quadratic in log(1+t)",51.1434555980577,-5.10664144228022
+"log_quadratic","Log-quadratic in log(1+t)",51.5960525502529,-5.10223028246907
+"log_quadratic","Log-quadratic in log(1+t)",52.0486495024481,-5.09772235713578
+"log_quadratic","Log-quadratic in log(1+t)",52.5012464546433,-5.09311992755441
+"log_quadratic","Log-quadratic in log(1+t)",52.9538434068385,-5.08842519504199
+"log_quadratic","Log-quadratic in log(1+t)",53.4064403590337,-5.08364030288381
+"log_quadratic","Log-quadratic in log(1+t)",53.8590373112289,-5.07876733818516
+"log_quadratic","Log-quadratic in log(1+t)",54.3116342634241,-5.07380833365285
+"log_quadratic","Log-quadratic in log(1+t)",54.7642312156193,-5.06876526930953
+"log_quadratic","Log-quadratic in log(1+t)",55.2168281678145,-5.06364007414378
+"log_quadratic","Log-quadratic in log(1+t)",55.6694251200097,-5.05843462769884
+"log_quadratic","Log-quadratic in log(1+t)",56.1220220722049,-5.05315076160248
+"log_quadratic","Log-quadratic in log(1+t)",56.5746190244001,-5.04779026104072
+"log_quadratic","Log-quadratic in log(1+t)",57.0272159765953,-5.04235486617764
+"log_quadratic","Log-quadratic in log(1+t)",57.4798129287905,-5.03684627352371
+"log_quadratic","Log-quadratic in log(1+t)",57.9324098809857,-5.03126613725468
+"log_quadratic","Log-quadratic in log(1+t)",58.3850068331809,-5.02561607048322
+"log_quadratic","Log-quadratic in log(1+t)",58.8376037853761,-5.01989764648514
+"log_quadratic","Log-quadratic in log(1+t)",59.2902007375713,-5.01411239988232
+"log_quadratic","Log-quadratic in log(1+t)",59.7427976897665,-5.00826182778374
+"log_quadratic","Log-quadratic in log(1+t)",60.1953946419617,-5.00234739088679
+"log_quadratic","Log-quadratic in log(1+t)",60.6479915941569,-4.99637051454005
+"log_quadratic","Log-quadratic in log(1+t)",61.1005885463521,-4.9903325897694
+"log_quadratic","Log-quadratic in log(1+t)",61.5531854985473,-4.98423497426878
+"log_quadratic","Log-quadratic in log(1+t)",62.0057824507425,-4.97807899335706
+"log_quadratic","Log-quadratic in log(1+t)",62.4583794029377,-4.97186594090235
+"log_quadratic","Log-quadratic in log(1+t)",62.9109763551329,-4.96559708021507
+"log_quadratic","Log-quadratic in log(1+t)",63.3635733073281,-4.95927364491097
+"log_quadratic","Log-quadratic in log(1+t)",63.8161702595233,-4.95289683974527
+"log_quadratic","Log-quadratic in log(1+t)",64.2687672117185,-4.94646784141907
+"log_quadratic","Log-quadratic in log(1+t)",64.7213641639137,-4.93998779935913
+"log_quadratic","Log-quadratic in log(1+t)",65.1739611161089,-4.9334578364719
+"log_quadratic","Log-quadratic in log(1+t)",65.6265580683041,-4.92687904987301
+"log_quadratic","Log-quadratic in log(1+t)",66.0791550204993,-4.92025251159291
+"log_quadratic","Log-quadratic in log(1+t)",66.5317519726945,-4.91357926925973
+"log_quadratic","Log-quadratic in log(1+t)",66.9843489248897,-4.90686034676019
+"log_quadratic","Log-quadratic in log(1+t)",67.4369458770849,-4.90009674487927
+"log_quadratic","Log-quadratic in log(1+t)",67.8895428292801,-4.89328944191958
+"log_quadratic","Log-quadratic in log(1+t)",68.3421397814753,-4.88643939430109
+"log_quadratic","Log-quadratic in log(1+t)",68.7947367336705,-4.87954753714191
+"log_quadratic","Log-quadratic in log(1+t)",69.2473336858657,-4.87261478482097
+"log_quadratic","Log-quadratic in log(1+t)",69.6999306380609,-4.86564203152302
+"log_quadratic","Log-quadratic in log(1+t)",70.1525275902561,-4.85863015176684
+"log_quadratic","Log-quadratic in log(1+t)",70.6051245424513,-4.85158000091705
+"log_quadratic","Log-quadratic in log(1+t)",71.0577214946465,-4.84449241568027
+"log_quadratic","Log-quadratic in log(1+t)",71.5103184468417,-4.83736821458608
+"log_quadratic","Log-quadratic in log(1+t)",71.9629153990369,-4.83020819845336
+"log_quadratic","Log-quadratic in log(1+t)",72.4155123512321,-4.82301315084254
+"log_quadratic","Log-quadratic in log(1+t)",72.8681093034273,-4.8157838384942
+"log_quadratic","Log-quadratic in log(1+t)",73.3207062556225,-4.80852101175459
+"log_quadratic","Log-quadratic in log(1+t)",73.7733032078177,-4.80122540498841
+"log_quadratic","Log-quadratic in log(1+t)",74.2259001600129,-4.79389773697935
+"log_quadratic","Log-quadratic in log(1+t)",74.6784971122081,-4.78653871131886
+"log_quadratic","Log-quadratic in log(1+t)",75.1310940644033,-4.77914901678344
+"log_quadratic","Log-quadratic in log(1+t)",75.5836910165985,-4.77172932770089
+"log_quadratic","Log-quadratic in log(1+t)",76.0362879687937,-4.764280304306
+"log_quadratic","Log-quadratic in log(1+t)",76.4888849209889,-4.75680259308582
+"log_quadratic","Log-quadratic in log(1+t)",76.9414818731841,-4.74929682711504
+"log_quadratic","Log-quadratic in log(1+t)",77.3940788253793,-4.74176362638175
+"log_quadratic","Log-quadratic in log(1+t)",77.8466757775745,-4.73420359810386
+"log_quadratic","Log-quadratic in log(1+t)",78.2992727297697,-4.72661733703658
+"log_quadratic","Log-quadratic in log(1+t)",78.7518696819649,-4.71900542577115
+"log_quadratic","Log-quadratic in log(1+t)",79.2044666341601,-4.71136843502519
+"log_quadratic","Log-quadratic in log(1+t)",79.6570635863553,-4.70370692392488
+"log_quadratic","Log-quadratic in log(1+t)",80.1096605385505,-4.69602144027932
+"log_quadratic","Log-quadratic in log(1+t)",80.5622574907457,-4.68831252084719
+"log_quadratic","Log-quadratic in log(1+t)",81.0148544429409,-4.68058069159607
+"log_quadratic","Log-quadratic in log(1+t)",81.4674513951361,-4.67282646795467
+"log_quadratic","Log-quadratic in log(1+t)",81.9200483473313,-4.66505035505805
+"log_quadratic","Log-quadratic in log(1+t)",82.3726452995265,-4.65725284798623
+"log_quadratic","Log-quadratic in log(1+t)",82.8252422517217,-4.64943443199626
+"log_quadratic","Log-quadratic in log(1+t)",83.2778392039169,-4.64159558274805
+"log_quadratic","Log-quadratic in log(1+t)",83.7304361561121,-4.63373676652408
+"log_quadratic","Log-quadratic in log(1+t)",84.1830331083073,-4.62585844044325
+"log_quadratic","Log-quadratic in log(1+t)",84.6356300605025,-4.61796105266901
+"log_quadratic","Log-quadratic in log(1+t)",85.0882270126977,-4.61004504261193
+"log_quadratic","Log-quadratic in log(1+t)",85.5408239648929,-4.60211084112695
+"log_quadratic","Log-quadratic in log(1+t)",85.9934209170881,-4.5941588707054
+"log_quadratic","Log-quadratic in log(1+t)",86.4460178692833,-4.58618954566196
+"log_quadratic","Log-quadratic in log(1+t)",86.8986148214785,-4.5782032723168
+"log_quadratic","Log-quadratic in log(1+t)",87.3512117736738,-4.57020044917288
+"log_quadratic","Log-quadratic in log(1+t)",87.8038087258689,-4.56218146708874
+"log_quadratic","Log-quadratic in log(1+t)",88.2564056780641,-4.55414670944679
+"log_quadratic","Log-quadratic in log(1+t)",88.7090026302593,-4.54609655231724
+"log_quadratic","Log-quadratic in log(1+t)",89.1615995824545,-4.53803136461792
+"log_quadratic","Log-quadratic in log(1+t)",89.6141965346497,-4.52995150826992
+"log_quadratic","Log-quadratic in log(1+t)",90.0667934868449,-4.52185733834933
+"log_quadratic","Log-quadratic in log(1+t)",90.5193904390401,-4.51374920323516
+"log_quadratic","Log-quadratic in log(1+t)",90.9719873912353,-4.50562744475349
+"log_quadratic","Log-quadratic in log(1+t)",91.4245843434306,-4.49749239831798
+"log_quadratic","Log-quadratic in log(1+t)",91.8771812956257,-4.48934439306698
+"log_quadratic","Log-quadratic in log(1+t)",92.329778247821,-4.48118375199707
+"log_quadratic","Log-quadratic in log(1+t)",92.7823752000162,-4.4730107920934
+"log_quadratic","Log-quadratic in log(1+t)",93.2349721522114,-4.46482582445679
+"log_quadratic","Log-quadratic in log(1+t)",93.6875691044065,-4.45662915442762
+"log_quadratic","Log-quadratic in log(1+t)",94.1401660566018,-4.44842108170683
+"log_quadratic","Log-quadratic in log(1+t)",94.592763008797,-4.44020190047382
+"log_quadratic","Log-quadratic in log(1+t)",95.0453599609922,-4.43197189950154
+"log_quadratic","Log-quadratic in log(1+t)",95.4979569131874,-4.42373136226883
+"log_quadratic","Log-quadratic in log(1+t)",95.9505538653825,-4.41548056706998
+"log_quadratic","Log-quadratic in log(1+t)",96.4031508175778,-4.40721978712168
+"log_quadratic","Log-quadratic in log(1+t)",96.855747769773,-4.3989492906674
+"log_quadratic","Log-quadratic in log(1+t)",97.3083447219682,-4.39066934107934
+"log_quadratic","Log-quadratic in log(1+t)",97.7609416741634,-4.3823801969578
+"log_quadratic","Log-quadratic in log(1+t)",98.2135386263586,-4.37408211222838
+"log_quadratic","Log-quadratic in log(1+t)",98.6661355785538,-4.36577533623675
+"log_quadratic","Log-quadratic in log(1+t)",99.118732530749,-4.35746011384127
+"log_quadratic","Log-quadratic in log(1+t)",99.5713294829442,-4.34913668550337
+"log_quadratic","Log-quadratic in log(1+t)",100.023926435139,-4.34080528737588
+"log_quadratic","Log-quadratic in log(1+t)",100.476523387335,-4.33246615138927
+"log_quadratic","Log-quadratic in log(1+t)",100.92912033953,-4.3241195053359
+"log_quadratic","Log-quadratic in log(1+t)",101.381717291725,-4.3157655729523
+"log_quadratic","Log-quadratic in log(1+t)",101.83431424392,-4.30740457399961
+"log_quadratic","Log-quadratic in log(1+t)",102.286911196115,-4.29903672434212
+"log_quadratic","Log-quadratic in log(1+t)",102.739508148311,-4.29066223602404
+"log_quadratic","Log-quadratic in log(1+t)",103.192105100506,-4.2822813173445
+"log_quadratic","Log-quadratic in log(1+t)",103.644702052701,-4.27389417293087
+"log_quadratic","Log-quadratic in log(1+t)",104.097299004896,-4.26550100381044
+"log_quadratic","Log-quadratic in log(1+t)",104.549895957091,-4.2571020074804
+"log_quadratic","Log-quadratic in log(1+t)",105.002492909287,-4.24869737797634
+"log_quadratic","Log-quadratic in log(1+t)",105.455089861482,-4.24028730593919
+"log_quadratic","Log-quadratic in log(1+t)",105.907686813677,-4.23187197868062
+"log_quadratic","Log-quadratic in log(1+t)",106.360283765872,-4.22345158024702
+"log_quadratic","Log-quadratic in log(1+t)",106.812880718067,-4.21502629148213
+"log_quadratic","Log-quadratic in log(1+t)",107.265477670263,-4.2065962900881
+"log_quadratic","Log-quadratic in log(1+t)",107.718074622458,-4.19816175068543
+"log_quadratic","Log-quadratic in log(1+t)",108.170671574653,-4.18972284487144
+"log_quadratic","Log-quadratic in log(1+t)",108.623268526848,-4.18127974127751
+"log_quadratic","Log-quadratic in log(1+t)",109.075865479043,-4.17283260562507
+"log_quadratic","Log-quadratic in log(1+t)",109.528462431239,-4.16438160078039
+"log_quadratic","Log-quadratic in log(1+t)",109.981059383434,-4.15592688680814
+"log_quadratic","Log-quadratic in log(1+t)",110.433656335629,-4.14746862102385
+"log_quadratic","Log-quadratic in log(1+t)",110.886253287824,-4.1390069580452
+"log_quadratic","Log-quadratic in log(1+t)",111.338850240019,-4.1305420498422
+"log_quadratic","Log-quadratic in log(1+t)",111.791447192215,-4.12207404578636
+"log_quadratic","Log-quadratic in log(1+t)",112.24404414441,-4.11360309269874
+"log_quadratic","Log-quadratic in log(1+t)",112.696641096605,-4.10512933489702
+"log_quadratic","Log-quadratic in log(1+t)",113.1492380488,-4.09665291424155
+"log_quadratic","Log-quadratic in log(1+t)",113.601835000995,-4.08817397018047
+"log_quadratic","Log-quadratic in log(1+t)",114.054431953191,-4.07969263979382
+"log_quadratic","Log-quadratic in log(1+t)",114.507028905386,-4.07120905783678
+"log_quadratic","Log-quadratic in log(1+t)",114.959625857581,-4.06272335678197
+"log_quadratic","Log-quadratic in log(1+t)",115.412222809776,-4.05423566686086
+"log_quadratic","Log-quadratic in log(1+t)",115.864819761971,-4.04574611610439
+"log_quadratic","Log-quadratic in log(1+t)",116.317416714167,-4.03725483038264
+"log_quadratic","Log-quadratic in log(1+t)",116.770013666362,-4.02876193344379
+"log_quadratic","Log-quadratic in log(1+t)",117.222610618557,-4.02026754695218
+"log_quadratic","Log-quadratic in log(1+t)",117.675207570752,-4.01177179052566
+"log_quadratic","Log-quadratic in log(1+t)",118.127804522947,-4.00327478177214
+"log_quadratic","Log-quadratic in log(1+t)",118.580401475143,-3.99477663632541
+"log_quadratic","Log-quadratic in log(1+t)",119.032998427338,-3.98627746788021
+"log_quadratic","Log-quadratic in log(1+t)",119.485595379533,-3.97777738822665
+"log_quadratic","Log-quadratic in log(1+t)",119.938192331728,-3.9692765072838
+"log_quadratic","Log-quadratic in log(1+t)",120.390789283923,-3.96077493313278
+"log_quadratic","Log-quadratic in log(1+t)",120.843386236119,-3.95227277204903
+"log_quadratic","Log-quadratic in log(1+t)",121.295983188314,-3.94377012853404
+"log_quadratic","Log-quadratic in log(1+t)",121.748580140509,-3.93526710534638
+"log_quadratic","Log-quadratic in log(1+t)",122.201177092704,-3.92676380353213
+"log_quadratic","Log-quadratic in log(1+t)",122.653774044899,-3.91826032245473
+"log_quadratic","Log-quadratic in log(1+t)",123.106370997095,-3.90975675982419
+"log_quadratic","Log-quadratic in log(1+t)",123.55896794929,-3.90125321172579
+"log_quadratic","Log-quadratic in log(1+t)",124.011564901485,-3.89274977264814
+"log_quadratic","Log-quadratic in log(1+t)",124.46416185368,-3.88424653551074
+"log_quadratic","Log-quadratic in log(1+t)",124.916758805875,-3.87574359169097
+"log_quadratic","Log-quadratic in log(1+t)",125.369355758071,-3.8672410310506
+"log_quadratic","Log-quadratic in log(1+t)",125.821952710266,-3.85873894196171
+"log_quadratic","Log-quadratic in log(1+t)",126.274549662461,-3.85023741133216
+"log_quadratic","Log-quadratic in log(1+t)",126.727146614656,-3.84173652463059
+"log_quadratic","Log-quadratic in log(1+t)",127.179743566851,-3.83323636591082
+"log_quadratic","Log-quadratic in log(1+t)",127.632340519047,-3.82473701783593
+"log_quadratic","Log-quadratic in log(1+t)",128.084937471242,-3.81623856170181
+"log_quadratic","Log-quadratic in log(1+t)",128.537534423437,-3.80774107746018
+"log_quadratic","Log-quadratic in log(1+t)",128.990131375632,-3.79924464374135
+"log_quadratic","Log-quadratic in log(1+t)",129.442728327827,-3.79074933787635
+"log_quadratic","Log-quadratic in log(1+t)",129.895325280023,-3.78225523591878
+"log_quadratic","Log-quadratic in log(1+t)",130.347922232218,-3.7737624126662
+"log_quadratic","Log-quadratic in log(1+t)",130.800519184413,-3.76527094168111
+"log_quadratic","Log-quadratic in log(1+t)",131.253116136608,-3.75678089531149
+"log_quadratic","Log-quadratic in log(1+t)",131.705713088803,-3.74829234471109
+"log_quadratic","Log-quadratic in log(1+t)",132.158310040999,-3.73980535985916
+"log_quadratic","Log-quadratic in log(1+t)",132.610906993194,-3.73132000957998
+"log_quadratic","Log-quadratic in log(1+t)",133.063503945389,-3.72283636156189
+"log_quadratic","Log-quadratic in log(1+t)",133.516100897584,-3.71435448237604
+"log_quadratic","Log-quadratic in log(1+t)",133.968697849779,-3.7058744374948
+"log_quadratic","Log-quadratic in log(1+t)",134.421294801975,-3.69739629130978
+"log_quadratic","Log-quadratic in log(1+t)",134.87389175417,-3.68892010714953
+"log_quadratic","Log-quadratic in log(1+t)",135.326488706365,-3.68044594729696
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",0,-2.62958306531065
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",0.452596952195201,-2.75650065473222
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",0.905193904390401,-2.88341824415378
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",1.3577908565856,-3.01033583357535
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",1.8103878087808,-3.13725342299691
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",2.262984760976,-3.26417101241847
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",2.7155817131712,-3.39108860184004
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",3.1681786653664,-3.51839035870348
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",3.62077561756161,-3.64634180704495
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",4.07337256975681,-3.77429325538642
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",4.52596952195201,-3.90224470372789
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",4.97856647414721,-4.03019615206936
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",5.43116342634241,-4.15814760041083
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",5.88376037853761,-4.28609904875231
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",6.33635733073281,-4.3466469722721
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",6.78895428292801,-4.38390133416969
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",7.24155123512321,-4.42115569606728
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",7.69414818731841,-4.45841005796487
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",8.14674513951361,-4.49566441986246
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",8.59934209170881,-4.53291878176005
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",9.05193904390402,-4.57017314365764
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",9.50453599609922,-4.60742750555523
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",9.95713294829442,-4.64468186745283
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",10.4097299004896,-4.68193622935042
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",10.8623268526848,-4.71919059124801
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",11.31492380488,-4.7564449531456
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",11.7675207570752,-4.79369931504319
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",12.2201177092704,-4.81846590608787
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",12.6727146614656,-4.8300434287776
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",13.1253116136608,-4.84162095146732
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",13.577908565856,-4.85319847415705
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",14.0305055180512,-4.86477599684678
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",14.4831024702464,-4.87635351953651
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",14.9356994224416,-4.88793104222623
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",15.3882963746368,-4.89950856491596
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",15.840893326832,-4.91108608760569
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",16.2934902790272,-4.92266361029542
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",16.7460872312224,-4.93424113298514
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",17.1986841834176,-4.94581865567487
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",17.6512811356128,-4.9573961783646
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",18.103878087808,-4.96897370105433
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",18.5564750400032,-4.98055122374405
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",19.0090719921984,-4.99212874643378
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",19.4616689443936,-5.00370626912351
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",19.9142658965888,-5.01528379181324
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",20.366862848784,-5.02686131450296
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",20.8194598009792,-5.03843883719269
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",21.2720567531744,-5.05001635988242
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",21.7246537053696,-5.06159388257215
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",22.1772506575648,-5.07317140526187
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",22.62984760976,-5.0847489279516
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",23.0824445619552,-5.09632645064133
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",23.5350415141504,-5.10790397333106
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",23.9876384663456,-5.11948149602078
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",24.4402354185408,-5.12003421192818
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",24.892832370736,-5.12027735819548
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",25.3454293229312,-5.12052050446279
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",25.7980262751264,-5.12076365073009
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",26.2506232273216,-5.12100679699739
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",26.7032201795168,-5.1212499432647
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",27.155817131712,-5.121493089532
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",27.6084140839072,-5.1217362357993
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",28.0610110361024,-5.12197938206661
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",28.5136079882977,-5.12222252833391
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",28.9662049404928,-5.12246567460121
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",29.418801892688,-5.12270882086852
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",29.8713988448833,-5.12295196713582
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",30.3239957970784,-5.12319511340313
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",30.7765927492736,-5.12343825967043
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",31.2291897014689,-5.12368140593774
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",31.6817866536641,-5.12392455220504
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",32.1343836058592,-5.12416769847234
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",32.5869805580545,-5.12441084473965
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",33.0395775102497,-5.12465399100695
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",33.4921744624449,-5.12489713727425
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",33.9447714146401,-5.12514028354156
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",34.3973683668353,-5.12538342980886
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",34.8499653190305,-5.12562657607616
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",35.3025622712257,-5.12586972234347
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",35.7551592234209,-5.12611286861077
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",36.2077561756161,-5.12635601487808
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",36.6603531278113,-5.12659916114538
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",37.1129500800065,-5.12684230741269
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",37.5655470322017,-5.12708545367999
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",38.0181439843969,-5.12732859994729
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",38.4707409365921,-5.1275717462146
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",38.9233378887873,-5.1278148924819
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",39.3759348409825,-5.12805803874921
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",39.8285317931777,-5.12830118501651
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",40.2811287453729,-5.12854433128381
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",40.7337256975681,-5.12878747755112
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",41.1863226497633,-5.12903062381842
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",41.6389196019585,-5.12927377008573
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",42.0915165541537,-5.12951691635303
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",42.5441135063489,-5.12976006262033
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",42.9967104585441,-5.13000320888763
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",43.4493074107393,-5.13024635515494
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",43.9019043629345,-5.13048950142224
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",44.3545013151297,-5.13073264768955
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",44.8070982673249,-5.13097579395685
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",45.2596952195201,-5.13121894022416
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",45.7122921717153,-5.13146208649146
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",46.1648891239105,-5.13170523275876
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",46.6174860761057,-5.13194837902607
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",47.0700830283009,-5.13219152529337
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",47.5226799804961,-5.13243467156067
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",47.9752769326913,-5.13267781782798
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",48.4278738848865,-5.13292096409528
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",48.8804708370817,-5.13316411036259
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",49.3330677892769,-5.13340725662989
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",49.7856647414721,-5.13365040289719
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",50.2382616936673,-5.1338935491645
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",50.6908586458625,-5.1341366954318
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",51.1434555980577,-5.13437984169911
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",51.5960525502529,-5.13462298796641
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",52.0486495024481,-5.13486613423371
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",52.5012464546433,-5.13510928050101
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",52.9538434068385,-5.13535242676832
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",53.4064403590337,-5.13559557303562
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",53.8590373112289,-5.13583871930293
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",54.3116342634241,-5.13608186557023
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",54.7642312156193,-5.13632501183753
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",55.2168281678145,-5.13656815810484
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",55.6694251200097,-5.13681130437214
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",56.1220220722049,-5.13705445063945
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",56.5746190244001,-5.13729759690675
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",57.0272159765953,-5.13754074317406
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",57.4798129287905,-5.13778388944136
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",57.9324098809857,-5.13802703570866
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",58.3850068331809,-5.13827018197597
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",58.8376037853761,-5.13851332824327
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",59.2902007375713,-5.13875647451057
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",59.7427976897665,-5.13899962077788
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",60.1953946419617,-5.13663333168668
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",60.6479915941569,-5.1308321848334
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",61.1005885463521,-5.12503103798012
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",61.5531854985473,-5.11922989112684
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",62.0057824507425,-5.11342874427357
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",62.4583794029377,-5.10762759742028
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",62.9109763551329,-5.10182645056701
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",63.3635733073281,-5.09602530371373
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",63.8161702595233,-5.09022415686045
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",64.2687672117185,-5.08442301000717
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",64.7213641639137,-5.07862186315389
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",65.1739611161089,-5.07282071630061
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",65.6265580683041,-5.06701956944733
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",66.0791550204993,-5.06121842259405
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",66.5317519726945,-5.05541727574077
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",66.9843489248897,-5.04961612888749
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",67.4369458770849,-5.04381498203422
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",67.8895428292801,-5.03801383518093
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",68.3421397814753,-5.03221268832766
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",68.7947367336705,-5.02641154147438
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",69.2473336858657,-5.0206103946211
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",69.6999306380609,-5.01480924776782
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",70.1525275902561,-5.00900810091454
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",70.6051245424513,-5.00320695406126
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",71.0577214946465,-4.99740580720798
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",71.5103184468417,-4.9916046603547
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",71.9629153990369,-4.98580351350142
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",72.4155123512321,-4.98000236664815
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",72.8681093034273,-4.97420121979486
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",73.3207062556225,-4.96840007294158
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",73.7733032078177,-4.96259892608831
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",74.2259001600129,-4.95679777923503
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",74.6784971122081,-4.95099663238175
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",75.1310940644033,-4.94519548552847
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",75.5836910165985,-4.93939433867519
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",76.0362879687937,-4.93359319182191
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",76.4888849209889,-4.92779204496863
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",76.9414818731841,-4.92199089811535
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",77.3940788253793,-4.91618975126207
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",77.8466757775745,-4.9103886044088
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",78.2992727297697,-4.90458745755552
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",78.7518696819649,-4.89878631070224
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",79.2044666341601,-4.89298516384896
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",79.6570635863553,-4.88718401699568
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",80.1096605385505,-4.8813828701424
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",80.5622574907457,-4.87558172328912
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",81.0148544429409,-4.86978057643584
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",81.4674513951361,-4.86397942958256
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",81.9200483473313,-4.85817828272928
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",82.3726452995265,-4.852377135876
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",82.8252422517217,-4.84657598902273
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",83.2778392039169,-4.84077484216945
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",83.7304361561121,-4.83497369531616
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",84.1830331083073,-4.82917254846289
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",84.6356300605025,-4.8233714016096
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",85.0882270126977,-4.81757025475633
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",85.5408239648929,-4.81176910790305
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",85.9934209170881,-4.80596796104977
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",86.4460178692833,-4.80016681419649
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",86.8986148214785,-4.79436566734322
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",87.3512117736738,-4.78856452048993
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",87.8038087258689,-4.78276337363665
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",88.2564056780641,-4.77696222678338
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",88.7090026302593,-4.77116107993009
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",89.1615995824545,-4.76535993307682
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",89.6141965346497,-4.75955878622354
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",90.0667934868449,-4.75375763937026
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",90.5193904390401,-4.74795649251698
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",90.9719873912353,-4.7421553456637
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",91.4245843434306,-4.73635419881042
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",91.8771812956257,-4.73055305195714
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",92.329778247821,-4.72475190510386
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",92.7823752000162,-4.71895075825058
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",93.2349721522114,-4.7131496113973
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",93.6875691044065,-4.70734846454403
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",94.1401660566018,-4.70154731769075
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",94.592763008797,-4.69574617083747
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",95.0453599609922,-4.68994502398418
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",95.4979569131874,-4.68414387713091
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",95.9505538653825,-4.67834273027763
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",96.4031508175778,-4.67254158342435
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",96.855747769773,-4.66674043657107
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",97.3083447219682,-4.66093928971779
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",97.7609416741634,-4.65513814286451
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",98.2135386263586,-4.64933699601123
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",98.6661355785538,-4.64353584915795
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",99.118732530749,-4.63773470230467
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",99.5713294829442,-4.6319335554514
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",100.023926435139,-4.62613240859812
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",100.476523387335,-4.62033126174484
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",100.92912033953,-4.61453011489156
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",101.381717291725,-4.60872896803828
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",101.83431424392,-4.602927821185
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",102.286911196115,-4.59712667433172
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",102.739508148311,-4.59132552747844
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",103.192105100506,-4.58552438062516
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",103.644702052701,-4.57972323377189
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",104.097299004896,-4.5739220869186
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",104.549895957091,-4.56812094006533
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",105.002492909287,-4.56231979321204
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",105.455089861482,-4.55651864635877
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",105.907686813677,-4.55071749950549
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",106.360283765872,-4.54491635265221
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",106.812880718067,-4.53911520579893
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",107.265477670263,-4.53331405894565
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",107.718074622458,-4.52751291209237
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",108.170671574653,-4.52171176523909
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",108.623268526848,-4.51591061838582
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",109.075865479043,-4.51010947153253
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",109.528462431239,-4.50430832467926
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",109.981059383434,-4.49850717782598
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",110.433656335629,-4.4927060309727
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",110.886253287824,-4.48690488411941
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",111.338850240019,-4.48110373726614
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",111.791447192215,-4.47530259041286
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",112.24404414441,-4.46950144355958
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",112.696641096605,-4.46370029670631
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",113.1492380488,-4.45789914985302
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",113.601835000995,-4.45209800299974
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",114.054431953191,-4.44629685614646
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",114.507028905386,-4.44049570929318
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",114.959625857581,-4.43469456243991
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",115.412222809776,-4.42889341558662
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",115.864819761971,-4.42309226873335
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",116.317416714167,-4.41729112188007
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",116.770013666362,-4.41148997502679
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",117.222610618557,-4.40568882817351
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",117.675207570752,-4.39988768132024
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",118.127804522947,-4.39408653446695
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",118.580401475143,-4.38828538761367
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",119.032998427338,-4.3824842407604
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",119.485595379533,-4.37668309390711
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",119.938192331728,-4.37088194705384
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",120.390789283923,-4.36508080020055
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",120.843386236119,-4.35927965334728
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",121.295983188314,-4.353478506494
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",121.748580140509,-4.34767735964071
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",122.201177092704,-4.34187621278744
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",122.653774044899,-4.33607506593416
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",123.106370997095,-4.33027391908088
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",123.55896794929,-4.3244727722276
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",124.011564901485,-4.31867162537432
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",124.46416185368,-4.31287047852104
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",124.916758805875,-4.30706933166777
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",125.369355758071,-4.30126818481448
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",125.821952710266,-4.2954670379612
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",126.274549662461,-4.28966589110793
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",126.727146614656,-4.28386474425464
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",127.179743566851,-4.27806359740137
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",127.632340519047,-4.27226245054809
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",128.084937471242,-4.26646130369481
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",128.537534423437,-4.26066015684153
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",128.990131375632,-4.25485900998825
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",129.442728327827,-4.24905786313497
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",129.895325280023,-4.24325671628169
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",130.347922232218,-4.23745556942842
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",130.800519184413,-4.23165442257513
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",131.253116136608,-4.22585327572186
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",131.705713088803,-4.22005212886858
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",132.158310040999,-4.21425098201529
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",132.610906993194,-4.20844983516202
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",133.063503945389,-4.20264868830873
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",133.516100897584,-4.19684754145546
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",133.968697849779,-4.19104639460218
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",134.421294801975,-4.1852452477489
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",134.87389175417,-4.17944410089562
+"piecewise_linear","Piecewise linear knots 3, 6, 12, 24, 60 months",135.326488706365,-4.17364295404235
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",0,-2.5939366367129
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",0.452596952195201,-2.71645074260531
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",0.905193904390401,-2.83860886352635
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",1.3577908565856,-2.96005501450465
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",1.8103878087808,-3.08043321056886
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",2.262984760976,-3.19938746674758
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",2.7155817131712,-3.31656179806947
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",3.1681786653664,-3.43160021956315
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",3.62077561756161,-3.54414674625725
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",4.07337256975681,-3.65384539318041
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",4.52596952195201,-3.76034017536125
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",4.97856647414721,-3.86327510782841
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",5.43116342634241,-3.96229420561053
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",5.88376037853761,-4.05704148373622
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",6.33635733073281,-4.14716095723413
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",6.78895428292801,-4.23229664113288
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",7.24155123512321,-4.3120934213391
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",7.69414818731841,-4.38635622643786
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",8.14674513951361,-4.45523568331816
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",8.59934209170881,-4.51892748005508
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",9.05193904390402,-4.5776273047237
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",9.50453599609922,-4.63153084539909
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",9.95713294829442,-4.68083379015634
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",10.4097299004896,-4.72573182707051
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",10.8623268526848,-4.7664206442167
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",11.31492380488,-4.80309592966996
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",11.7675207570752,-4.8359533715054
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",12.2201177092704,-4.86518865779806
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",12.6727146614656,-4.89099747662305
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",13.1253116136608,-4.91357551605543
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",13.577908565856,-4.93311846417028
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",14.0305055180512,-4.94982200904269
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",14.4831024702464,-4.96388183874771
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",14.9356994224416,-4.97549364136045
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",15.3882963746368,-4.98485310495596
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",15.840893326832,-4.99215591760933
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",16.2934902790272,-4.99759776739564
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",16.7460872312224,-5.00137434238996
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",17.1986841834176,-5.00368133066738
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",17.6512811356128,-5.00471442030296
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",18.103878087808,-5.00466929937179
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",18.5564750400032,-5.00374165594894
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",19.0090719921984,-5.00212717810949
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",19.4616689443936,-5.00002155392852
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",19.9142658965888,-4.99762047148111
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",20.366862848784,-4.99511961884233
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",20.8194598009792,-4.99271403627744
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",21.2720567531744,-4.99053275903921
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",21.7246537053696,-4.98858280223962
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",22.1772506575648,-4.98685798620749
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",22.62984760976,-4.98535213127162
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",23.0824445619552,-4.98405905776084
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",23.5350415141504,-4.98297258600395
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",23.9876384663456,-4.98208653632976
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",24.4402354185408,-4.98139472906711
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",24.892832370736,-4.98089098454478
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",25.3454293229312,-4.98056912309161
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",25.7980262751264,-4.98042296503641
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",26.2506232273216,-4.98044633070798
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",26.7032201795168,-4.98063304043514
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",27.155817131712,-4.98097691454671
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",27.6084140839072,-4.9814717733715
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",28.0610110361024,-4.98211143723833
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",28.5136079882977,-4.982889726476
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",28.9662049404928,-4.98380046141333
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",29.418801892688,-4.98483746237914
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",29.8713988448833,-4.98599454970224
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",30.3239957970784,-4.98726554371144
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",30.7765927492736,-4.98864426473555
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",31.2291897014689,-4.9901245331034
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",31.6817866536641,-4.9917001691438
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",32.1343836058592,-4.99336499318555
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",32.5869805580545,-4.99511282555747
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",33.0395775102497,-4.99693748658838
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",33.4921744624449,-4.99883279660709
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",33.9447714146401,-5.00079257594241
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",34.3973683668353,-5.00281064492317
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",34.8499653190305,-5.00488082387816
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",35.3025622712257,-5.00699693313621
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",35.7551592234209,-5.00915279302613
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",36.2077561756161,-5.01134222387673
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",36.6603531278113,-5.01355904601683
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",37.1129500800065,-5.01579707977524
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",37.5655470322017,-5.01805014548077
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",38.0181439843969,-5.02031206346225
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",38.4707409365921,-5.02257665404847
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",38.9233378887873,-5.02483773756827
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",39.3759348409825,-5.02708913435044
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",39.8285317931777,-5.02932466472381
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",40.2811287453729,-5.03153814901718
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",40.7337256975681,-5.03372340755938
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",41.1863226497633,-5.03587426067921
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",41.6389196019585,-5.03798452870549
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",42.0915165541537,-5.04004803196704
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",42.5441135063489,-5.04205859079266
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",42.9967104585441,-5.04401002551118
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",43.4493074107393,-5.04589615645139
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",43.9019043629345,-5.04771080394213
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",44.3545013151297,-5.0494477883122
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",44.8070982673249,-5.05110092989042
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",45.2596952195201,-5.0526640490056
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",45.7122921717153,-5.05413096626556
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",46.1648891239105,-5.05549684138002
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",46.6174860761057,-5.05676127140476
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",47.0700830283009,-5.05792477128947
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",47.5226799804961,-5.05898785598384
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",47.9752769326913,-5.05995104043756
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",48.4278738848865,-5.06081483960033
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",48.8804708370817,-5.06157976842185
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",49.3330677892769,-5.06224634185181
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",49.7856647414721,-5.06281507483989
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",50.2382616936673,-5.06328648233581
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",50.6908586458625,-5.06366107928924
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",51.1434555980577,-5.06393938064989
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",51.5960525502529,-5.06412190136744
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",52.0486495024481,-5.0642091563916
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",52.5012464546433,-5.06420166067205
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",52.9538434068385,-5.0640999291585
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",53.4064403590337,-5.06390447680062
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",53.8590373112289,-5.06361581854813
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",54.3116342634241,-5.06323446935071
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",54.7642312156193,-5.06276094415805
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",55.2168281678145,-5.06219575791986
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",55.6694251200097,-5.06153942558582
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",56.1220220722049,-5.06079246210563
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",56.5746190244001,-5.05995538242898
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",57.0272159765953,-5.05902870150557
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",57.4798129287905,-5.05801293428508
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",57.9324098809857,-5.05690859571722
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",58.3850068331809,-5.05571620075169
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",58.8376037853761,-5.05443626433816
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",59.2902007375713,-5.05306930142634
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",59.7427976897665,-5.05161582696593
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",60.1953946419617,-5.0500763559066
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",60.6479915941569,-5.04845140319807
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",61.1005885463521,-5.04674148379002
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",61.5531854985473,-5.04494711263214
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",62.0057824507425,-5.04306880467414
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",62.4583794029377,-5.0411070748657
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",62.9109763551329,-5.03906243815652
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",63.3635733073281,-5.0369354094963
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",63.8161702595233,-5.03472650383472
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",64.2687672117185,-5.03243623612148
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",64.7213641639137,-5.03006512130628
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",65.1739611161089,-5.0276136743388
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",65.6265580683041,-5.02508241016876
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",66.0791550204993,-5.02247184374582
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",66.5317519726945,-5.0197824900197
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",66.9843489248897,-5.01701486394009
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",67.4369458770849,-5.01416948045667
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",67.8895428292801,-5.01124685451915
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",68.3421397814753,-5.00824750107722
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",68.7947367336705,-5.00517193508056
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",69.2473336858657,-5.00202067147889
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",69.6999306380609,-4.99879422522188
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",70.1525275902561,-4.99549311125924
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",70.6051245424513,-4.99211784454065
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",71.0577214946465,-4.98866894001582
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",71.5103184468417,-4.98514691263443
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",71.9629153990369,-4.98155227734618
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",72.4155123512321,-4.97788554910077
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",72.8681093034273,-4.97414724284789
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",73.3207062556225,-4.97033787353722
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",73.7733032078177,-4.96645795611848
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",74.2259001600129,-4.96250800554134
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",74.6784971122081,-4.95848853675551
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",75.1310940644033,-4.95440006471067
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",75.5836910165985,-4.95024310435653
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",76.0362879687937,-4.94601817064278
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",76.4888849209889,-4.9417257785191
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",76.9414818731841,-4.9373664429352
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",77.3940788253793,-4.93294067884077
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",77.8466757775745,-4.9284490011855
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",78.2992727297697,-4.92389192491908
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",78.7518696819649,-4.91926996499122
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",79.2044666341601,-4.9145836363516
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",79.6570635863553,-4.90983345394993
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",80.1096605385505,-4.90501993273588
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",80.5622574907457,-4.90014358765916
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",81.0148544429409,-4.89520493366946
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",81.4674513951361,-4.89020448571648
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",81.9200483473313,-4.8851427587499
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",82.3726452995265,-4.88002026771943
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",82.8252422517217,-4.87483752757476
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",83.2778392039169,-4.86959505326557
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",83.7304361561121,-4.86429335974157
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",84.1830331083073,-4.85893296195245
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",84.6356300605025,-4.85351437484791
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",85.0882270126977,-4.84803811337763
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",85.5408239648929,-4.84250469249131
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",85.9934209170881,-4.83691462713865
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",86.4460178692833,-4.83126843226934
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",86.8986148214785,-4.82556662283307
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",87.3512117736738,-4.81980971377953
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",87.8038087258689,-4.81399822005843
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",88.2564056780641,-4.80813265661946
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",88.7090026302593,-4.8022135384123
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",89.1615995824545,-4.79624138038666
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",89.6141965346497,-4.79021669749223
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",90.0667934868449,-4.78414000467869
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",90.5193904390401,-4.77801181689576
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",90.9719873912353,-4.77183264909311
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",91.4245843434306,-4.76560301622044
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",91.8771812956257,-4.75932343322746
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",92.329778247821,-4.75299441506385
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",92.7823752000162,-4.7466164766793
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",93.2349721522114,-4.74019013302351
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",93.6875691044065,-4.73371589904618
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",94.1401660566018,-4.72719428969699
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",94.592763008797,-4.72062581992565
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",95.0453599609922,-4.71401100468184
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",95.4979569131874,-4.70735035891526
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",95.9505538653825,-4.70064439757561
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",96.4031508175778,-4.69389363561258
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",96.855747769773,-4.68709858797585
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",97.3083447219682,-4.68025976961514
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",97.7609416741634,-4.67337769548012
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",98.2135386263586,-4.6664528805205
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",98.6661355785538,-4.65948583968597
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",99.118732530749,-4.65247708792622
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",99.5713294829442,-4.64542714019095
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",100.023926435139,-4.63833651142984
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",100.476523387335,-4.6312057165926
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",100.92912033953,-4.62403527062893
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",101.381717291725,-4.6168256884885
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",101.83431424392,-4.60957748512102
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",102.286911196115,-4.60229117547618
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",102.739508148311,-4.59496727450368
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",103.192105100506,-4.5876062971532
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",103.644702052701,-4.58020875837445
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",104.097299004896,-4.57277517311711
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",104.549895957091,-4.56530605633089
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",105.002492909287,-4.55780192296547
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",105.455089861482,-4.55026328797055
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",105.907686813677,-4.54269066629583
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",106.360283765872,-4.53508457289099
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",106.812880718067,-4.52744552270573
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",107.265477670263,-4.51977403068974
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",107.718074622458,-4.51207061179273
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",108.170671574653,-4.50433578096438
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",108.623268526848,-4.49657005315439
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",109.075865479043,-4.48877394331245
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",109.528462431239,-4.48094796638825
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",109.981059383434,-4.4730926373315
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",110.433656335629,-4.46520847109187
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",110.886253287824,-4.45729598261908
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",111.338850240019,-4.44935568686281
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",111.791447192215,-4.44138809877275
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",112.24404414441,-4.4333937332986
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",112.696641096605,-4.42537310539006
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",113.1492380488,-4.41732672999681
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",113.601835000995,-4.40925512206856
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",114.054431953191,-4.40115879655499
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",114.507028905386,-4.3930382684058
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",114.959625857581,-4.38489405257069
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",115.412222809776,-4.37672666399934
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",115.864819761971,-4.36853661764146
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",116.317416714167,-4.36032442844673
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",116.770013666362,-4.35209061136485
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",117.222610618557,-4.34383568134552
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",117.675207570752,-4.33556015333843
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",118.127804522947,-4.32726454229326
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",118.580401475143,-4.31894936315973
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",119.032998427338,-4.31061513088751
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",119.485595379533,-4.30226236042631
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",119.938192331728,-4.29389156672582
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",120.390789283923,-4.28550326473573
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",120.843386236119,-4.27709796940573
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",121.295983188314,-4.26867619568553
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",121.748580140509,-4.26023845852481
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",122.201177092704,-4.25178527287327
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",122.653774044899,-4.24331715368061
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",123.106370997095,-4.23483461589651
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",123.55896794929,-4.22633817447067
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",124.011564901485,-4.21782834435278
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",124.46416185368,-4.20930564049255
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",124.916758805875,-4.20077057783966
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",125.369355758071,-4.1922236713438
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",125.821952710266,-4.18366543595468
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",126.274549662461,-4.17509638662198
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",126.727146614656,-4.1665170382954
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",127.179743566851,-4.15792790592463
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",127.632340519047,-4.14932950445937
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",128.084937471242,-4.14072234884932
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",128.537534423437,-4.13210695404415
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",128.990131375632,-4.12348383499358
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",129.442728327827,-4.11485350664729
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",129.895325280023,-4.10621648395498
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",130.347922232218,-4.09757328186634
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",130.800519184413,-4.08892441533106
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",131.253116136608,-4.08027039929884
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",131.705713088803,-4.07161174871938
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",132.158310040999,-4.06294897854237
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",132.610906993194,-4.05428260371749
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",133.063503945389,-4.04561313919445
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",133.516100897584,-4.03694109992295
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",133.968697849779,-4.02826700085266
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",134.421294801975,-4.0195913569333
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",134.87389175417,-4.01091468311454
+"penalized_spline_proxy","Low-rank spline proxy (4 df)",135.326488706365,-4.0022374943461
+"monotone_soft_constraint","Soft monotone-decline spline projection",0,-2.5939366367129
+"monotone_soft_constraint","Soft monotone-decline spline projection",0.452596952195201,-2.71645074260531
+"monotone_soft_constraint","Soft monotone-decline spline projection",0.905193904390401,-2.83860886352635
+"monotone_soft_constraint","Soft monotone-decline spline projection",1.3577908565856,-2.96005501450465
+"monotone_soft_constraint","Soft monotone-decline spline projection",1.8103878087808,-3.08043321056886
+"monotone_soft_constraint","Soft monotone-decline spline projection",2.262984760976,-3.19938746674758
+"monotone_soft_constraint","Soft monotone-decline spline projection",2.7155817131712,-3.31656179806947
+"monotone_soft_constraint","Soft monotone-decline spline projection",3.1681786653664,-3.43160021956315
+"monotone_soft_constraint","Soft monotone-decline spline projection",3.62077561756161,-3.54414674625725
+"monotone_soft_constraint","Soft monotone-decline spline projection",4.07337256975681,-3.65384539318041
+"monotone_soft_constraint","Soft monotone-decline spline projection",4.52596952195201,-3.76034017536125
+"monotone_soft_constraint","Soft monotone-decline spline projection",4.97856647414721,-3.86327510782841
+"monotone_soft_constraint","Soft monotone-decline spline projection",5.43116342634241,-3.96229420561053
+"monotone_soft_constraint","Soft monotone-decline spline projection",5.88376037853761,-4.05704148373622
+"monotone_soft_constraint","Soft monotone-decline spline projection",6.33635733073281,-4.14716095723413
+"monotone_soft_constraint","Soft monotone-decline spline projection",6.78895428292801,-4.23229664113288
+"monotone_soft_constraint","Soft monotone-decline spline projection",7.24155123512321,-4.3120934213391
+"monotone_soft_constraint","Soft monotone-decline spline projection",7.69414818731841,-4.38635622643786
+"monotone_soft_constraint","Soft monotone-decline spline projection",8.14674513951361,-4.45523568331816
+"monotone_soft_constraint","Soft monotone-decline spline projection",8.59934209170881,-4.51892748005508
+"monotone_soft_constraint","Soft monotone-decline spline projection",9.05193904390402,-4.5776273047237
+"monotone_soft_constraint","Soft monotone-decline spline projection",9.50453599609922,-4.63153084539909
+"monotone_soft_constraint","Soft monotone-decline spline projection",9.95713294829442,-4.68083379015634
+"monotone_soft_constraint","Soft monotone-decline spline projection",10.4097299004896,-4.72573182707051
+"monotone_soft_constraint","Soft monotone-decline spline projection",10.8623268526848,-4.7664206442167
+"monotone_soft_constraint","Soft monotone-decline spline projection",11.31492380488,-4.80309592966996
+"monotone_soft_constraint","Soft monotone-decline spline projection",11.7675207570752,-4.8359533715054
+"monotone_soft_constraint","Soft monotone-decline spline projection",12.2201177092704,-4.86518865779806
+"monotone_soft_constraint","Soft monotone-decline spline projection",12.6727146614656,-4.89099747662305
+"monotone_soft_constraint","Soft monotone-decline spline projection",13.1253116136608,-4.91357551605543
+"monotone_soft_constraint","Soft monotone-decline spline projection",13.577908565856,-4.93311846417028
+"monotone_soft_constraint","Soft monotone-decline spline projection",14.0305055180512,-4.94982200904269
+"monotone_soft_constraint","Soft monotone-decline spline projection",14.4831024702464,-4.96388183874771
+"monotone_soft_constraint","Soft monotone-decline spline projection",14.9356994224416,-4.97549364136045
+"monotone_soft_constraint","Soft monotone-decline spline projection",15.3882963746368,-4.98485310495596
+"monotone_soft_constraint","Soft monotone-decline spline projection",15.840893326832,-4.99215591760933
+"monotone_soft_constraint","Soft monotone-decline spline projection",16.2934902790272,-4.99759776739564
+"monotone_soft_constraint","Soft monotone-decline spline projection",16.7460872312224,-5.00137434238996
+"monotone_soft_constraint","Soft monotone-decline spline projection",17.1986841834176,-5.00368133066738
+"monotone_soft_constraint","Soft monotone-decline spline projection",17.6512811356128,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",18.103878087808,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",18.5564750400032,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",19.0090719921984,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",19.4616689443936,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",19.9142658965888,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",20.366862848784,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",20.8194598009792,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",21.2720567531744,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",21.7246537053696,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",22.1772506575648,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",22.62984760976,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",23.0824445619552,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",23.5350415141504,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",23.9876384663456,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",24.4402354185408,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",24.892832370736,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",25.3454293229312,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",25.7980262751264,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",26.2506232273216,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",26.7032201795168,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",27.155817131712,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",27.6084140839072,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",28.0610110361024,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",28.5136079882977,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",28.9662049404928,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",29.418801892688,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",29.8713988448833,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",30.3239957970784,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",30.7765927492736,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",31.2291897014689,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",31.6817866536641,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",32.1343836058592,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",32.5869805580545,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",33.0395775102497,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",33.4921744624449,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",33.9447714146401,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",34.3973683668353,-5.00471442030296
+"monotone_soft_constraint","Soft monotone-decline spline projection",34.8499653190305,-5.00488082387816
+"monotone_soft_constraint","Soft monotone-decline spline projection",35.3025622712257,-5.00699693313621
+"monotone_soft_constraint","Soft monotone-decline spline projection",35.7551592234209,-5.00915279302613
+"monotone_soft_constraint","Soft monotone-decline spline projection",36.2077561756161,-5.01134222387673
+"monotone_soft_constraint","Soft monotone-decline spline projection",36.6603531278113,-5.01355904601683
+"monotone_soft_constraint","Soft monotone-decline spline projection",37.1129500800065,-5.01579707977524
+"monotone_soft_constraint","Soft monotone-decline spline projection",37.5655470322017,-5.01805014548077
+"monotone_soft_constraint","Soft monotone-decline spline projection",38.0181439843969,-5.02031206346225
+"monotone_soft_constraint","Soft monotone-decline spline projection",38.4707409365921,-5.02257665404847
+"monotone_soft_constraint","Soft monotone-decline spline projection",38.9233378887873,-5.02483773756827
+"monotone_soft_constraint","Soft monotone-decline spline projection",39.3759348409825,-5.02708913435044
+"monotone_soft_constraint","Soft monotone-decline spline projection",39.8285317931777,-5.02932466472381
+"monotone_soft_constraint","Soft monotone-decline spline projection",40.2811287453729,-5.03153814901718
+"monotone_soft_constraint","Soft monotone-decline spline projection",40.7337256975681,-5.03372340755938
+"monotone_soft_constraint","Soft monotone-decline spline projection",41.1863226497633,-5.03587426067921
+"monotone_soft_constraint","Soft monotone-decline spline projection",41.6389196019585,-5.03798452870549
+"monotone_soft_constraint","Soft monotone-decline spline projection",42.0915165541537,-5.04004803196704
+"monotone_soft_constraint","Soft monotone-decline spline projection",42.5441135063489,-5.04205859079266
+"monotone_soft_constraint","Soft monotone-decline spline projection",42.9967104585441,-5.04401002551118
+"monotone_soft_constraint","Soft monotone-decline spline projection",43.4493074107393,-5.04589615645139
+"monotone_soft_constraint","Soft monotone-decline spline projection",43.9019043629345,-5.04771080394213
+"monotone_soft_constraint","Soft monotone-decline spline projection",44.3545013151297,-5.0494477883122
+"monotone_soft_constraint","Soft monotone-decline spline projection",44.8070982673249,-5.05110092989042
+"monotone_soft_constraint","Soft monotone-decline spline projection",45.2596952195201,-5.0526640490056
+"monotone_soft_constraint","Soft monotone-decline spline projection",45.7122921717153,-5.05413096626556
+"monotone_soft_constraint","Soft monotone-decline spline projection",46.1648891239105,-5.05549684138002
+"monotone_soft_constraint","Soft monotone-decline spline projection",46.6174860761057,-5.05676127140476
+"monotone_soft_constraint","Soft monotone-decline spline projection",47.0700830283009,-5.05792477128947
+"monotone_soft_constraint","Soft monotone-decline spline projection",47.5226799804961,-5.05898785598384
+"monotone_soft_constraint","Soft monotone-decline spline projection",47.9752769326913,-5.05995104043756
+"monotone_soft_constraint","Soft monotone-decline spline projection",48.4278738848865,-5.06081483960033
+"monotone_soft_constraint","Soft monotone-decline spline projection",48.8804708370817,-5.06157976842185
+"monotone_soft_constraint","Soft monotone-decline spline projection",49.3330677892769,-5.06224634185181
+"monotone_soft_constraint","Soft monotone-decline spline projection",49.7856647414721,-5.06281507483989
+"monotone_soft_constraint","Soft monotone-decline spline projection",50.2382616936673,-5.06328648233581
+"monotone_soft_constraint","Soft monotone-decline spline projection",50.6908586458625,-5.06366107928924
+"monotone_soft_constraint","Soft monotone-decline spline projection",51.1434555980577,-5.06393938064989
+"monotone_soft_constraint","Soft monotone-decline spline projection",51.5960525502529,-5.06412190136744
+"monotone_soft_constraint","Soft monotone-decline spline projection",52.0486495024481,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",52.5012464546433,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",52.9538434068385,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",53.4064403590337,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",53.8590373112289,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",54.3116342634241,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",54.7642312156193,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",55.2168281678145,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",55.6694251200097,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",56.1220220722049,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",56.5746190244001,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",57.0272159765953,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",57.4798129287905,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",57.9324098809857,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",58.3850068331809,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",58.8376037853761,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",59.2902007375713,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",59.7427976897665,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",60.1953946419617,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",60.6479915941569,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",61.1005885463521,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",61.5531854985473,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",62.0057824507425,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",62.4583794029377,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",62.9109763551329,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",63.3635733073281,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",63.8161702595233,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",64.2687672117185,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",64.7213641639137,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",65.1739611161089,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",65.6265580683041,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",66.0791550204993,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",66.5317519726945,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",66.9843489248897,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",67.4369458770849,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",67.8895428292801,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",68.3421397814753,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",68.7947367336705,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",69.2473336858657,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",69.6999306380609,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",70.1525275902561,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",70.6051245424513,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",71.0577214946465,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",71.5103184468417,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",71.9629153990369,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",72.4155123512321,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",72.8681093034273,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",73.3207062556225,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",73.7733032078177,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",74.2259001600129,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",74.6784971122081,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",75.1310940644033,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",75.5836910165985,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",76.0362879687937,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",76.4888849209889,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",76.9414818731841,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",77.3940788253793,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",77.8466757775745,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",78.2992727297697,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",78.7518696819649,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",79.2044666341601,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",79.6570635863553,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",80.1096605385505,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",80.5622574907457,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",81.0148544429409,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",81.4674513951361,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",81.9200483473313,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",82.3726452995265,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",82.8252422517217,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",83.2778392039169,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",83.7304361561121,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",84.1830331083073,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",84.6356300605025,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",85.0882270126977,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",85.5408239648929,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",85.9934209170881,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",86.4460178692833,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",86.8986148214785,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",87.3512117736738,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",87.8038087258689,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",88.2564056780641,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",88.7090026302593,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",89.1615995824545,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",89.6141965346497,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",90.0667934868449,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",90.5193904390401,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",90.9719873912353,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",91.4245843434306,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",91.8771812956257,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",92.329778247821,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",92.7823752000162,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",93.2349721522114,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",93.6875691044065,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",94.1401660566018,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",94.592763008797,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",95.0453599609922,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",95.4979569131874,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",95.9505538653825,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",96.4031508175778,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",96.855747769773,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",97.3083447219682,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",97.7609416741634,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",98.2135386263586,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",98.6661355785538,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",99.118732530749,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",99.5713294829442,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",100.023926435139,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",100.476523387335,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",100.92912033953,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",101.381717291725,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",101.83431424392,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",102.286911196115,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",102.739508148311,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",103.192105100506,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",103.644702052701,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",104.097299004896,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",104.549895957091,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",105.002492909287,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",105.455089861482,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",105.907686813677,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",106.360283765872,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",106.812880718067,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",107.265477670263,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",107.718074622458,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",108.170671574653,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",108.623268526848,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",109.075865479043,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",109.528462431239,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",109.981059383434,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",110.433656335629,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",110.886253287824,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",111.338850240019,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",111.791447192215,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",112.24404414441,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",112.696641096605,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",113.1492380488,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",113.601835000995,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",114.054431953191,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",114.507028905386,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",114.959625857581,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",115.412222809776,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",115.864819761971,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",116.317416714167,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",116.770013666362,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",117.222610618557,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",117.675207570752,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",118.127804522947,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",118.580401475143,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",119.032998427338,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",119.485595379533,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",119.938192331728,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",120.390789283923,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",120.843386236119,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",121.295983188314,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",121.748580140509,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",122.201177092704,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",122.653774044899,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",123.106370997095,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",123.55896794929,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",124.011564901485,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",124.46416185368,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",124.916758805875,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",125.369355758071,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",125.821952710266,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",126.274549662461,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",126.727146614656,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",127.179743566851,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",127.632340519047,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",128.084937471242,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",128.537534423437,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",128.990131375632,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",129.442728327827,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",129.895325280023,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",130.347922232218,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",130.800519184413,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",131.253116136608,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",131.705713088803,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",132.158310040999,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",132.610906993194,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",133.063503945389,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",133.516100897584,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",133.968697849779,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",134.421294801975,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",134.87389175417,-5.0642091563916
+"monotone_soft_constraint","Soft monotone-decline spline projection",135.326488706365,-5.0642091563916

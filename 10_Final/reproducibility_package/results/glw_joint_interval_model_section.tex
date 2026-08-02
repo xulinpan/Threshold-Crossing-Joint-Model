@@ -1,0 +1,33 @@
+\section{Proposed Model}
+
+The GLW data structure motivates a joint longitudinal--interval survival model. Modern CML guidelines and reviews define clinically meaningful molecular-response milestones, including early molecular response, DMR, MR4.5, and treatment-free remission \cite{Hochhaus2020ELN,Jabbour2025JAMAReview,Haddad2026Algorithms,Senapati2023CMLManagement,Hughes2014EarlyMolecularResponse,Rasekh2026TFRPredictor,Ono2026MR45}. In the GLW cohort, however, molecular response is observed through irregular monitoring visits, so first DMR is interval-observed rather than exactly timed. This structure aligns with joint longitudinal-survival modeling approaches \cite{Wulfsohn1997JointModel,Rizopoulos2016JMbayes,Lovblom2026MixedObservationJointModel,Niu2026QuantileJointModel}.
+
+Let \(y_{ij}\) denote the observed log-MRD value for patient \(i\) at visit \(j\), measured \(t_{ij}\) years after imatinib initiation. The longitudinal molecular trajectory is modeled as
+\[
+\mu_{ij} =
+\beta_0 + \beta_1 \log(1+t_{ij}) + \beta_2\{\log(1+t_{ij})\}^2
++ \beta_3 I(\mathrm{bone\ marrow}_{ij}) + b_{0i} + b_{1i}\log(1+t_{ij}),
+\]
+where \(b_{0i}\) and \(b_{1i}\) are patient-specific random intercept and random slope terms. For non-floor observations,
+\[
+y_{ij}\sim N(\mu_{ij}, \sigma_y^2).
+\]
+Because deep molecular values may be constrained by assay sensitivity or reporting limits \cite{Kim2026BCRABLqPCR}, observations reported at the log-MRD floor are treated as left-censored:
+\[
+P(y_{ij}\leq -5)=\Phi\{(-5-\mu_{ij})/\sigma_y\}.
+\]
+
+For DMR onset, let \(L_{ik}\) and \(R_{ik}\) be the start and end of at-risk interval \(k\), with \(\Delta_{ik}=R_{ik}-L_{ik}\). The interval hazard is
+\[
+h_{ik} =
+\exp\{\gamma_0 + \gamma_1\log(1+t_{ik}^{mid})
++\gamma_2\log(1+\Delta_{ik})+\alpha\mu_i(t_{ik}^{mid})\},
+\]
+where \(t_{ik}^{mid}=(L_{ik}+R_{ik})/2\). The probability that first DMR occurs during the interval is
+\[
+P(d_{ik}=1 \mid \mathrm{at\ risk})=1-\exp(-h_{ik}\Delta_{ik}).
+\]
+The association parameter \(\alpha\) links the latent molecular trajectory to DMR onset. Because lower log-MRD indicates deeper molecular response, \(\alpha<0\) implies that lower molecular burden is associated with a higher interval probability of reaching DMR.
+
+This model directly addresses the main data-reference gap: it uses repeated molecular measurements, preserves irregular visit timing, handles assay-floor behavior, and estimates first DMR as an interval-observed event rather than imposing exact event times.
+

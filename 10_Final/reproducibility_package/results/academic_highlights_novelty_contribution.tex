@@ -1,0 +1,70 @@
+\section{Academic Highlights, Novelty, and Contribution}
+
+\subsection{Overall Positioning}
+
+This study is best positioned as an applied biostatistical and real-world chronic myeloid leukemia (CML) monitoring paper. Its main academic value is not the discovery of a new biological mechanism or a new CML treatment. Instead, the contribution is a reproducible privacy-preserving dataset workflow and a joint longitudinal--interval modeling framework for deep molecular response (DMR) under irregular clinical monitoring.
+
+The most defensible contribution statement is:
+\begin{quote}
+This study contributes a reproducible, privacy-preserving real-world CML molecular monitoring workflow and an interval-aware joint modeling framework for deep molecular response. By linking repeated log-MRD measurements with interval-observed first DMR under irregular follow-up, the work addresses an important gap between guideline-defined molecular endpoints and the structure of routine clinical monitoring data.
+\end{quote}
+
+\subsection{Key Highlights}
+
+\begin{enumerate}
+  \item The cleaned dataset includes 87 patients, 495 longitudinal molecular observations, and 275 at-risk intervals.
+  \item Public modeling files use coded patient identifiers, with direct identifiers isolated in a private patient-key file.
+  \item DMR and CMR are derived from clinically meaningful log-MRD thresholds.
+  \item First observed DMR is represented as an interval-observed event rather than an exact event time.
+  \item Monitoring is irregular: the median visit gap is 6.0 months, 50.3\% of gaps exceed 6 months, and 20.0\% exceed 12 months.
+  \item The proposed model links continuous log-MRD trajectories to interval-observed DMR onset.
+  \item Assay-floor observations are treated as left-censored values rather than ordinary exact measurements.
+  \item The workflow includes reproducible R scripts, Stan code, figures, tables, selected references, and LaTeX documentation.
+\end{enumerate}
+
+\subsection{Novelty}
+
+The high-confidence novelty is practical and methodological. The study combines irregular real-world log-MRD trajectories with interval-observed first DMR, implements privacy-preserving clinical-data engineering, models assay-floor behavior, and connects guideline-defined CML endpoints with joint longitudinal-survival methodology.
+
+The DMR and CMR thresholds themselves are not novel. Similarly, interval-censored survival models and longitudinal mixed models are established methods. The novelty comes from integrating these components into a reproducible CML molecular monitoring workflow where first DMR is not assumed to be exactly observed.
+
+\subsection{Academic Contribution}
+
+\begin{center}
+\begin{tabular}{p{0.22\textwidth}p{0.48\textwidth}p{0.16\textwidth}}
+\toprule
+Contribution type & Specific contribution & Strength\\
+\midrule
+Clinical data & Curated real-world CML molecular monitoring data with DMR/CMR endpoints & High\\
+Methodology & Joint longitudinal--interval model linking log-MRD trajectory and first DMR & High\\
+Implementation & Stan model and runnable R benchmark models & Moderate--high\\
+Reproducibility & End-to-end scripts, tables, figures, references, and LaTeX outputs & High\\
+Clinical interpretation & Connects molecular monitoring, DMR/MR4.5, and TFR literature & Moderate\\
+Generalizability & Evidence from a small single cohort & Low--moderate\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Suggested Manuscript Highlights}
+
+\begin{itemize}
+  \item A model-ready real-world CML cohort was generated from raw longitudinal molecular monitoring data.
+  \item Public analysis files use coded patient identifiers, with the re-identification key stored separately.
+  \item DMR was observed in 68 of 87 patients, but first DMR timing was interval-observed because visits were irregular.
+  \item Half of visit gaps exceeded 6 months, supporting the need for gap-aware interval modeling.
+  \item A joint longitudinal--interval model was specified to link log-MRD trajectories with first DMR onset.
+  \item Assay-floor log-MRD observations were modeled as left-censored values.
+\end{itemize}
+
+\subsection{Claims to Avoid}
+
+The manuscript should avoid claiming a new biological mechanism, a new clinical predictor, or the first-ever joint model for CML unless these claims are supported by additional validation or systematic literature review. It should also avoid overstating treatment-free remission prediction, because the current endpoint is DMR onset rather than observed TKI discontinuation success.
+
+\subsection{Limitations}
+
+Important limitations include the modest cohort size, incomplete covariate data, single-cohort design, absence of external validation, and the fact that full Bayesian sampling of the Stan model requires installation of a Stan interface. The DMR endpoint is clinically related to treatment-free remission eligibility but does not directly measure treatment-free remission.
+
+\subsection{Overall Assessment}
+
+The academic contribution is moderate to strong if framed as an applied statistical and real-world data workflow paper. It is weaker if framed as a purely clinical discovery paper. The strongest academic path is to emphasize the modeling gap: routine CML monitoring produces irregular longitudinal biomarker data and interval-observed response times, and the proposed workflow gives a principled way to analyze that structure.
+

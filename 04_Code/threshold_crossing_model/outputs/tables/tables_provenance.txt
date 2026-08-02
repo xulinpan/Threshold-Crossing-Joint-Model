@@ -1,0 +1,7 @@
+dgm_tag          : v2_cohort_posterior_hazard
+other mechanisms : v1_legacy_legacy_hazard
+source           : D:\research2026\paper01_glw\04_Code\threshold_crossing_model\outputs/sim_redesign/sim_redesign_summary.csv
+summary mtime    : 2026-07-30 20:20:33
+sbc source       : D:\research2026\paper01_glw\04_Code\threshold_crossing_model\outputs/sbc/sbc_summary_corrected.csv
+generated        : 2026-07-30 20:20:37
+R                : R version 4.5.0 (2025-04-11 ucrt)

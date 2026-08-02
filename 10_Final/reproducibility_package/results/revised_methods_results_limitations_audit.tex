@@ -1,0 +1,65 @@
+\section*{Revised Methods, Results, and Limitations Text After Essential Model Audit}
+
+\subsection*{Methods: Data Structure and Endpoints}
+
+The raw molecular monitoring file was processed into privacy-preserving analysis datasets using coded patient identifiers. Treatment follow-up was stored descriptively in months from imatinib initiation. Deep molecular response (DMR) was defined as log-MRD \(\leq -4.5\), and complete molecular response (CMR) was defined as log-MRD \(\leq -5.0\). These endpoint indicators were recomputed directly from the final log-MRD values as part of the analysis audit. First observed DMR was represented as an interval-observed endpoint because the biological onset of response was not continuously observed but was detected at laboratory monitoring visits. For each patient, intervals before the first DMR-positive visit were coded as at risk without event, the first interval ending in DMR was coded as the event interval, and subsequent intervals were excluded from first-event modeling. Patients without observed DMR by last follow-up were censored.
+
+\subsection*{Methods: Time Scale}
+
+For clinical description, follow-up time and visit gaps are reported in months. For the Bayesian model, all time variables were converted to years before fitting. Thus, \(u_{ij}\) denotes years from imatinib initiation at visit \(j\) for patient \(i\), and interval start, interval end, and interval gap were also analyzed in years. Model coefficients involving time therefore correspond to functions of \(\log(1+\mathrm{years})\), not to linear per-month effects.
+
+\subsection*{Methods: Joint Longitudinal--Interval Model}
+
+Let \(y_{ij}\) denote the observed log-MRD value and \(u_{ij}\) denote years from imatinib initiation. The latent longitudinal trajectory was modeled as
+\[
+\mu_{ij} =
+\beta_0 + \beta_1 \log(1+u_{ij})
++ \beta_2\{\log(1+u_{ij})\}^2
++ \beta_3 I(\mathrm{bone\ marrow}_{ij})
++ b_{0i} + b_{1i}\log(1+u_{ij}).
+\]
+For non-floor observations, \(y_{ij}\sim N(\mu_{ij},\sigma_y^2)\). Observations reported at the assay floor \(c=-5.0\) were treated as left-censored, contributing
+\[
+P(y_{ij}\le c)=\Phi\{(c-\mu_{ij})/\sigma_y\}
+\]
+to the likelihood. This censoring formulation was used because floor-coded deep-response values indicate that the true molecular burden is at or below the reporting floor rather than exactly equal to the floor.
+
+For the DMR process, let \(L_{ik}\), \(R_{ik}\), and \(\Delta_{ik}=R_{ik}-L_{ik}\) be the start, end, and length in years of at-risk interval \(k\) for patient \(i\), and let \(u_{ik}^{mid}=(L_{ik}+R_{ik})/2\). The interval hazard-rate component was specified as
+\[
+h_{ik} =
+\exp\{\gamma_0 + \gamma_1\log(1+u_{ik}^{mid})
++\gamma_2\log(1+\Delta_{ik})
++\alpha\mu_i(u_{ik}^{mid})\}.
+\]
+The probability that first DMR occurred during the interval was
+\[
+P(d_{ik}=1\mid \mathrm{at\ risk}) =
+1-\exp(-h_{ik}\Delta_{ik}).
+\]
+The association parameter \(\alpha\) links the latent molecular trajectory to interval DMR probability. Because lower log-MRD indicates deeper molecular response, a negative \(\alpha\) indicates that lower latent molecular burden is associated with a higher interval probability of DMR.
+
+\subsection*{Methods: Priors, Computation, and Model Checking}
+
+The priors were weakly informative and chosen to regularize the nonlinear longitudinal trajectory, interval event model, and patient-specific effects. The current fitted model used \(N(-2.5,2^2)\) for \(\beta_0\), \(N(-1,1^2)\) for the linear log-time coefficient, \(N(0,0.5^2)\) for the quadratic log-time coefficient, \(N(0,1^2)\) for the bone marrow sample-source coefficient, and an exponential(1) prior for \(\sigma_y\). The interval model used \(N(-2,2^2)\) for \(\gamma_0\), \(N(0,1^2)\) for time and gap coefficients, and \(N(-0.5,0.75^2)\) for the latent MRD association parameter. Random-effect standard deviations had exponential(1) priors, standardized random effects had standard normal priors, and the random-effect correlation matrix used an LKJ Cholesky prior with shape 2.
+
+The model was fitted using four Markov chains. Convergence and computation were assessed using divergent transitions, maximum treedepth, approximate E-BFMI, R-hat, effective sample size, and inspection of weakly estimated parameters. Model adequacy was assessed using posterior predictive checks for non-floor longitudinal log-MRD values, posterior floor probabilities for assay-floor observations, and calibration summaries comparing estimated DMR probabilities with observed DMR at the interval and patient levels.
+
+\subsection*{Results: Endpoint Audit and Data Structure}
+
+The final processed analysis dataset contained 87 patients, 495 longitudinal molecular observations, and 275 at-risk intervals for first observed DMR. Endpoint definitions were audited by recomputing DMR and CMR directly from the final log-MRD values. DMR was defined as log-MRD \(\leq -4.5\), and CMR was defined as log-MRD \(\leq -5.0\). The stored endpoint indicators matched the recomputed values exactly. In the retained analysis data, DMR and CMR counts were identical because no observations fell in the DMR-only range \((-5.0,-4.5]\). All 239 DMR-positive longitudinal observations were also CMR-positive floor-coded observations at log-MRD = -5.0. Thus, the identical DMR and CMR summaries reflect the retained data distribution and assay-floor reporting pattern rather than a mismatch in endpoint coding. One excluded raw record had IS = 0.002 with missing ABL, sample type, laboratory date, and New LOG-MRD; adjudication of this record would be required before any attempt to recover it for analysis.
+
+\subsection*{Results: Model Fit and Main Posterior Findings}
+
+The fitted Bayesian joint model used time in years, after conversion from the processed month-scale variables. Descriptive summaries are reported in months for clinical readability. The Bayesian sampler produced 4000 post-warmup draws from four chains. There were no divergent transitions, the maximum treedepth was 7, the minimum approximate E-BFMI was 0.500, and the maximum R-hat was 1.019. The main fixed-effect and association parameters showed acceptable convergence. The random-effect correlation was weakly estimated and was not interpreted clinically.
+
+The longitudinal submodel showed a strong nonlinear decline in latent log-MRD over follow-up. The posterior mean for the log-time coefficient was -3.539, with 95\% posterior interval -4.497 to -2.613. The quadratic log-time coefficient was positive on average, with posterior mean 0.499 and 95\% posterior interval -0.005 to 1.012, supporting nonlinear response dynamics. The bone marrow sample-source coefficient was positive on average but uncertain, with posterior mean 0.613 and 95\% posterior interval -0.826 to 2.065; it was therefore treated as a measurement-source adjustment rather than as a confirmed clinical effect.
+
+The interval DMR component showed a strong association between latent molecular burden and first observed DMR. The association parameter was negative, with posterior mean -1.256 and 95\% posterior interval -1.851 to -0.809. Under the fitted parameterization, lower latent log-MRD was associated with higher interval probability of DMR. Because the model uses a nonlinear time transformation and an interval hazard formulation, this association should be interpreted as a model-based monitoring association rather than as a validated clinical decision threshold.
+
+\subsection*{Results: Posterior Predictive Checks and Calibration}
+
+Posterior predictive checks supported cautious interpretation of the longitudinal component. Among non-floor observations, posterior predictive coverage was 0.961 for the 90\% predictive interval and 0.988 for the 95\% predictive interval. The observed floor rate was 0.483, while the posterior mean floor probability was 0.414. Calibration was descriptive because it was assessed in the development cohort. At the interval level, the observed event rate was 0.247 and the mean predicted probability was 0.247, with Brier score 0.082. At the patient level, the observed DMR rate was 0.782 and the mean predicted cumulative DMR probability was 0.581, with Brier score 0.124. This patient-level underprediction indicates that model-estimated probabilities should not be used as treatment-decision thresholds without recalibration and external validation.
+
+\subsection*{Limitations}
+
+This study should be interpreted as development and internal checking of a monitoring-oriented model rather than validation of a treatment-decision rule. The cohort was modest, with 87 patients, incomplete core covariates, and no external validation cohort. In the retained analysis data, DMR and CMR indicators were identical because all observed DMR-positive measurements were floor-coded at log-MRD = -5.0; this limits the ability to distinguish DMR from deeper response in the current dataset. One excluded raw record with low IS but missing essential modeling fields requires adjudication before final analysis. The current model includes patient-specific random intercepts and slopes, but the random-effect correlation was weakly estimated and should not be interpreted clinically. Patient-level calibration showed underprediction of cumulative DMR probability, so model-based probabilities require recalibration and external validation before clinical deployment.

@@ -1,0 +1,54 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the manuscript and the archived release."
+title: "A Bayesian Threshold-Crossing Joint Model for Irregular, Assay-Floor-Censored Molecular Monitoring in Chronic Myeloid Leukemia — analysis code"
+abstract: >-
+  Code, Stan models and reproducible simulation workflow for a Bayesian joint
+  model in which deep molecular response is read as a first-hitting time of the
+  latent biomarker trajectory rather than coded as a separate event, with
+  assay-floor left-censoring and interval-observed endpoints. Includes the
+  ADEMP simulation study, prior-sensitivity, leave-one-out model comparison and
+  simulation-based calibration analyses, and a synthetic-cohort generator that
+  allows the pipeline to run without access to the confidential clinical data.
+type: software
+license: MIT
+version: 1.0.0
+date-released: "2026-08-01"
+repository-code: "https://github.com/xulinpan/Threshold-Crossing-Joint-Model"
+keywords:
+  - Bayesian hierarchical models
+  - joint longitudinal-survival models
+  - interval-censored data
+  - left-censored biomarkers
+  - first-hitting-time models
+  - simulation-based calibration
+  - chronic myeloid leukemia
+  - Stan
+authors:
+  - family-names: "Pan"
+    given-names: "Xulin"
+    affiliation: "School of Mathematics and Statistics, Yunnan University, Kunming, China"
+    email: "panxl@ynu.edu.cn"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"   # title page: to be completed
+  - family-names: "Lv"
+    given-names: "Jun"
+    affiliation: "School of Mathematics and Statistics, Yunnan University, Kunming, China"
+  - family-names: "Wang"
+    given-names: "Chuanming"
+    affiliation: "School of Biological and Food Engineering, Honghe University, Mengzi, China"
+  - family-names: "Wang"
+    given-names: "Xueren"
+    affiliation: "School of Mathematics and Statistics, Yunnan University, Kunming, China"
+references:
+  - type: article
+    title: "A Bayesian Threshold-Crossing Joint Model for Irregular, Assay-Floor-Censored Molecular Monitoring in Chronic Myeloid Leukemia"
+    authors:
+      - family-names: "Pan"
+        given-names: "Xulin"
+      - family-names: "Lv"
+        given-names: "Jun"
+      - family-names: "Wang"
+        given-names: "Chuanming"
+      - family-names: "Wang"
+        given-names: "Xueren"
+    year: 2026
+    status: submitted

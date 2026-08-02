@@ -1,0 +1,42 @@
+\subsection{Latent Threshold-Crossing Model for DMR}
+
+As a sensitivity and conceptual refinement, we formulated DMR onset as a latent threshold-crossing time rather than as a separate interval hazard predicted by latent MRD. Let \(m_i(t)\) denote the latent true biological log-MRD trajectory for patient \(i\) at treatment time \(t\), measured in years. The trajectory was modeled as
+\[
+m_i(t)=\beta_0+\beta_1\log(1+t)+\beta_2\{\log(1+t)\}^2
++b_{0i}+b_{1i}\log(1+t),
+\]
+with independent patient-specific random intercept and slope terms. The expected observed log-MRD value additionally included a sample-source adjustment,
+\[
+\mu_{ij}=m_i(t_{ij})+\beta_{\mathrm{BM}}I(\mathrm{bone\ marrow}_{ij}).
+\]
+Thus, sample source was treated as an observation-level measurement effect and did not alter the biological trajectory used to define DMR onset.
+
+For exact non-floor observations, \(y_{ij}\sim N(\mu_{ij},\sigma_y^2)\). Observations reported at the assay floor contributed the left-censored likelihood
+\[
+P(y_{ij}\leq -5.0)=
+\Phi\{(-5.0-\mu_{ij})/\sigma_y\}.
+\]
+If molecular values were available only as intervals, their likelihood contribution was the corresponding normal probability over the reporting interval.
+
+DMR was defined by the clinical threshold \(c_{\mathrm{DMR}}=-4.5\). The latent DMR onset time was
+\[
+T_i^{\mathrm{DMR}}=\inf\{t\geq 0:m_i(t)\leq c_{\mathrm{DMR}}\}.
+\]
+For irregularly monitored patients with observed first DMR, the event was represented as \(L_i<T_i^{\mathrm{DMR}}\leq R_i\), where \(L_i\) was the last visit before documented DMR and \(R_i\) was the first visit with documented DMR. Patients without documented DMR were treated as censored after their last observed follow-up time. For a general trajectory, the event likelihood was expressed through the running minimum \(M_i(t)=\min_{0\leq u\leq t}m_i(u)\). An observed event interval contributed the condition \(M_i(L_i)>c_{\mathrm{DMR}}\) and \(M_i(R_i)\leq c_{\mathrm{DMR}}\), whereas a censored patient contributed \(M_i(C_i)>c_{\mathrm{DMR}}\).
+
+We considered two threshold-crossing versions. The deterministic version used a near-deterministic smooth approximation to the threshold indicators for stable Hamiltonian Monte Carlo computation. The probabilistic version introduced threshold uncertainty \(C_i\sim N(c_{\mathrm{DMR}},\sigma_{\mathrm{threshold}}^2)\), giving
+\[
+P(L_i<T_i^{\mathrm{DMR}}\leq R_i)
+=
+\Phi\{(M_i(L_i)-c_{\mathrm{DMR}})/\sigma_{\mathrm{threshold}}\}
+-
+\Phi\{(M_i(R_i)-c_{\mathrm{DMR}})/\sigma_{\mathrm{threshold}}\}.
+\]
+For censored patients, the corresponding probability was
+\[
+\Phi\{(M_i(C_i)-c_{\mathrm{DMR}})/\sigma_{\mathrm{threshold}}\}.
+\]
+Weakly informative priors were used for all fixed effects, variance components, and threshold-uncertainty parameters. Because the model was developed in a modest single-cohort dataset, all threshold-crossing results were interpreted as monitoring-oriented model development rather than as externally validated clinical decision rules.
+
+\paragraph{Methodological contribution.}
+The latent threshold-crossing formulation addresses a conceptual limitation of modeling DMR as a separate event process predicted by latent MRD. Because DMR is clinically defined by log-MRD \(\leq -4.5\), a model in which latent MRD predicts first DMR can appear circular: the biomarker is used to predict an endpoint defined by the same biomarker. The threshold-crossing model resolves this by defining DMR onset as a functional of the latent biological MRD trajectory itself. In this framework, irregular monitoring produces interval-censored observation of the latent crossing time, and assay-floor values contribute through the longitudinal measurement model rather than as exact deep-response values. This provides a closer alignment between the statistical model and the clinical endpoint definition. The approach should still be interpreted as a development-stage monitoring model, because threshold-crossing probabilities and patient-specific crossing times require external validation and calibration before they can be used for treatment decisions or treatment-free-remission counseling.

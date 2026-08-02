@@ -1,0 +1,988 @@
+
+\documentclass[11pt]{article}
+
+% ------------------------------------------------------------
+% Preamble
+% ------------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+% ------------------------------------------------------------
+% Theorem environments
+% ------------------------------------------------------------
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% ------------------------------------------------------------
+% Custom notation
+% ------------------------------------------------------------
+\newcommand{\MRD}{\mathrm{MRD}}
+\newcommand{\DMR}{\mathrm{DMR}}
+\newcommand{\CMR}{\mathrm{CMR}}
+\newcommand{\Normal}{\mathcal{N}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Ind}{\mathbb{I}}
+\newcommand{\given}{\,\middle|\,}
+\newcommand{\logit}{\operatorname{logit}}
+\newcommand{\expit}{\operatorname{expit}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
+\newcommand{\softmin}{\operatorname{softmin}}
+\newcommand{\PhiStd}{\Phi}
+\newcommand{\phiStd}{\phi}
+
+\title{
+A Bayesian Hierarchical Threshold-Crossing Model for\\
+Irregular Molecular Monitoring and Deep Molecular Response
+}
+
+\author{
+Xulin Pan\\
+Pennsylvania State University\\
+\texttt{xxp5066@psu.edu}
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This document gives a unified mathematical formulation of a Bayesian hierarchical model for irregular molecular monitoring in chronic myeloid leukemia. The framework combines a latent patient-specific log-MRD trajectory, an assay observation model with left-censoring at the reporting floor, a latent threshold-crossing definition of deep molecular response, interval observation induced by irregular visits, Bayesian posterior inference, dynamic prediction, recalibration, and theoretical properties. The core idea is that DMR should not be treated as an independent survival event when it is clinically defined by the biomarker itself. Instead, DMR onset is defined as the first time the latent molecular trajectory crosses the clinical response threshold.
+\end{abstract}
+
+\tableofcontents
+
+\section{Model}
+
+\subsection{Observed data and notation}
+
+Let \(i=1,\ldots,N\) index patients and \(j=1,\ldots,n_i\) index molecular monitoring visits. For patient \(i\), the observed data are
+\[
+\mathcal{O}_i
+=
+\left\{
+(t_{ij},y_{ij},r_{ij},s_{ij})_{j=1}^{n_i},
+D_i,
+V_i
+\right\},
+\]
+where \(t_{ij}\) is time from treatment initiation, \(y_{ij}\) is the observed log-transformed minimal residual disease value, \(r_{ij}\) is an assay-floor indicator, \(s_{ij}\) denotes the sample source, \(D_i\) denotes the observed DMR information, and \(V_i\) denotes the observed visit process.
+
+The assay floor is denoted by
+\[
+c_F=-5.0,
+\]
+and the clinical DMR threshold is denoted by
+\[
+c_D=-4.5.
+\]
+
+In the motivating CML application, treatment time is summarized clinically in months but is converted to years for likelihood-based modeling. If \(t^{(m)}\) denotes months since treatment initiation, the model time scale is
+\[
+t=\frac{t^{(m)}}{12}.
+\]
+
+\subsection{Latent biological MRD trajectory}
+
+Let \(m_i(t)\) denote the latent true log-MRD trajectory for patient \(i\). The primary longitudinal trajectory model is
+\[
+m_i(t)
+=
+\beta_0
++
+\beta_1 \ell(t)
++
+\beta_2 \ell(t)^2
++
+b_{0i}
++
+b_{1i}\ell(t),
+\]
+where
+\[
+\ell(t)=\log(1+t).
+\]
+The patient-specific random effects are
+\[
+b_{0i}\sim \Normal(0,\tau_0^2),
+\qquad
+b_{1i}\sim \Normal(0,\tau_1^2).
+\]
+
+Equivalently,
+\[
+m_i(t)=x_i(t)^\top \beta+z_i(t)^\top b_i,
+\]
+where
+\[
+x_i(t)=
+\begin{pmatrix}
+1\\
+\ell(t)\\
+\ell(t)^2
+\end{pmatrix},
+\qquad
+\beta=
+\begin{pmatrix}
+\beta_0\\
+\beta_1\\
+\beta_2
+\end{pmatrix},
+\qquad
+z_i(t)=
+\begin{pmatrix}
+1\\
+\ell(t)
+\end{pmatrix},
+\qquad
+b_i=
+\begin{pmatrix}
+b_{0i}\\
+b_{1i}
+\end{pmatrix}.
+\]
+The independent random-effects structure is parsimonious and is preferred when the intercept--slope correlation is weakly identified.
+
+\subsection{Assay observation model with left-censoring}
+
+The observation-scale mean is
+\[
+\mu_{ij}
+=
+m_i(t_{ij})
++
+\beta_{BM}\Ind(s_{ij}=\text{bone marrow}).
+\]
+Let \(y_{ij}^*\) be the latent continuous log-MRD measurement that would be observed in the absence of reporting-floor censoring. The measurement model is
+\[
+y_{ij}^*
+\given m_i(t_{ij}),\theta
+\sim
+\Normal(\mu_{ij},\sigma_y^2).
+\]
+
+For a non-floor observation, \(r_{ij}=0\), the likelihood contribution is
+\[
+p(y_{ij}\given m_i,\theta)
+=
+\frac{1}{\sigma_y}
+\phiStd
+\left(
+\frac{y_{ij}-\mu_{ij}}{\sigma_y}
+\right).
+\]
+
+For a floor observation, \(r_{ij}=1\), the observed information is
+\[
+y_{ij}^*\leq c_F.
+\]
+Therefore, the likelihood contribution is
+\[
+\Prob(y_{ij}^*\leq c_F\given m_i,\theta)
+=
+\PhiStd
+\left(
+\frac{c_F-\mu_{ij}}{\sigma_y}
+\right).
+\]
+
+The full longitudinal likelihood for patient \(i\) is
+\[
+L_i^{Y}(\theta,b_i)
+=
+\prod_{j=1}^{n_i}
+\left[
+\frac{1}{\sigma_y}
+\phiStd
+\left(
+\frac{y_{ij}-\mu_{ij}}{\sigma_y}
+\right)
+\right]^{1-r_{ij}}
+\left[
+\PhiStd
+\left(
+\frac{c_F-\mu_{ij}}{\sigma_y}
+\right)
+\right]^{r_{ij}}.
+\]
+
+\subsection{Latent threshold-crossing definition of DMR}
+
+DMR is defined by the biomarker itself. Therefore, rather than treating DMR as an independent survival event predicted by the same biomarker, we define DMR onset as the first time the latent MRD trajectory crosses the clinical threshold:
+\[
+T_i^D
+=
+\inf\{t\geq 0:m_i(t)\leq c_D\}.
+\]
+
+Define the running minimum of the latent trajectory by
+\[
+M_i(t)=\min_{0\leq u\leq t}m_i(u).
+\]
+Then
+\[
+T_i^D\leq t
+\quad\Longleftrightarrow\quad
+M_i(t)\leq c_D.
+\]
+This formulation aligns the statistical estimand with the clinical definition of DMR.
+
+\subsection{Interval observation of DMR}
+
+The true threshold-crossing time \(T_i^D\) is not observed continuously. It is documented only at monitoring visits.
+
+If patient \(i\) first documents DMR in the interval \((L_i,R_i]\), then
+\[
+L_i<T_i^D\leq R_i.
+\]
+Under deterministic threshold crossing,
+\[
+\Prob(L_i<T_i^D\leq R_i\given m_i)
+=
+\Ind\{M_i(L_i)>c_D,\;M_i(R_i)\leq c_D\}.
+\]
+For a censored patient without documented DMR by censoring time \(C_i\),
+\[
+\Prob(T_i^D>C_i\given m_i)
+=
+\Ind\{M_i(C_i)>c_D\}.
+\]
+
+Because hard indicators are inconvenient for Hamiltonian Monte Carlo, we introduce a smooth probabilistic threshold-crossing model. Let the effective patient-level DMR threshold be
+\[
+C_i^D\sim \Normal(c_D,\sigma_{\mathrm{thr}}^2),
+\]
+where \(\sigma_{\mathrm{thr}}\) represents threshold uncertainty due to assay and reporting variability.
+
+For an observed DMR interval,
+\[
+\Prob(L_i<T_i^D\leq R_i\given m_i,\sigma_{\mathrm{thr}})
+=
+\Prob\{M_i(R_i)\leq C_i^D<M_i(L_i)\}.
+\]
+Therefore,
+\[
+\Prob(L_i<T_i^D\leq R_i\given m_i,\sigma_{\mathrm{thr}})
+=
+\PhiStd
+\left(
+\frac{M_i(L_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+-
+\PhiStd
+\left(
+\frac{M_i(R_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right).
+\]
+
+For a censored patient,
+\[
+\Prob(T_i^D>C_i\given m_i,\sigma_{\mathrm{thr}})
+=
+\Prob(C_i^D<M_i(C_i)),
+\]
+so
+\[
+\Prob(T_i^D>C_i\given m_i,\sigma_{\mathrm{thr}})
+=
+\PhiStd
+\left(
+\frac{M_i(C_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right).
+\]
+
+Let \(\delta_i=1\) if DMR is documented and \(\delta_i=0\) otherwise. The DMR observation likelihood is
+\[
+L_i^{D}(\theta,b_i)
+=
+\left[
+\PhiStd
+\left(
+\frac{M_i(L_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+-
+\PhiStd
+\left(
+\frac{M_i(R_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+\right]^{\delta_i}
+\left[
+\PhiStd
+\left(
+\frac{M_i(C_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+\right]^{1-\delta_i}.
+\]
+
+\subsection{Documented-DMR interval-hazard approximation}
+
+For comparison, a pragmatic interval-hazard model can be used to model first documented DMR during monitoring interval \(k\). Let
+\[
+\Delta_{ik}=R_{ik}-L_{ik},
+\qquad
+t_{ik}^{mid}=\frac{L_{ik}+R_{ik}}{2}.
+\]
+Define
+\[
+h_{ik}^{D}
+=
+\exp
+\left\{
+\gamma_0
++
+\gamma_1\log(1+t_{ik}^{mid})
++
+\gamma_2\log(1+\Delta_{ik})
++
+\alpha m_i(t_{ik}^{mid})
+\right\}.
+\]
+Then the interval event probability is
+\[
+p_{ik}^{D}
+=
+1-\exp(-h_{ik}^{D}\Delta_{ik}).
+\]
+If \(d_{ik}=1\) for the first interval in which DMR is documented and \(d_{ik}=0\) for previous at-risk intervals, the likelihood is
+\[
+L_i^{H}(\theta,b_i)
+=
+\prod_{k\in\mathcal{A}_i}
+(p_{ik}^{D})^{d_{ik}}
+(1-p_{ik}^{D})^{1-d_{ik}}.
+\]
+This approximation targets first documented DMR, whereas the threshold-crossing model targets latent biological DMR onset.
+
+\subsection{Informative visit-process extension}
+
+If monitoring times may be informative, let \(V_i=\{v_{i1},\ldots,v_{iM_i}\}\) be the observed visit times. Define the visit intensity
+\[
+\lambda_i^V(t)
+=
+\exp
+\left\{
+\delta_0
++
+\delta_1[m_i(t)-c_D]
++
+\delta_2\log(1+t)
++
+u_i
+\right\},
+\]
+where
+\[
+u_i\sim \Normal(0,\sigma_u^2).
+\]
+The visit-process likelihood over the observation window \([E_i,C_i]\) is
+\[
+L_i^V(\theta,b_i,u_i)
+=
+\left[
+\prod_{\ell=1}^{M_i}
+\lambda_i^V(v_{i\ell})
+\right]
+\exp
+\left[
+-
+\int_{E_i}^{C_i}
+\lambda_i^V(s)\,ds
+\right].
+\]
+This layer should be treated as an advanced sensitivity extension unless it is fully fitted and validated.
+
+\subsection{Full Bayesian hierarchical likelihood}
+
+For the primary threshold-crossing model conditioning on the observed visit schedule, the patient-specific likelihood is
+\[
+L_i(\theta,b_i)
+=
+L_i^Y(\theta,b_i)
+L_i^D(\theta,b_i)
+p(b_i\given \theta).
+\]
+The full likelihood is
+\[
+L(\theta,b)
+=
+\prod_{i=1}^{N}
+L_i^Y(\theta,b_i)
+L_i^D(\theta,b_i)
+p(b_i\given\theta).
+\]
+
+With the optional informative visit process,
+\[
+L(\theta,b,u)
+=
+\prod_{i=1}^{N}
+L_i^Y(\theta,b_i)
+L_i^D(\theta,b_i)
+L_i^V(\theta,b_i,u_i)
+p(b_i\given\theta)
+p(u_i\given\theta).
+\]
+
+\section{Bayesian Inference}
+
+\subsection{Prior distributions}
+
+The primary model uses weakly informative priors:
+\[
+\beta_0\sim \Normal(-2.5,2^2),
+\qquad
+\beta_1\sim \Normal(-1,1^2),
+\qquad
+\beta_2\sim \Normal(0,0.5^2),
+\]
+\[
+\beta_{BM}\sim \Normal(0,1^2),
+\qquad
+\sigma_y\sim \mathrm{Exponential}(1),
+\]
+\[
+\tau_0\sim \mathrm{Exponential}(1),
+\qquad
+\tau_1\sim \mathrm{Exponential}(1),
+\]
+\[
+\sigma_{\mathrm{thr}}\sim \mathrm{HalfNormal}(0,0.25^2).
+\]
+
+For the interval-hazard approximation,
+\[
+\gamma_0\sim \Normal(-2,2^2),
+\qquad
+\gamma_1\sim \Normal(0,1^2),
+\qquad
+\gamma_2\sim \Normal(0,1^2),
+\]
+\[
+\alpha\sim \Normal(-0.5,0.75^2).
+\]
+
+For the visit-process extension,
+\[
+\delta_0\sim \Normal(0,2^2),
+\qquad
+\delta_1\sim \Normal(0,1^2),
+\qquad
+\delta_2\sim \Normal(0,1^2),
+\qquad
+\sigma_u\sim \mathrm{Exponential}(1).
+\]
+
+\subsection{Posterior distribution}
+
+Let
+\[
+\theta
+=
+(\beta_0,\beta_1,\beta_2,\beta_{BM},
+\sigma_y,\tau_0,\tau_1,\sigma_{\mathrm{thr}})
+\]
+for the primary model. The posterior is
+\[
+p(\theta,b\given Y,D)
+\propto
+\left[
+\prod_{i=1}^{N}
+L_i^Y(\theta,b_i)
+L_i^D(\theta,b_i)
+p(b_i\given\theta)
+\right]
+p(\theta).
+\]
+
+For the interval-hazard approximation,
+\[
+p(\theta,b,\gamma,\alpha\given Y,D)
+\propto
+\left[
+\prod_{i=1}^{N}
+L_i^Y(\theta,b_i)
+L_i^H(\theta,b_i,\gamma,\alpha)
+p(b_i\given\theta)
+\right]
+p(\theta)p(\gamma)p(\alpha).
+\]
+
+For the informative visit model,
+\[
+p(\theta,b,u,\delta\given Y,D,V)
+\propto
+\left[
+\prod_{i=1}^{N}
+L_i^Y
+L_i^D
+L_i^V
+p(b_i\given\theta)
+p(u_i\given\theta)
+\right]
+p(\theta)p(\delta).
+\]
+
+\subsection{Computation}
+
+The posterior can be estimated by Hamiltonian Monte Carlo in Stan. For numerical implementation, the running minimum
+\[
+M_i(t)=\min_{0\leq u\leq t}m_i(u)
+\]
+can be approximated on a fine grid
+\[
+0=u_1<u_2<\cdots<u_G=t.
+\]
+A differentiable soft-min approximation is
+\[
+M_i^{(\kappa)}(t)
+=
+-\frac{1}{\kappa}
+\log
+\left[
+\sum_{g=1}^{G}
+\exp\{-\kappa m_i(u_g)\}
+\right],
+\]
+where larger \(\kappa\) gives a closer approximation to the true minimum.
+
+For numerical stability, compute
+\[
+\log\left[\PhiStd(a)-\PhiStd(b)\right]
+\]
+using a stable log-CDF difference, where
+\[
+a=\frac{M_i(L_i)-c_D}{\sigma_{\mathrm{thr}}},
+\qquad
+b=\frac{M_i(R_i)-c_D}{\sigma_{\mathrm{thr}}}.
+\]
+
+\subsection{Posterior predictive checks}
+
+For posterior draw \(q=1,\ldots,Q\), generate replicated observations
+\[
+y_{ij}^{rep,(q)}
+\sim
+\Normal(\mu_{ij}^{(q)},\sigma_y^{2(q)}).
+\]
+The posterior floor probability is
+\[
+p_{ij,F}^{(q)}
+=
+\PhiStd
+\left(
+\frac{c_F-\mu_{ij}^{(q)}}{\sigma_y^{(q)}}
+\right).
+\]
+Recommended posterior predictive checks include non-floor predictive coverage, observed versus predicted assay-floor rate, and observed-versus-replicated log-MRD plots.
+
+\subsection{Dynamic prediction}
+
+At landmark time \(s\), define the observed patient history
+\[
+\mathcal{H}_i(s)
+=
+\{(t_{ij},y_{ij},r_{ij},s_{ij}):t_{ij}\leq s\}.
+\]
+The dynamic prediction target is
+\[
+\pi_i(s,H)
+=
+\Prob(T_i^D\leq s+H\given T_i^D>s,\mathcal{H}_i(s)).
+\]
+
+Using the running-minimum representation,
+\[
+\Prob(T_i^D>s)
+=
+\PhiStd
+\left(
+\frac{M_i(s)-c_D}{\sigma_{\mathrm{thr}}}
+\right),
+\]
+and
+\[
+\Prob(s<T_i^D\leq s+H)
+=
+\PhiStd
+\left(
+\frac{M_i(s)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+-
+\PhiStd
+\left(
+\frac{M_i(s+H)-c_D}{\sigma_{\mathrm{thr}}}
+\right).
+\]
+Thus,
+\[
+\pi_i(s,H)
+=
+1
+-
+\frac{
+\PhiStd
+\left(
+\frac{M_i(s+H)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+}{
+\PhiStd
+\left(
+\frac{M_i(s)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+}.
+\]
+
+\subsection{Recalibration}
+
+Because absolute probabilities from mechanistic joint models may be miscalibrated, apply horizon-specific logistic recalibration:
+\[
+\logit\{\pi_{i,\mathrm{cal}}(s,H)\}
+=
+a_H+b_H\logit\{\pi_i(s,H)\}.
+\]
+Perfect calibration corresponds to
+\[
+a_H=0,
+\qquad
+b_H=1.
+\]
+The recalibration layer should be assessed by bootstrap or leave-one-patient-out validation.
+
+\section{Theorems and Proofs}
+
+\begin{theorem}[Valid hierarchical likelihood factorization]
+Under the hierarchical model defined above, conditional on patient-specific random effects \(b_i\), the longitudinal observations and DMR interval information factorize as
+\[
+p(Y_i,D_i\given b_i,\theta)
+=
+p(Y_i\given b_i,\theta)
+p(D_i\given b_i,\theta).
+\]
+Therefore, the full likelihood conditional on the observed visit schedule is
+\[
+L(\theta,b)
+=
+\prod_{i=1}^{N}
+p(Y_i\given b_i,\theta)
+p(D_i\given b_i,\theta)
+p(b_i\given\theta).
+\]
+\end{theorem}
+
+\begin{proof}
+Given \(b_i\), the latent trajectory
+\[
+m_i(t)=x_i(t)^\top\beta+z_i(t)^\top b_i
+\]
+is determined by \(\theta\) and \(b_i\). The observed longitudinal measurements \(Y_i\) arise through the assay observation model, giving
+\[
+p(Y_i\given b_i,\theta)=L_i^Y(\theta,b_i).
+\]
+The DMR information \(D_i\) arises through the threshold-crossing process
+\[
+T_i^D=\inf\{t:m_i(t)\leq c_D\}
+\]
+and the interval-observation mechanism, giving
+\[
+p(D_i\given b_i,\theta)=L_i^D(\theta,b_i).
+\]
+Conditional on \(b_i\) and \(\theta\), the two data components are linked through the shared latent trajectory but have separate observation mechanisms. Hence
+\[
+p(Y_i,D_i\given b_i,\theta)
+=
+p(Y_i\given b_i,\theta)
+p(D_i\given b_i,\theta).
+\]
+Independence across patients gives the full likelihood factorization.
+\end{proof}
+
+\begin{theorem}[Interval-observed threshold-crossing likelihood]
+Let
+\[
+T_i^D=\inf\{t\geq 0:m_i(t)\leq c_D\}
+\]
+and
+\[
+M_i(t)=\min_{0\leq u\leq t}m_i(u).
+\]
+Then
+\[
+T_i^D\leq t
+\quad\Longleftrightarrow\quad
+M_i(t)\leq c_D.
+\]
+If \(C_i^D\sim \Normal(c_D,\sigma_{\mathrm{thr}}^2)\), then for an observed DMR interval \((L_i,R_i]\),
+\[
+\Prob(L_i<T_i^D\leq R_i)
+=
+\PhiStd
+\left(
+\frac{M_i(L_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+-
+\PhiStd
+\left(
+\frac{M_i(R_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right).
+\]
+For censoring at \(C_i\),
+\[
+\Prob(T_i^D>C_i)
+=
+\PhiStd
+\left(
+\frac{M_i(C_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right).
+\]
+\end{theorem}
+
+\begin{proof}
+By definition,
+\[
+T_i^D=\inf\{t:m_i(t)\leq c_D\}.
+\]
+The event \(T_i^D\leq t\) means that there exists some \(u\leq t\) such that
+\[
+m_i(u)\leq c_D.
+\]
+This is equivalent to
+\[
+\min_{0\leq u\leq t}m_i(u)\leq c_D,
+\]
+namely
+\[
+M_i(t)\leq c_D.
+\]
+Thus,
+\[
+T_i^D\leq t
+\quad\Longleftrightarrow\quad
+M_i(t)\leq c_D.
+\]
+
+For DMR to occur in \((L_i,R_i]\), the threshold must not have been crossed by \(L_i\), but must have been crossed by \(R_i\). Under threshold uncertainty, this is
+\[
+M_i(R_i)\leq C_i^D<M_i(L_i).
+\]
+Since
+\[
+C_i^D\sim \Normal(c_D,\sigma_{\mathrm{thr}}^2),
+\]
+we have
+\[
+\Prob(C_i^D<M_i(L_i))
+=
+\PhiStd
+\left(
+\frac{M_i(L_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right),
+\]
+and
+\[
+\Prob(C_i^D<M_i(R_i))
+=
+\PhiStd
+\left(
+\frac{M_i(R_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right).
+\]
+Therefore,
+\[
+\Prob\{M_i(R_i)\leq C_i^D<M_i(L_i)\}
+=
+\PhiStd
+\left(
+\frac{M_i(L_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right)
+-
+\PhiStd
+\left(
+\frac{M_i(R_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right).
+\]
+
+For censoring,
+\[
+T_i^D>C_i
+\]
+means no crossing has occurred by \(C_i\), so
+\[
+M_i(C_i)>C_i^D.
+\]
+Thus,
+\[
+\Prob(T_i^D>C_i)
+=
+\Prob(C_i^D<M_i(C_i))
+=
+\PhiStd
+\left(
+\frac{M_i(C_i)-c_D}{\sigma_{\mathrm{thr}}}
+\right).
+\]
+\end{proof}
+
+\begin{theorem}[Posterior propriety under proper priors]
+Assume that all regression parameters have proper normal priors, all scale parameters have proper priors on \((0,\infty)\), the number of patients and observations is finite, exact biomarker observations use Gaussian densities, floor observations use Gaussian cumulative probabilities, and DMR interval probabilities are bounded between 0 and 1. Then the posterior distribution
+\[
+p(\theta,b\given Y,D)
+\]
+is proper.
+\end{theorem}
+
+\begin{proof}
+The likelihood for an exact observation is
+\[
+\frac{1}{\sigma_y}
+\phiStd
+\left(
+\frac{y_{ij}-\mu_{ij}}{\sigma_y}
+\right),
+\]
+which is finite for all \(\sigma_y>0\). The likelihood for a floor observation is
+\[
+\PhiStd
+\left(
+\frac{c_F-\mu_{ij}}{\sigma_y}
+\right),
+\]
+which lies in \([0,1]\). The threshold-crossing likelihood for an observed interval is a difference of two Gaussian cumulative probabilities and is bounded between 0 and 1. The censoring likelihood is similarly bounded.
+
+Because the dataset is finite, the full likelihood is finite for all admissible parameter values. Let \(p(\theta)\) and \(p(b\given\theta)\) be proper. The posterior normalizing constant is
+\[
+Z
+=
+\int
+L(\theta,b)p(\theta)p(b\given\theta)
+\,d\theta\,db.
+\]
+Since the likelihood is bounded and the priors are proper, \(Z<\infty\). Therefore,
+\[
+p(\theta,b\given Y,D)
+=
+\frac{L(\theta,b)p(\theta)p(b\given\theta)}{Z}
+\]
+is a proper posterior distribution.
+\end{proof}
+
+\begin{theorem}[Floor-censored likelihood is not equivalent to exact-floor coding]
+Let
+\[
+y^*\sim \Normal(\mu,\sigma^2).
+\]
+If the assay reports only that \(y^*\leq c_F\), then the correct likelihood contribution is
+\[
+L_C(\mu,\sigma)
+=
+\PhiStd
+\left(
+\frac{c_F-\mu}{\sigma}
+\right).
+\]
+Treating the observation as exact, \(y=c_F\), uses instead
+\[
+L_E(\mu,\sigma)
+=
+\frac{1}{\sigma}
+\phiStd
+\left(
+\frac{c_F-\mu}{\sigma}
+\right).
+\]
+These likelihoods are not proportional in \((\mu,\sigma)\). Therefore, exact-floor coding changes the statistical model and generally understates uncertainty below the assay floor.
+\end{theorem}
+
+\begin{proof}
+The censored likelihood is the probability mass below the reporting threshold:
+\[
+L_C(\mu,\sigma)
+=
+\int_{-\infty}^{c_F}
+\frac{1}{\sigma}
+\phiStd
+\left(
+\frac{y-\mu}{\sigma}
+\right)
+dy
+=
+\PhiStd
+\left(
+\frac{c_F-\mu}{\sigma}
+\right).
+\]
+The exact-floor likelihood is
+\[
+L_E(\mu,\sigma)
+=
+\frac{1}{\sigma}
+\phiStd
+\left(
+\frac{c_F-\mu}{\sigma}
+\right).
+\]
+The ratio is
+\[
+\frac{L_C(\mu,\sigma)}{L_E(\mu,\sigma)}
+=
+\sigma
+\frac{
+\PhiStd\left((c_F-\mu)/\sigma\right)
+}{
+\phiStd\left((c_F-\mu)/\sigma\right)
+}.
+\]
+This ratio depends on \(\mu\) and \(\sigma\). Therefore, \(L_C\) and \(L_E\) are not proportional and do not define the same likelihood.
+\end{proof}
+
+\begin{proposition}[Observed equivalence of DMR and CMR under floor-only deep responses]
+Suppose DMR is defined as \(y\leq -4.5\) and CMR is defined as \(y\leq -5.0\). If the retained dataset contains no observations in \((-5.0,-4.5]\), then the observed DMR and CMR indicators are identical:
+\[
+\Ind(y\leq -4.5)=\Ind(y\leq -5.0).
+\]
+\end{proposition}
+
+\begin{proof}
+For any retained observation, either \(y\leq -5.0\) or \(y>-4.5\), because no value lies in \((-5.0,-4.5]\). Therefore,
+\[
+y\leq -4.5
+\quad\Longleftrightarrow\quad
+y\leq -5.0.
+\]
+Thus,
+\[
+\Ind(y\leq -4.5)=\Ind(y\leq -5.0).
+\]
+\end{proof}
+
+\section{Manuscript Positioning}
+
+The proposed framework is best described as a Bayesian hierarchical threshold-crossing joint model for floor-censored molecular monitoring. Its novelty is not the use of a Bayesian joint model alone, but the unification of the following features:
+\begin{enumerate}[label=(\roman*)]
+\item a latent patient-specific MRD trajectory;
+\item assay-floor left-censoring;
+\item DMR onset defined as a latent threshold-crossing event;
+\item interval observation induced by irregular monitoring;
+\item optional informative visit-process modeling;
+\item dynamic prediction and recalibration.
+\end{enumerate}
+
+The threshold-crossing formulation gives the clearest estimand for biological DMR onset, while the interval-hazard approximation can be retained as a pragmatic comparator for first documented DMR under the observed visit process.
+
+\end{document}

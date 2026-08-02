@@ -1,0 +1,26 @@
+\subsection{Informative Monitoring Sensitivity Analysis}
+
+Because molecular monitoring was irregular, patients with more frequent visits had more opportunities to document DMR. In addition, visit frequency may depend on latent molecular response, clinician concern, adherence, or local practice patterns. To evaluate whether the observation process could influence estimated DMR probabilities, we prespecified an exploratory informative-monitoring sensitivity model.
+
+The sensitivity model extended the joint longitudinal--interval framework by adding a recurrent monitoring-visit process. Let \(t\) denote treatment time in years and let \(\eta_i(t)\) denote the latent log-MRD trajectory for patient \(i\). The longitudinal and interval-DMR components were retained from the primary model, including left-censoring for assay-floor observations and interval-observed first DMR. Conditional on \(\eta_i(t)\), monitoring visits were modeled as an inhomogeneous point process with intensity
+\[
+\lambda_i^{V}(t)=
+\exp\{\delta_0+\delta_1[\eta_i(t)+4.5]
++\delta_2\log(1+t)+u_i\},
+\]
+where \(u_i\sim N(0,\sigma_u^2)\) is a patient-level monitoring-intensity random effect. The latent trajectory was centered at the DMR threshold so that \(\delta_1\) represents the log visit-rate ratio associated with a one-unit higher log-MRD value relative to the DMR threshold. Positive \(\delta_1\) would indicate more frequent monitoring among patients with higher molecular burden, whereas negative \(\delta_1\) would indicate more frequent monitoring among deeper responders.
+
+For observed follow-up visit times \(v_{i1},\ldots,v_{iM_i}\) in the monitoring-risk window \([E_i,C_i]\), the visit-process likelihood contribution was
+\[
+L_i^{V}=
+\left\{\prod_{\ell=1}^{M_i}\lambda_i^{V}(v_{i\ell})\right\}
+\exp\left\{-\int_{E_i}^{C_i}\lambda_i^{V}(s)\,ds\right\}.
+\]
+The cumulative intensity was evaluated by numerical quadrature. Deterministic baseline measurements were excluded from the visit-process likelihood. The most parsimonious implementation treated \(u_i\) as independent of the longitudinal random intercept and slope; a correlated random-effect structure was not used because of the small cohort size.
+
+Weakly informative priors were assigned to the visit-process parameters: \(\delta_0\sim N(\log 2,1^2)\), \(\delta_1\sim N(0,0.5^2)\), \(\delta_2\sim N(0,0.5^2)\), and \(\sigma_u\sim \mathrm{Exponential}(2)\). These priors shrink the model toward non-informative monitoring while allowing clinically meaningful dependence of visit frequency on latent molecular burden.
+
+This model was treated as exploratory because the cohort included only 87 patients and the visit process introduces additional parameters that may be weakly identified. The assessment focused on whether the posterior distribution of \(\delta_1\) was concentrated away from zero, whether posterior predictive checks reproduced visit counts and visit-gap distributions, and whether interval-level or patient-level DMR calibration materially changed after accounting for visit intensity. The sensitivity model was not used as the primary clinical prediction model.
+
+\paragraph{Limitations.}
+The informative-monitoring extension is scientifically relevant but statistically fragile. The same latent MRD trajectory contributes to the longitudinal measurements, DMR probability, and visit intensity, so \(\delta_1\) may be confounded with patient-level random effects, the DMR association parameter, and the monitoring-intensity random effect. The model is also interpretable only if the recorded visits represent the actual monitoring process. If early monitoring history is incomplete, the visit-process likelihood should condition on a reliable entry time rather than treating unrecorded visits as absent. Consequently, this sensitivity analysis should be reported as exploratory evidence about observation-process robustness, not as validated clinical decision support.

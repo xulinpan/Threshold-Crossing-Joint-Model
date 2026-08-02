@@ -1,0 +1,136 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage[numbers,sort&compress]{natbib}  % Sage Vancouver: numbered
+\usepackage{amsmath}
+\usepackage{array}
+
+\captionsetup{font=small,labelfont=bf}
+\graphicspath{{../05_Figures/}{../08_Model/}}
+\makeatletter
+\def\input@path{{../06_Tables/}{../08_Model/}}
+\makeatother
+
+\title{A Bayesian Left-Censored Joint Longitudinal--Interval Model for
+Irregular Molecular Monitoring in Chronic Myeloid Leukemia}
+
+%% ---- TITLE PAGE INFORMATION (submit as a separate, non-anonymized file) ----
+%% Xulin Pan (corresponding author), xxp5066@psu.edu
+%%   Pennsylvania State University, University Park, PA 16802, USA
+%% Jun Lv, School of Mathematics and Statistics, Yunnan University, Kunming, China
+%% Chuanming Wang, School of Biological and Food Engineering, Honghe University, Mengzi, China
+%% Xueren Wang, School of Mathematics and Statistics, Yunnan University, Kunming, China
+%% ---------------------------------------------------------------------------
+\author{}     % anonymized for double-anonymized peer review
+\date{}
+
+\graphicspath{{../05_Figures/}{../08_Model/}}
+\def\input@path{{../06_Tables/}{../08_Model/}}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+\title{Supplementary Material\\[2pt]
+\large A Bayesian Joint Longitudinal--Interval and Multi-State
+Threshold-Crossing Framework for Irregular Molecular Monitoring in Chronic
+Myeloid Leukemia}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent This supplement supports the main paper with: (i) the closed-form
+running extrema and the optional relapse frailty of the multi-state
+threshold-crossing model (Section~3.3 of the main paper); (ii) an exploratory
+informative visit-process model; and (iii) two secondary simulation scenarios
+(endpoint choice and informative monitoring). The multi-state model, its
+simulation recovery, and its application to the cohort are reported in the main
+paper.
+
+\section{Closed-form running extrema and relapse frailty}
+\label{sec:s-frailty}
+
+Because the latent trajectory $m_i(\ell)$ is quadratic in $\ell=\log(1+t)$
+(piecewise-quadratic once a spline slope change is added), the running extrema
+that define the multi-state transitions are available in closed form. The
+running minimum equals the value at the vertex
+$\ell^\ast=-(\beta_1+b_{1i})/(2\beta_2)$ clamped to the observed range
+$[0,\ell(t)]$; past the vertex $m_i$ is monotone increasing, so the upward
+(relapse) crossing and the durability maximum are point evaluations. This
+removes the soft-minimum grid approximation entirely and yields a smooth log
+density, which in practice eliminates the divergent transitions the grid
+induces.
+
+Between-patient heterogeneity in relapse propensity can be captured by a
+Gaussian frailty $\rho_i\sim N(0,\sigma_\rho^2)$ on the relapse threshold.
+Because
+\[
+\int\Phi\!\left\{\frac{x+\rho}{\sigma_{\mathrm{thr}}}\right\}\,\mathrm dN(\rho;0,\sigma_\rho^2)
+=\Phi\!\left\{\frac{x}{\sqrt{\sigma_{\mathrm{thr}}^2+\sigma_\rho^2}}\right\},
+\]
+the frailty is equivalent to a wider relapse-specific width
+$\sigma_{\mathrm{rel}}=\sqrt{\sigma_{\mathrm{thr}}^2+\sigma_\rho^2}$ and
+preserves the closed form. In the cohort the frailty modestly improved relapse
+calibration but was only weakly identified (9 confirmed relapses) and added
+little over the spline model in simulations where trajectory curvature already
+explains relapse; the base spline model is therefore preferred.
+
+\section{Exploratory informative visit-process model (not fitted)}
+\label{sec:s-visit}
+
+Monitoring intensity may itself depend on molecular response: a patient doing
+well may be seen less often, and more frequent testing yields more
+opportunities to document DMR. This dependence is written into the governing
+guideline, which raises molecular-monitoring frequency when the BCR-ABL
+transcript rises \cite{CSH2011CMLGuideline}. To assess sensitivity to
+informative visiting, one may model the visit intensity jointly with the
+trajectory,
+\[
+\lambda_i^V(t)=
+\exp\{\delta_0+\delta_1[m_i(t)+4.5]+\delta_2\log(1+t)+u_i\},
+\qquad u_i\sim N(0,\sigma_u^2),
+\]
+so that visit intensity depends on the latent MRD, time, and a patient-level
+monitoring random effect $u_i$. For visit times $v_{i1},\ldots,v_{iM_i}$ in
+$[E_i,C_i]$ the visit-process likelihood is
+\[
+L_i^V=
+\left\{\prod_{\ell=1}^{M_i}\lambda_i^V(v_{i\ell})\right\}
+\exp\left\{-\int_{E_i}^{C_i}\lambda_i^V(s)\,ds\right\},
+\]
+with the cumulative intensity evaluated by quadrature. Because this extension
+adds weakly identified parameters in a cohort of 87 patients, it is presented
+as a sensitivity model to be evaluated primarily by simulation and in larger
+cohorts.
+
+\section{Simulation: endpoint choice and informative monitoring}
+\label{sec:s-sim}
+
+The main-text simulation focuses on the primary joint model and the multi-state
+recovery study. Here we report the two secondary scenarios summarised in the
+patient-level calibration table (Table~12 of the main paper).
+
+\emph{Endpoint choice.} A latent threshold-crossing estimator, which targets
+biological onset rather than the visit-documented endpoint, under-predicted
+documented DMR more strongly than the floor model (mean predicted $\approx0.44$
+versus observed $\approx0.85$ at $n=150$; difference $\approx-0.41$, versus
+$\approx-0.26$ for the floor model). This quantifies the distinction between the
+latent-crossing and documented-DMR estimands: because documentation occurs only
+at visits, an estimator that targets biological onset necessarily predicts fewer
+\emph{documented} events under interval ascertainment.
+
+\emph{Informative monitoring.} Under a response-adaptive visit process the
+observed documented-DMR rate fell (to $\approx0.59$) and the floor model's
+calibration slope rose above one ($1.16$), showing that the monitoring process
+materially affects calibration. This motivates the joint visit-process
+extension outlined as future work in the main paper.
+
+\bibliographystyle{unsrtnat}
+\bibliography{../07_References/peer_reviewed_papers_selected}
+
+\end{document}

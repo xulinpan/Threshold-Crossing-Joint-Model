@@ -1,0 +1,4 @@
+"analysis","random_structure","n_observations","n_patients","aic","sample_bm_estimate","sample_bm_std_error","sample_bm_p_value"
+"floor_as_exact_minus5","random_intercept_slope",495,87,1741.05667727341,1.24490070820304,0.662614166792468,0.0609954646871482
+"floor_shifted_to_minus5_5","random_intercept_slope",495,87,1858.55598912112,1.43667814391177,0.749829623878597,0.0560697546752564
+"nonfloor_only","fixed_effect_only",256,81,746.983447787181,NA,NA,NA

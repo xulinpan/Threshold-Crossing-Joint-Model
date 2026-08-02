@@ -1,0 +1,49 @@
+{
+  "title": "A Bayesian Threshold-Crossing Joint Model for Irregular, Assay-Floor-Censored Molecular Monitoring in Chronic Myeloid Leukemia — analysis code",
+  "description": "<p>Code, Stan models and reproducible simulation workflow for a Bayesian joint model in which deep molecular response (DMR) is read as a first-hitting time of the latent biomarker trajectory rather than coded as a separate event.</p><p><strong>No clinical data is included.</strong> The study cohort is identifiable patient health information and cannot be shared. A synthetic-cohort generator with the identical column schema is provided so the pipeline runs end-to-end; it verifies that the code executes but does not reproduce the reported estimates.</p><p>Contents: Stan models for the joint longitudinal-interval and multi-state threshold-crossing formulations, including Gaussian and Student-t observation models; R scripts for data preparation, fitting, prior sensitivity, leave-one-out model comparison and reporting; a self-contained ADEMP simulation study with sharded, checkpointed execution; and the generated tables and figures.</p>",
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "version": "1.0.0",
+  "language": "eng",
+  "keywords": [
+    "Bayesian hierarchical models",
+    "joint longitudinal-survival models",
+    "interval-censored data",
+    "left-censored biomarkers",
+    "first-hitting-time models",
+    "simulation-based calibration",
+    "chronic myeloid leukemia",
+    "Stan"
+  ],
+  "creators": [
+    {
+      "name": "Pan, Xulin",
+      "affiliation": "School of Mathematics and Statistics, Yunnan University, Kunming, China"
+    },
+    {
+      "name": "Lv, Jun",
+      "affiliation": "School of Mathematics and Statistics, Yunnan University, Kunming, China"
+    },
+    {
+      "name": "Wang, Chuanming",
+      "affiliation": "School of Biological and Food Engineering, Honghe University, Mengzi, China"
+    },
+    {
+      "name": "Wang, Xueren",
+      "affiliation": "School of Mathematics and Statistics, Yunnan University, Kunming, China"
+    }
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "TO-BE-ASSIGNED-ON-ACCEPTANCE",
+      "scheme": "doi"
+    },
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://github.com/xulinpan/Threshold-Crossing-Joint-Model",
+      "scheme": "url"
+    }
+  ]
+}

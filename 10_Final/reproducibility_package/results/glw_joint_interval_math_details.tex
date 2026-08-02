@@ -1,0 +1,269 @@
+\section{Mathematical Details of the Joint Interval-DMR Model}
+\label{sec:joint_interval_math}
+
+\subsection{Observed Data and Indexing}
+
+Let \(i=1,\ldots,N\) index patients. Patient \(i\) has \(n_i\) longitudinal molecular observations and \(K_i\) at-risk intervals for first deep molecular response (DMR). The cleaned GLW data contain \(N=87\) patients, \(\sum_i n_i=495\) longitudinal observations, and \(\sum_i K_i=275\) at-risk intervals.
+
+For longitudinal visit \(j\) of patient \(i\), define
+\[
+y_{ij}=\mathrm{log\mbox{-}MRD}_{ij}, \qquad
+t_{ij}=\mathrm{years\ from\ imatinib\ start}, \qquad
+x_{ij}=\log(1+t_{ij}),
+\]
+and let \(z_{ij}=1\) if the sample type is bone marrow and \(z_{ij}=0\) otherwise. The transformed time \(x_{ij}\) is used to allow rapid early molecular change and slower later change.
+
+For at-risk interval \(k\) of patient \(i\), define
+\[
+L_{ik}=\mathrm{interval\ start}, \qquad
+R_{ik}=\mathrm{interval\ end}, \qquad
+\Delta_{ik}=R_{ik}-L_{ik},
+\]
+where time is measured in years. Let
+\[
+t^{mid}_{ik}=\frac{L_{ik}+R_{ik}}{2}, \qquad
+x^{mid}_{ik}=\log(1+t^{mid}_{ik}).
+\]
+The event indicator is
+\[
+d_{ik} =
+\begin{cases}
+1, & \text{if first observed DMR occurs in interval }(L_{ik},R_{ik}],\\
+0, & \text{otherwise.}
+\end{cases}
+\]
+By construction, each patient has at most one interval with \(d_{ik}=1\). Intervals before first DMR or through censoring have \(d_{ik}=0\).
+
+\subsection{Longitudinal Molecular Submodel}
+
+The latent patient-specific molecular trajectory is
+\[
+\mu_{ij}
+=\beta_0+\beta_1x_{ij}+\beta_2x_{ij}^2+\beta_3z_{ij}
++b_{0i}+b_{1i}x_{ij}.
+\]
+Here \(\beta_0\) is the population intercept, \(\beta_1\) and \(\beta_2\) describe the population time trend, and \(\beta_3\) adjusts for sample type. The patient-specific random intercept and random slope are
+\[
+\mathbf{b}_i =
+\begin{pmatrix}
+b_{0i}\\
+b_{1i}
+\end{pmatrix}
+\sim N_2(\mathbf{0},\Sigma_b),
+\]
+with
+\[
+\Sigma_b =
+\begin{pmatrix}
+\tau_0 & 0\\
+0 & \tau_1
+\end{pmatrix}
+\Omega_b
+\begin{pmatrix}
+\tau_0 & 0\\
+0 & \tau_1
+\end{pmatrix},
+\]
+where \(\tau_0,\tau_1>0\) are random-effect standard deviations and \(\Omega_b\) is a \(2\times2\) correlation matrix.
+
+For observations not reported at the assay floor,
+\[
+y_{ij}\mid \mu_{ij},\sigma_y \sim N(\mu_{ij},\sigma_y^2).
+\]
+The Stan model treats values at the reporting floor as left-censored. Let \(c=-5\) be the log-MRD floor and let \(a_{ij}=1\) indicate that the observation is at the floor. Then the longitudinal contribution is
+\[
+\ell^{Y}_{ij} =
+\begin{cases}
+\log \phi(y_{ij};\mu_{ij},\sigma_y^2), & a_{ij}=0,\\
+\log \Phi\left(\dfrac{c-\mu_{ij}}{\sigma_y}\right), & a_{ij}=1,
+\end{cases}
+\]
+where \(\phi(\cdot;\mu,\sigma^2)\) is the normal density and \(\Phi(\cdot)\) is the standard normal cumulative distribution function.
+
+\subsection{Interval-DMR Submodel}
+
+The event submodel links DMR onset to the latent molecular trajectory. At the midpoint of interval \(k\), the latent molecular value used by the hazard model is
+\[
+\mu_i(t^{mid}_{ik})
+=\beta_0+\beta_1x^{mid}_{ik}+\beta_2(x^{mid}_{ik})^2
++b_{0i}+b_{1i}x^{mid}_{ik}.
+\]
+The current Stan implementation does not include sample type in the interval midpoint trajectory because intervals are defined at the patient-follow-up level rather than at a specific sample type.
+
+The interval-specific log hazard is
+\[
+\eta_{ik}
+=\gamma_0+\gamma_1x^{mid}_{ik}
++\gamma_2\log(1+\Delta_{ik})
++\alpha\,\mu_i(t^{mid}_{ik}),
+\]
+and the interval hazard is
+\[
+h_{ik}=\exp(\eta_{ik}).
+\]
+Assuming a piecewise-constant hazard within each observed interval, the cumulative hazard over the interval is
+\[
+H_{ik}=h_{ik}\Delta_{ik}.
+\]
+Therefore, the probability that first DMR occurs during the interval is
+\[
+p_{ik}
+=P(d_{ik}=1\mid\mathrm{at\ risk})
+=1-\exp(-H_{ik}).
+\]
+The interval likelihood contribution is
+\[
+\ell^{D}_{ik}
+=d_{ik}\log\{1-\exp(-H_{ik})\}-(1-d_{ik})H_{ik}.
+\]
+This is exactly the likelihood form implemented in Stan:
+\[
+\ell^{D}_{ik} =
+\begin{cases}
+\log\{1-\exp(-H_{ik})\}, & d_{ik}=1,\\
+-H_{ik}, & d_{ik}=0.
+\end{cases}
+\]
+
+\subsection{Joint Likelihood}
+
+Let \(\theta\) denote all fixed-effect, variance, association, and random-effect parameters. Conditional on the random effects, the joint likelihood is
+\[
+L(\theta)
+=
+\prod_{i=1}^{N}
+\left[
+\prod_{j=1}^{n_i} L^{Y}_{ij}(\theta)
+\prod_{k=1}^{K_i} L^{D}_{ik}(\theta)
+\right],
+\]
+or equivalently the log-likelihood is
+\[
+\ell(\theta)
+=
+\sum_{i=1}^{N}
+\left[
+\sum_{j=1}^{n_i}\ell^{Y}_{ij}(\theta)
++\sum_{k=1}^{K_i}\ell^{D}_{ik}(\theta)
+\right].
+\]
+The shared random effects \(b_{0i}\) and \(b_{1i}\) induce dependence between the repeated molecular measurements and first-DMR process.
+
+\subsection{Prior Distributions}
+
+The Stan implementation uses weakly informative priors centered on clinically plausible molecular-response behavior:
+\[
+\beta_0\sim N(-2.5,2^2), \qquad
+\beta_1\sim N(-1,1^2), \qquad
+\beta_2\sim N(0,0.5^2),
+\]
+\[
+\beta_3\sim N(0,1^2), \qquad
+\sigma_y\sim \mathrm{Exponential}(1).
+\]
+For the interval-DMR submodel,
+\[
+\gamma_0\sim N(-2,2^2), \qquad
+\gamma_1\sim N(0,1^2), \qquad
+\gamma_2\sim N(0,1^2),
+\]
+\[
+\alpha\sim N(-0.5,0.75^2).
+\]
+The prior mean for \(\alpha\) is negative because lower log-MRD corresponds to deeper molecular response; therefore lower molecular burden is expected to increase the probability of DMR within an interval.
+
+For the random effects,
+\[
+\tau_0,\tau_1\sim \mathrm{Exponential}(1), \qquad
+\Omega_b\sim \mathrm{LKJ}(2).
+\]
+The Stan code uses a non-centered Cholesky parameterization:
+\[
+\mathbf{b}_i = \mathrm{diag}(\boldsymbol{\tau})L_{\Omega}\mathbf{z}_i,
+\qquad
+\mathbf{z}_i\sim N_2(\mathbf{0},I_2),
+\]
+where \(L_{\Omega}L_{\Omega}^{T}=\Omega_b\).
+
+\subsection{Posterior Distribution}
+
+The posterior distribution is proportional to the product of the joint likelihood and all prior densities:
+\[
+p(\theta\mid Y,D)
+\propto
+\left[
+\prod_{i=1}^{N}
+\prod_{j=1}^{n_i} L^{Y}_{ij}(\theta)
+\prod_{k=1}^{K_i} L^{D}_{ik}(\theta)
+\right]
+p(\boldsymbol{\beta})p(\boldsymbol{\gamma})p(\alpha)
+p(\sigma_y)p(\boldsymbol{\tau})p(\Omega_b)
+\prod_{i=1}^{N}p(\mathbf{b}_i\mid\boldsymbol{\tau},\Omega_b).
+\]
+Posterior inference focuses on the molecular time trend \((\beta_1,\beta_2)\), between-patient heterogeneity \((\tau_0,\tau_1,\Omega_b)\), visit-gap effect \(\gamma_2\), and association parameter \(\alpha\).
+
+\subsection{Interpretation of Key Parameters}
+
+\begin{itemize}
+  \item \(\beta_1,\beta_2\): population-level change in log-MRD over time.
+  \item \(\beta_3\): systematic difference between bone marrow and non-bone-marrow samples.
+  \item \(\tau_0,\tau_1\): between-patient heterogeneity in baseline molecular level and response slope.
+  \item \(\gamma_1\): change in interval-DMR hazard across follow-up time.
+  \item \(\gamma_2\): association between visit-gap length and interval event probability after accounting for the interval length.
+  \item \(\alpha\): association between latent molecular burden and DMR onset. A negative value supports the clinical expectation that lower log-MRD increases the chance of DMR.
+\end{itemize}
+
+\subsection{Derived Quantities}
+
+For each interval, the generated quantity
+\[
+\widehat{p}_{ik}=1-\exp(-H_{ik})
+\]
+summarizes the posterior interval probability of first DMR. Patient-specific fitted trajectories are obtained from
+\[
+\widehat{\mu}_{i}(t)
+=\beta_0+\beta_1\log(1+t)+\beta_2\{\log(1+t)\}^2
++b_{0i}+b_{1i}\log(1+t).
+\]
+These fitted trajectories can be plotted against observed log-MRD values and used to estimate individualized DMR probabilities over future monitoring intervals.
+
+\subsection{Benchmark Models}
+
+Because a Stan interface is not currently installed in the workspace, the pipeline also fits benchmark models using installed R packages. The interval-censored Weibull model uses
+\[
+T_i \sim \mathrm{Weibull}(\lambda_i,\kappa),
+\qquad
+\log \lambda_i = \delta_0+\delta_1 y_{i0}
+\]
+for the molecular-only model, with a complete-case extension
+\[
+\log \lambda_i
+=\delta_0+\delta_1y_{i0}+\delta_2\mathrm{age}_i
++\delta_3\mathrm{male}_i+\delta_4\mathrm{duration}_i.
+\]
+The longitudinal benchmark model is a mixed-effects model,
+\[
+y_{ij}
+=f(t_{ij})+\beta_3z_{ij}+u_{0i}+u_{1i}t_{ij}+\epsilon_{ij},
+\]
+where \(f(t_{ij})\) is a natural spline in years from imatinib start. These benchmark models verify that the cleaned data support interval-censored survival modeling and longitudinal mixed modeling, but the proposed joint model remains the primary model.
+
+\subsection{Assumptions and Sensitivity Analyses}
+
+The primary assumptions are:
+\begin{enumerate}
+  \item the latent log-MRD trajectory is adequately represented by a quadratic function of \(\log(1+t)\) plus patient-specific random effects;
+  \item reported floor values at log-MRD \(\leq -5\) are left-censored observations;
+  \item the DMR hazard is approximately constant within each observed monitoring interval;
+  \item censoring is conditionally independent given the observed follow-up and modeled molecular trajectory;
+  \item each patient can experience first DMR only once.
+\end{enumerate}
+Recommended sensitivity analyses are:
+\begin{enumerate}
+  \item fit an exact-value model that treats floor values as observed \(-5\) to assess floor-censoring impact;
+  \item fit a model without \(\gamma_2\) to evaluate whether explicit visit-gap adjustment changes inference;
+  \item replace the quadratic \(\log(1+t)\) trajectory with spline time terms;
+  \item compare molecular-only and complete-case covariate-adjusted survival models;
+  \item evaluate prior sensitivity for \(\alpha\), especially using \(N(0,1)\) and \(N(-0.5,1.5^2)\) alternatives.
+\end{enumerate}
+

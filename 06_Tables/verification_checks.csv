@@ -1,0 +1,17 @@
+"check","passed"
+"longitudinal_required_columns_present",TRUE
+"longitudinal_complete_required_fields",TRUE
+"longitudinal_nonnegative_time",TRUE
+"interval_required_columns_present",TRUE
+"interval_complete_required_fields",TRUE
+"interval_time_order",TRUE
+"one_event_interval_per_patient_max",TRUE
+"patient_required_columns_present",TRUE
+"patient_complete_outcome_fields",TRUE
+"patient_ids_are_coded",TRUE
+"no_name_columns_in_public_model_files",TRUE
+"no_cjk_text_in_public_csv_table_latex_outputs",TRUE
+"figures_exist_and_nonempty",TRUE
+"tables_exist_and_nonempty",TRUE
+"latex_pdf_exists_and_nonempty",TRUE
+"stan_rds_exists_and_nonempty",TRUE

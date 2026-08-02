@@ -1,0 +1,31 @@
+# compiled Stan binaries and build artefacts (platform-specific; do not commit)
+*.exe
+*.o
+*.hpp
+threshold_crossing_model/stan/*.exe
+
+# R / RStudio
+.Rhistory
+.RData
+.Rproj.user/
+renv/library/
+
+# LaTeX build artefacts
+*.aux
+*.log
+*.out
+*.blg
+*.synctex.gz
+
+# NEVER COMMIT: identifiable or real-cohort data
+03_Data/Raw/
+**/private/
+*patient_key*
+real_*.csv
+stan_data_real_*.rds
+*.xlsx
+
+# anonymised real-cohort files: controlled sharing only, never open release
+03_Data/Anonymized/
+*anonymization_crosswalk*
+anon_*.csv

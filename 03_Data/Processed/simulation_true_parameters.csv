@@ -1,0 +1,18 @@
+parameter,true_value,description
+beta0,-1.05,longitudinal intercept
+beta_time,-0.055,linear time effect
+beta_logtime,-0.62,log time effect
+beta_age,0.006,age effect in longitudinal model
+beta_sex,0.04,male sex effect in longitudinal model
+sigma_y,0.32,measurement error SD
+sigma_b0,0.65,random intercept SD
+sigma_b1,0.025,random slope SD
+rho_b,-0.35,random intercept-slope correlation
+sigma_u,0.55,survival frailty SD
+alpha0,-2.15,hazard intercept
+alpha_m,-0.85,association with latent LOG-MRD level
+alpha_slope,-4.2,association with latent LOG-MRD slope
+alpha_gap,0.34,gap effect in interval hazard
+gamma_age,0.006,age effect in hazard
+gamma_sex,0.12,male sex effect in hazard
+gamma_ph,-0.004,Philadelphia chromosome effect in hazard

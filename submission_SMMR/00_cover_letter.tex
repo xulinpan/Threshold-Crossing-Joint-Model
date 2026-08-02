@@ -1,0 +1,66 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\begin{document}
+\thispagestyle{empty}
+
+\noindent The Editor\\
+\emph{Statistical Methods in Medical Research}
+
+\bigskip
+\noindent Dear Editor,
+
+\bigskip
+We are pleased to submit our manuscript, ``A Bayesian Threshold-Crossing Joint Model for
+Irregular, Assay-Floor-Censored Molecular Monitoring in Chronic Myeloid
+Leukemia,'' for
+consideration as an original methodological development with application.
+
+Routine molecular monitoring in chronic myeloid leukemia produces data that
+break the assumptions of standard survival and landmark analyses:
+log-transformed minimal residual disease is measured at irregular visits, is
+left-censored at an assay reporting floor, and the deep-molecular-response
+(DMR) endpoint is ascertained only at the visits when a patient is tested, and
+is defined by a threshold on the very biomarker used as its predictor. We
+develop a Bayesian framework built around two linked models that respect these
+features. The first couples a left-censored longitudinal sub-model with an
+interval-observed likelihood for first documented DMR through shared random
+effects. The second reads the endpoint directly as a latent
+threshold-crossing (first-hitting-time) process and extends it to a
+multi-state model of onset, durable response, and molecular relapse; because
+the trajectory is piecewise-quadratic, the running minimum and maximum that
+define these transitions are available in closed form, which removes the usual
+soft-minimum grid approximation and yields divergence-free Hamiltonian Monte
+Carlo.
+
+We believe the manuscript suits the journal because it develops a general
+statistical methodology---latent threshold-crossing and multi-state joint
+modelling under assay-floor left-censoring and interval ascertainment---while
+motivating and illustrating it on a real clinical monitoring cohort, and is
+written to be accessible to a broad methodological and applied audience. A
+simulation study characterises identifiability, coverage, and the consequences
+of mishandling the assay floor; the application reports posterior predictive
+checks, calibration, model comparison, and dynamic prediction, with
+limitations (single-centre data, internal dynamic-prediction accuracy, and
+imperfect finite-sample coverage) stated plainly.
+
+The manuscript is our original work, has not been published previously, and is
+not under consideration elsewhere. All authors have approved the submission and
+agree to its content. We have no conflicts of interest to declare. The
+manuscript has been anonymized for double-anonymized review, with author and
+institutional information provided on a separate Title Page.
+
+We note that, with the addition of the multi-state model and the revisions
+requested at review, the manuscript's length (counting tables and figures)
+slightly exceeds the journal's guideline of around 8000 words; we are happy to
+move selected tables to the Supplementary Material at the editor's discretion.
+
+\bigskip
+\noindent Thank you for considering our work.
+
+\bigskip
+\noindent Sincerely,\\
+Xulin Pan, on behalf of all authors\\
+\href{mailto:xxp5066@psu.edu}{xxp5066@psu.edu}
+
+\end{document}

@@ -1,0 +1,25 @@
+{
+  "title": "A Bayesian Threshold-Crossing Joint Model for Irregular, Assay-Floor-Censored Molecular Monitoring in Chronic Myeloid Leukemia: code and synthetic data",
+  "upload_type": "software",
+  "license": "MIT",
+  "access_right": "open",
+  "creators": [
+    {"name": "Pan, Xulin", "affiliation": "Pennsylvania State University, University Park, PA, USA"},
+    {"name": "Lv, Jun", "affiliation": "School of Mathematics and Statistics, Yunnan University, Kunming, China"},
+    {"name": "Wang, Chuanming", "affiliation": "School of Biological and Food Engineering, Honghe University, Mengzi, China"},
+    {"name": "Wang, Xueren", "affiliation": "School of Mathematics and Statistics, Yunnan University, Kunming, China"}
+  ],
+  "description": "<p>Reproducibility materials for a Bayesian joint model in which deep molecular response (DMR) in chronic myeloid leukemia is read off a latent log-MRD trajectory as a <em>threshold crossing</em> (first-hitting time), rather than coded as a separate event. Because DMR is defined as log-MRD &le; -4.5, predicting a coded event from the same biomarker is circular; the crossing formulation removes this. The longitudinal sub-model treats assay-floor values as left-censored and the endpoint is interval-observed. A conventional interval-censored hazard and a multi-state extension (onset, durability, relapse) are options of the same Stan program.</p><p><strong>No patient data are included.</strong> The clinical cohort contains identifiable health information and cannot be shared. A fully synthetic dataset of identical structure, generated from the fitted model's posterior predictive distribution, is provided so the pipeline runs end-to-end. Aggregate results (posterior summaries, simulation operating characteristics, calibration bins) are included; patient-level derived files are not.</p>",
+  "keywords": [
+    "joint longitudinal-survival models",
+    "left-censored biomarkers",
+    "interval-censored events",
+    "threshold regression",
+    "first-hitting-time models",
+    "Bayesian hierarchical modelling",
+    "chronic myeloid leukemia",
+    "Stan",
+    "reproducibility"
+  ],
+  "language": "eng"
+}

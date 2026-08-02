@@ -1,0 +1,83 @@
+dgm_tag,scen_id,label,n,param,nrep,bias,bias_mcse,coverage,cov_mcse,ci_width
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,alpha,198,0.0364,0.0107,0.96,0.014,0.68
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,beta0,198,-0.1259,0.0166,0.929,0.018,0.942
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,beta1,198,0.5266,0.0254,0.798,0.029,1.601
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,beta2,198,-0.2106,0.0124,0.848,0.025,0.743
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,beta_bm,198,-0.0336,0.0125,0.939,0.017,0.677
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,gamma0,198,-0.002,0.0435,0.975,0.011,2.933
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,gamma1,198,-0.0069,0.0232,0.99,0.007,1.494
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,gamma2,198,0.6481,0.0363,0.859,0.025,2.322
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,sigma_y,198,-0.0037,0.0031,0.934,0.018,0.17
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,tau0,198,-0.019,0.0104,0.944,0.016,0.572
+v1_legacy_legacy_hazard,1,"Correct specification, n=87",87,tau1,198,-0.0164,0.0162,0.919,0.019,0.851
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,alpha,130,-0.0056,0.012,0.969,0.015,0.554
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,beta0,130,-0.101,0.0155,0.938,0.021,0.735
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,beta1,130,0.37,0.024,0.838,0.032,1.307
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,beta2,130,-0.1576,0.0109,0.877,0.029,0.603
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,beta_bm,130,-0.0183,0.0118,0.946,0.02,0.525
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,gamma0,130,-0.107,0.0482,0.977,0.013,2.416
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,gamma1,130,-0.0216,0.0229,0.977,0.013,1.207
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,gamma2,130,0.4745,0.0401,0.892,0.027,1.968
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,sigma_y,130,0.0051,0.0028,0.977,0.013,0.13
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,tau0,130,-0.0148,0.0092,0.962,0.017,0.426
+v1_legacy_legacy_hazard,2,"Correct specification, n=150",150,tau1,130,0.0492,0.0151,0.962,0.017,0.666
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,beta0,30,-0.098,0.0346,0.933,0.046,0.773
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,beta1,30,-0.0692,0.0523,1.0,0.0,1.377
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,beta_bm,30,-0.0094,0.0314,0.933,0.046,0.584
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,gamma0,30,-0.0526,0.1089,1.0,0.0,2.544
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,gamma1,30,0.0327,0.0666,0.933,0.046,1.263
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,gamma2,30,0.6694,0.0908,0.733,0.081,1.953
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,sigma_y,30,0.0028,0.0054,1.0,0.0,0.151
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,tau0,30,-0.0,0.0187,0.933,0.046,0.444
+v1_legacy_legacy_hazard,3,Trajectory: monotone,150,tau1,30,0.041,0.0309,0.967,0.033,0.73
+v1_legacy_legacy_hazard,4,Trajectory: exponential,150,beta0,30,-0.6359,0.0285,0.067,0.046,0.788
+v1_legacy_legacy_hazard,4,Trajectory: exponential,150,beta_bm,30,-0.0054,0.0192,1.0,0.0,0.505
+v1_legacy_legacy_hazard,4,Trajectory: exponential,150,gamma0,30,-0.1374,0.1148,0.967,0.033,2.77
+v1_legacy_legacy_hazard,4,Trajectory: exponential,150,gamma1,30,-0.0814,0.0591,0.933,0.046,1.234
+v1_legacy_legacy_hazard,4,Trajectory: exponential,150,gamma2,30,0.6861,0.08,0.833,0.068,1.98
+v1_legacy_legacy_hazard,4,Trajectory: exponential,150,sigma_y,30,-0.0047,0.0059,0.933,0.046,0.125
+v1_legacy_legacy_hazard,4,Trajectory: exponential,150,tau0,30,0.4098,0.0229,0.067,0.046,0.475
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,alpha,30,0.0318,0.0199,1.0,0.0,0.538
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,beta0,30,-0.0325,0.0339,0.933,0.046,0.732
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,beta1,30,0.2768,0.0444,0.967,0.033,1.302
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,beta2,30,-0.1285,0.0247,0.9,0.055,0.602
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,beta_bm,30,-0.0363,0.0272,0.9,0.055,0.522
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,gamma0,30,0.0061,0.0849,0.967,0.033,2.336
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,gamma1,30,0.0003,0.0491,0.967,0.033,1.201
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,gamma2,30,0.5262,0.0763,0.9,0.055,1.906
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,sigma_y,30,-0.0024,0.0062,0.9,0.055,0.13
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,tau0,30,-0.0215,0.0167,1.0,0.0,0.424
+v1_legacy_legacy_hazard,5,Heterogeneous assay floor,150,tau1,30,0.0122,0.0315,0.967,0.033,0.656
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,alpha,29,0.0244,0.0231,0.931,0.047,0.553
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,beta0,29,-0.0899,0.0322,0.931,0.047,0.698
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,beta1,29,0.3212,0.0601,0.828,0.07,1.245
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,beta2,29,-0.2312,0.0271,0.655,0.088,0.578
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,beta_bm,29,0.0334,0.0209,0.966,0.034,0.5
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,gamma0,29,-0.0936,0.1083,0.966,0.034,2.353
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,gamma1,29,0.1089,0.0569,0.897,0.057,1.192
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,gamma2,29,0.313,0.0734,0.897,0.057,1.858
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,sigma_y,29,-0.0837,0.0272,0.138,0.064,0.123
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,tau0,29,-0.101,0.0266,0.724,0.083,0.414
+v1_legacy_legacy_hazard,6,Heavy-tailed (t3) errors/RE,150,tau1,29,-0.1248,0.0641,0.621,0.09,0.612
+v1_legacy_legacy_hazard,7,Informative monitoring,150,alpha,30,-0.0475,0.025,0.967,0.033,0.57
+v1_legacy_legacy_hazard,7,Informative monitoring,150,beta0,30,-0.1065,0.0354,0.9,0.055,0.732
+v1_legacy_legacy_hazard,7,Informative monitoring,150,beta1,30,0.401,0.0441,0.867,0.062,1.301
+v1_legacy_legacy_hazard,7,Informative monitoring,150,beta2,30,-0.1277,0.0235,0.967,0.033,0.601
+v1_legacy_legacy_hazard,7,Informative monitoring,150,beta_bm,30,-0.0052,0.0244,0.967,0.033,0.528
+v1_legacy_legacy_hazard,7,Informative monitoring,150,gamma0,30,-0.2313,0.0952,0.967,0.033,2.476
+v1_legacy_legacy_hazard,7,Informative monitoring,150,gamma1,30,0.0069,0.0528,0.967,0.033,1.224
+v1_legacy_legacy_hazard,7,Informative monitoring,150,gamma2,30,0.2519,0.0838,0.9,0.055,2.006
+v1_legacy_legacy_hazard,7,Informative monitoring,150,sigma_y,30,0.0017,0.0059,0.967,0.033,0.128
+v1_legacy_legacy_hazard,7,Informative monitoring,150,tau0,30,-0.0257,0.0154,0.967,0.033,0.418
+v1_legacy_legacy_hazard,7,Informative monitoring,150,tau1,30,0.0677,0.0333,0.867,0.062,0.667
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,alpha,26,-0.002,0.0192,0.923,0.052,0.403
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,beta0,26,-0.032,0.0224,1.0,0.0,0.525
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,beta1,26,0.1325,0.0418,0.962,0.038,0.959
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,beta2,26,-0.0739,0.0145,1.0,0.0,0.446
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,beta_bm,26,-0.0102,0.0209,0.962,0.038,0.371
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,gamma0,26,-0.0735,0.0855,0.923,0.052,1.768
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,gamma1,26,-0.0221,0.0454,0.962,0.038,0.88
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,gamma2,26,0.3577,0.0582,0.885,0.063,1.463
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,sigma_y,26,0.0012,0.0031,0.962,0.038,0.092
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,tau0,26,-0.0098,0.0149,0.962,0.038,0.298
+v1_legacy_legacy_hazard,8,"Correct specification, n=300",300,tau1,26,0.0049,0.0252,0.962,0.038,0.467

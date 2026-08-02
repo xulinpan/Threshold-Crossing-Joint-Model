@@ -1,0 +1,25 @@
+\begin{table}[!htbp]
+\centering
+\caption{The cost of treating assay-floor values as exact. Each simulated dataset is fitted twice by Hamiltonian Monte Carlo with identical data, differing only in whether floor-coded observations enter the likelihood as left-censored or as exact values at $c_F$; the two arms are therefore paired. Bias (Monte Carlo standard error), root mean squared error and $95\%$ credible-interval coverage, up to $100$ replicates per cell (one fit excluded at $n=87$ on convergence diagnostics). Note that the exact-floor bias in $\tau_{b1}$ and $\sigma_y$ does not diminish with sample size.}
+\label{tab:sim-bias}
+\small
+\begin{tabular}{llrrrrrrr}
+\toprule
+$n$ & Parameter & True & \multicolumn{3}{c}{Floor left-censored} & \multicolumn{3}{c}{Floor as exact}\\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}
+ & & & Bias (MCse) & RMSE & Cov$_{95}$ & Bias (MCse) & RMSE & Cov$_{95}$\\
+\midrule
+87 & $\beta_{\mathrm{time}}$ & -3.23 & +0.651 (0.031) & 0.718 & 0.77 & +0.932 (0.031) & 0.980 & 0.18\\
+ & $\tau_{b1}$ & 2.22 & +0.042 (0.027) & 0.269 & 0.95 & -1.130 (0.019) & 1.146 & 0.00\\
+ & $\sigma_y$ & 1.69 & +0.004 (0.007) & 0.068 & 0.95 & -0.421 (0.006) & 0.425 & 0.00\\
+\addlinespace
+150 & $\beta_{\mathrm{time}}$ & -3.23 & +0.491 (0.034) & 0.597 & 0.75 & +0.787 (0.031) & 0.846 & 0.16\\
+ & $\tau_{b1}$ & 2.22 & +0.031 (0.020) & 0.200 & 0.94 & -1.125 (0.015) & 1.135 & 0.00\\
+ & $\sigma_y$ & 1.69 & +0.000 (0.005) & 0.046 & 0.98 & -0.429 (0.004) & 0.431 & 0.00\\
+\addlinespace
+300 & $\beta_{\mathrm{time}}$ & -3.23 & +0.269 (0.027) & 0.377 & 0.84 & +0.656 (0.022) & 0.693 & 0.11\\
+ & $\tau_{b1}$ & 2.22 & +0.007 (0.016) & 0.156 & 0.94 & -1.123 (0.011) & 1.128 & 0.00\\
+ & $\sigma_y$ & 1.69 & -0.006 (0.004) & 0.039 & 0.91 & -0.434 (0.004) & 0.435 & 0.00\\
+\bottomrule
+\end{tabular}
+\end{table}

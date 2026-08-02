@@ -1,0 +1,65 @@
+# =============================================================================
+# PRIVACY-CRITICAL EXCLUSIONS — do not relax without ethics approval
+# =============================================================================
+# The study cohort is identifiable patient health information from a single
+# clinical centre. The following must never be committed or archived.
+
+# Re-identification keys. patient_key.csv maps pseudonyms to patient NAMES.
+03_Data/Processed/private/
+**/patient_key.csv
+**/anonymization_crosswalk.csv
+
+# Raw clinical extracts
+03_Data/Raw/
+
+# Analysed patient records (pseudonymised, not anonymised: patient_id resolves
+# via the crosswalk above). Use the synthetic cohort instead — see README.
+03_Data/Processed/real_*.csv
+03_Data/Anonymized/
+03_Data/Processed/clean_patient_covariates.csv
+03_Data/Processed/longitudinal_missingness.csv
+03_Data/Processed/data_cleaning_audit.csv
+03_Data/Processed/stan_data_real*.rds
+
+# =============================================================================
+# Large or regenerable artefacts
+# =============================================================================
+# Posterior draws: hundreds of MB, regenerable by refitting
+08_Model/**/*.csv
+08_Model/**/*.rds
+!08_Model/loo_gaussian_vs_studentt.csv
+
+# Simulation checkpoints: thousands of files, regenerable
+**/checkpoints/
+**/checkpoints_*/
+04_Code/threshold_crossing_model/outputs/**/*.rds
+04_Code/threshold_crossing_model/outputs/*.rds
+
+# Compiled Stan binaries and CmdStan build products
+*.exe
+*.o
+*.hpp
+04_Code/Stan/cmdstan/
+
+# LaTeX build products
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

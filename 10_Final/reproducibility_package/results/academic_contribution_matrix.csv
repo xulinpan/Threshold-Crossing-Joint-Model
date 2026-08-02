@@ -1,0 +1,11 @@
+domain,highlight,novelty_strength,academic_contribution,claim_strength,recommended_wording
+Clinical data,"87 patients, 495 longitudinal molecular observations, 275 at-risk intervals",Moderate,"Curated real-world CML molecular monitoring cohort",High,"model-ready real-world CML molecular monitoring dataset"
+Privacy,"Coded patient identifiers with private key separated",Moderate,"Privacy-preserving reproducible data workflow",High,"privacy-preserving model-ready workflow"
+Outcome construction,"DMR/CMR derived and first DMR represented as interval-observed",High,"Transforms molecular monitoring into longitudinal-event data",High,"interval-observed first DMR rather than exact event time"
+Irregular follow-up,"Median visit gap 6.0 months; 50.3% of gaps >6 months",High,"Justifies gap-aware interval modeling",High,"irregular real-world clinical monitoring"
+Longitudinal modeling,"Repeated log-MRD trajectories linked to DMR onset",High,"Joint longitudinal-interval response framework",High,"links repeated log-MRD trajectories with interval-observed DMR"
+Assay floor,"Log-MRD floor values handled as left-censored",Moderate,"Improves measurement model for deep response values",Moderate,"assay-floor-aware molecular response model"
+Clinical relevance,"DMR/MR4.5/TFR literature motivates endpoint",Moderate,"Connects guideline-defined endpoints with routine data structure",Moderate,"complements guideline and TFR literature"
+Generalizability,"Single cohort and 62 complete core covariates",Low,"Useful demonstration but limited broad inference",Low,"requires external validation"
+Implementation,"Stan model, R benchmark scripts, LaTeX math, references",Moderate,"Reproducible statistical workflow",High,"fully documented reproducible modeling workflow"
+

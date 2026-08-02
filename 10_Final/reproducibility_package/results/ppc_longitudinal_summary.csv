@@ -1,0 +1,12 @@
+"metric","value"
+"observations",495
+"floor_observations",239
+"non_floor_observations",256
+"observed_floor_rate",0.482828282828283
+"posterior_mean_floor_rate",0.413604461606183
+"mean_predicted_floor_probability_among_floor_obs",0.69268623229555
+"mean_predicted_floor_probability_among_nonfloor_obs",0.153055464751657
+"nonfloor_rmse_to_posterior_mean",1.49192988048861
+"nonfloor_mae_to_posterior_mean",1.09725675851068
+"nonfloor_90pct_predictive_coverage",0.9609375
+"nonfloor_95pct_predictive_coverage",0.98828125

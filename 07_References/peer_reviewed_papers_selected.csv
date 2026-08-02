@@ -1,0 +1,25 @@
+priority,topic,citation_key,year,journal,reason,doi
+1,Guideline,Hochhaus2020ELN,2020,Leukemia,Primary CML guideline and response-monitoring anchor,https://doi.org/10.1038/s41375-020-0776-2
+2,Review,Jabbour2025JAMAReview,2025,JAMA,Modern CML clinical overview for introduction,https://doi.org/10.1001/jama.2025.0220
+3,Treatment algorithms,Haddad2026Algorithms,2026,Blood Cancer Journal,Latest treatment-algorithm update,https://doi.org/10.1038/s41408-026-01527-6
+4,Management,Senapati2023CMLManagement,2023,Blood Cancer Journal,Practical management and monitoring context,https://doi.org/10.1038/s41408-023-00823-9
+5,Guideline,Takahashi2024JSHGuidelines,2024,International Journal of Hematology,Recent guideline comparator and Asian cohort context,https://doi.org/10.1007/s12185-024-03865-2
+6,Molecular response,Hughes2014EarlyMolecularResponse,2014,Blood,Early BCR-ABL1 response predicts outcomes,https://doi.org/10.1182/blood-2013-06-510396
+7,TFR,Rasekh2026TFRPredictor,2026,Clinical Lymphoma Myeloma and Leukemia,Early molecular response and TFR eligibility,https://doi.org/10.1016/j.clml.2026.04.007
+8,DMR/MR4.5,Ono2026MR45,2026,Blood Advances,MR4.5 predictors and TKI discontinuation,https://doi.org/10.1182/bloodadvances.2026019701
+9,TFR,Takahashi2026JSKI,2026,International Journal of Hematology,Long-term observational TKI discontinuation evidence,https://doi.org/10.1007/s12185-026-04184-4
+10,TFR,Parihar2026TFR,2026,Indian Journal of Hematology and Blood Transfusion,Real-world TFR monitoring feasibility,https://doi.org/10.1007/s12288-025-02199-1
+11,TFR review,Atallah2021TFR,2021,Current Hematologic Malignancy Reports,TFR framing and clinical relevance of DMR,https://doi.org/10.1007/s11899-021-00653-1
+12,Molecular monitoring,Kim2026BCRABLqPCR,2026,Practical Laboratory Medicine,BCR::ABL1 assay performance for monitoring variables,https://doi.org/10.1016/j.plabm.2026.e00538
+13,Remote monitoring,Verweij2026RemoteMonitoring,2026,JMIR Cancer,Remote/irregular monitoring workflow context,https://doi.org/10.2196/76096
+14,Real-world monitoring,Uwizeyimana2026Rwanda,2026,Cancer Management and Research,Real-world molecular-response monitoring evidence,https://doi.org/10.2147/CMAR.S595861
+15,Cytogenetics,Tokac2026CytogeneticDiversity,2026,International Journal of Laboratory Hematology,Philadelphia translocation and cytogenetic diversity,https://doi.org/10.1111/ijlh.70146
+16,Cytogenetics,Wang2026AdditionalChromosomal,2026,Discover Oncology,Additional chromosomal abnormalities and prognosis,https://doi.org/10.1007/s12672-026-05309-1
+17,Imatinib,Hehlmann2017Imatinib10Year,2017,Leukemia,Long-term imatinib-era outcome anchor,https://doi.org/10.1038/leu.2017.253
+18,TKI therapy,Hochhaus2024AsciminibNEJM,2024,New England Journal of Medicine,Contemporary frontline TKI comparator,https://doi.org/10.1056/NEJMoa2400858
+19,TKI management,Oehler2026TKIManagement,2026,Haematologica,TKI adverse event and dosing context,https://doi.org/10.3324/haematol.2025.288334
+20,Joint modeling,Wulfsohn1997JointModel,1997,Biometrics,Foundational joint longitudinal-survival model,https://doi.org/10.2307/2533098
+21,Joint modeling,Rizopoulos2016JMbayes,2016,Journal of Statistical Software,Bayesian joint-model implementation,https://doi.org/10.18637/jss.v072.i07
+22,Joint modeling,Lovblom2026MixedObservationJointModel,2026,Statistical Methods in Medical Research,Recent mixed-observation joint model,https://doi.org/10.1177/09622802261455480
+23,Joint modeling,Niu2026QuantileJointModel,2026,Statistical Methods in Medical Research,Recent multivariate joint modeling method,https://doi.org/10.1177/09622802261420698
+

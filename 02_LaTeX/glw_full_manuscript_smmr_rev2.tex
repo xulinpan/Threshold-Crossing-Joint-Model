@@ -1,0 +1,812 @@
+%% =====================================================================
+%% Statistical Methods in Medical Research (SMMR) submission version
+%% Restructured from glw_full_manuscript_renewed.tex to SAGE / SMMR
+%% author instructions: methods-led structure, unstructured abstract
+%% (<=200 words), >=5 keywords, Sage Vancouver references, anonymized
+%% main file, Statements and Declarations block.
+%%
+%% NOTE ON ANONYMIZATION (SMMR is double-anonymized):
+%% The author/affiliation block below is commented out. Move it to a
+%% SEPARATE Title Page file at submission; the main manuscript sent to
+%% reviewers must not contain identifying information.
+%% =====================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage[numbers,sort&compress]{natbib}  % Sage Vancouver: numbered
+\usepackage{amsmath}
+\usepackage{array}
+
+\captionsetup{font=small,labelfont=bf}
+\graphicspath{{../05_Figures/}{../08_Model/}}
+\makeatletter
+\def\input@path{{../06_Tables/}{../08_Model/}}
+\makeatother
+
+\title{A Bayesian Left-Censored Joint Longitudinal--Interval Model for
+Irregular Molecular Monitoring in Chronic Myeloid Leukemia}
+
+%% ---- TITLE PAGE INFORMATION (submit as a separate, non-anonymized file) ----
+%% Xulin Pan (corresponding author), xxp5066@psu.edu
+%%   Pennsylvania State University, University Park, PA 16802, USA
+%% Jun Lv, School of Mathematics and Statistics, Yunnan University, Kunming, China
+%% Chuanming Wang, School of Biological and Food Engineering, Honghe University, Mengzi, China
+%% Xueren Wang, School of Mathematics and Statistics, Yunnan University, Kunming, China
+%% ---------------------------------------------------------------------------
+\author{}     % anonymized for double-anonymized peer review
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Routine molecular monitoring in chronic myeloid leukemia (CML) produces
+data that violate the assumptions of standard survival and landmark
+analyses: log-transformed minimal residual disease (log-MRD) is measured
+at irregular clinic visits, is left-censored at an assay reporting floor,
+and deep molecular response (DMR) is detected only at the visits at which a
+patient is tested. We develop a Bayesian joint model for the latent MRD
+trajectory and the time to first documented DMR that respects these
+features: a longitudinal sub-model left-censors assay-floor observations,
+and the event sub-model is an interval-observed likelihood for first DMR,
+with the two linked through shared patient-specific random effects and
+fitted by Hamiltonian Monte Carlo. In a simulation study, coding
+assay-floor values as exact measurements substantially attenuates the
+estimated between-patient heterogeneity, whereas the left-censored model
+recovers the generating parameters more closely, though finite-sample
+interval coverage is imperfect at the cohort sizes studied. In a single-centre cohort of 87 patients the model was calibrated in the
+large at the interval level and attained a lower Brier score than
+Kaplan--Meier, interval-only, landmark, and exact-floor alternatives.
+Dynamic predictions are reported as internal (apparent) accuracy. A threshold-crossing
+interpretation, a multi-state extension, and informative-visit modelling are
+outlined as future work.
+\end{abstract}
+
+\noindent\textbf{Keywords:} joint longitudinal--survival models;
+interval-censored events; left-censored biomarkers; Bayesian hierarchical
+modelling; dynamic prediction; chronic myeloid leukemia; deep molecular
+response.
+
+\section{Introduction}
+
+Tyrosine kinase inhibitor (TKI) therapy has transformed the prognosis of
+chronic myeloid leukemia (CML), shifting long-term care toward sustained
+molecular control, adherence, adverse-effect management, and the possible
+selection of patients for treatment-free remission
+\cite{Hochhaus2020ELN,Jabbour2025JAMAReview,Haddad2026Algorithms,Senapati2023CMLManagement}.
+Deep and durable molecular response, including MR4.5 and deep molecular
+response (DMR), is central to long-term response assessment and to
+discussions about treatment discontinuation
+\cite{Hughes2014EarlyMolecularResponse,Rasekh2026TFRPredictor,Ono2026MR45,Takahashi2026JSKI}.
+Large real-world cohorts confirm that the depth, timing and durability of
+molecular response drive long-term outcome: early molecular response
+(BCR-ABL $\le 10\%$ at three months) predicts superior progression-free and
+overall survival by landmark analysis
+\cite{Hanfstein2012EMR,Ohm2012Landmark}, loss of an achieved response counts
+as an event, and outcomes worsen the later response is attained
+\cite{Li2014TKIEfficacy}.
+Consequently, statistical models for CML are increasingly asked to turn
+longitudinal molecular histories into individualized, calibrated
+statements about response.
+
+Routine molecular monitoring data, however, rarely have the structure
+assumed by simple survival or prediction models. Three features recur.
+First, measurements are obtained at \emph{irregular} clinical visits, so
+the exact time at which a patient first attains DMR is never observed;
+only the interval between two visits that brackets the transition is
+known. Treating first \emph{observed} DMR as an exact event time ignores
+this interval observation and confounds biological onset with visit
+timing. Second, deep molecular values are frequently reported at an assay
+or reporting floor. Treating floor values as exact numerical measurements
+understates uncertainty below the reporting limit; the correct
+information is that the true burden lies at or below the floor. Third, and
+more subtly, the clinical endpoint is \emph{defined} by a threshold on the
+same biomarker that any joint model uses as a predictor: DMR is
+$\text{log-MRD} \le -4.5$. Using the latent biomarker to predict a
+separately coded DMR ``event'' can therefore be circular.
+
+Joint longitudinal--survival models provide a natural framework for
+connecting repeated biomarkers with event processes
+\cite{Wulfsohn1997JointModel,Rizopoulos2016JMbayes}, and recent
+methodological work has extended them to complex observation schemes and
+flexible biomarker--event associations
+\cite{Lovblom2026MixedObservationJointModel,Niu2026QuantileJointModel}.
+What is missing for molecular monitoring is a single framework that
+simultaneously (i) handles assay-floor left-censoring in the biomarker,
+(ii) respects the interval nature of endpoint detection under irregular
+visits, and (iii) links the event to the latent biomarker
+trajectory---with a threshold-crossing formulation that removes the residual
+definitional circularity between predictor and endpoint developed as an
+extension---while (iv) delivering calibrated, individualized dynamic
+predictions without overstating clinical decision utility.
+
+Our event model belongs to the \emph{first-hitting-time} (first-passage-time)
+tradition, in which failure is the first time a latent stochastic process
+reaches a boundary: threshold regression \cite{LeeWhitmore2006ThresholdRegression}
+and the process point of view on hazards
+\cite{AalenGjessing2001ProcessView,AalenBorganGjessing2008}. What is new here is
+to bring this tradition to \emph{interval-observed, assay-floor left-censored
+biomarker monitoring} of first DMR, combining interval-censoring methodology
+\cite{Sun2006IntervalCensored}, landmarking and joint-model dynamic prediction
+\cite{vanHouwelingen2007Landmarking,Rizopoulos2011DynamicPredictions}, and proper
+scoring rules for calibration assessment \cite{GneitingRaftery2007ProperScoring}.
+
+This paper develops and illustrates, on a real-world CML cohort, a single
+proposed model: a Bayesian left-censored joint longitudinal--interval model
+for the time to first documented DMR. Its contributions are five. First, a
+longitudinal sub-model for the latent log-MRD trajectory that treats
+assay-floor measurements as left-censored rather than as exact values
+(Section~\ref{sec:long}). Second, an interval-observed likelihood for first
+documented DMR that respects the fact that response is ascertained only at
+monitoring visits (Section~\ref{sec:interval}). Third, a Bayesian joint
+model that links the two sub-models through shared patient-specific random
+effects and is fitted by Hamiltonian Monte Carlo. Fourth, a simulation
+study showing that coding assay-floor values as exact measurements
+attenuates the estimated between-patient heterogeneity, and characterising
+the estimator's finite-sample behaviour, including imperfect interval
+coverage at the cohort sizes studied (Section~\ref{sec:simresults}). Fifth,
+an application to the cohort with posterior predictive checks, calibration,
+comparison against Kaplan--Meier, interval-only, landmark, and exact-floor
+alternatives, and dynamic prediction reported as internal (apparent)
+accuracy (Section~\ref{sec:application}). A latent threshold-crossing
+interpretation of the endpoint, a multi-state extension to durability and
+relapse, and joint modelling of the informative visit process are outlined
+as future work; external validation is the subject of ongoing work.
+
+\section{Motivating application: a CML molecular-monitoring cohort}
+\label{sec:motivating}
+
+We motivate and illustrate the methodology with a real-world CML monitoring
+cohort assembled from routine tyrosine kinase inhibitor monitoring at a single
+haematology centre in Kunming, Yunnan Province, China. Monitoring followed the
+2011 Chinese CML guideline \cite{CSH2011CMLGuideline}, which prescribes
+response-adaptive molecular testing---quarterly BCR-ABL quantification,
+intensified to every one-to-three months if the transcript rises---so visit
+times are irregular and partly response-driven by design. The raw visit-level
+file contained 504 molecular records on 89 patients. After removing records with missing or invalid
+essential modelling fields, the longitudinal analysis file contained 495
+complete molecular observations from 87 patients; the corresponding
+patient-level file contained 87 records and 275 at-risk intervals for
+first documented DMR (Table~\ref{tab:cleaning-audit}). Analysis files used coded
+identifiers; direct identifiers were held only in a private linkage file.
+
+\input{table_03_data_cleaning_audit.tex}
+
+DMR was defined as $\text{log-MRD}\le-4.5$ and complete molecular response
+(CMR) as $\text{log-MRD}\le-5.0$; both indicators were audited by
+recomputation from the processed values. A structural feature of the data
+is central to the modelling: 239 of 495 observations (48.3\%) were at or
+below the log-MRD floor of $-5.0$, and no retained observation fell in the
+interval $(-5.0,-4.5]$. As a result, DMR-positive and CMR-positive counts
+coincide in the retained data --- not through a coding error, but because
+all DMR-positive values were reported at the $-5.0$ assay floor. This
+directly motivates left-censored modelling of floor observations and
+limits the ability of the data alone to distinguish DMR from deeper
+response. Treatment time was recorded in months for clinical summaries and
+converted to years for all likelihood components; if $t^{(m)}$ denotes
+months since imatinib initiation, the model uses $t=t^{(m)}/12$, with
+time effects on the $\log(1+t)$ scale.
+
+Monitoring was heterogeneous, with median follow-up of 39.0 months and a
+median of 5 visits per patient. The median visit gap was 6.0 months;
+50.3\% of gaps exceeded 6 months and 20.0\% exceeded 12 months. This
+irregularity, together with the fact that DMR is documented only at
+visits, is precisely what the interval and threshold-crossing likelihoods
+below are designed to accommodate.
+
+\section{Statistical framework}
+\label{sec:methods}
+
+\subsection{Longitudinal sub-model with assay-floor left-censoring}
+\label{sec:long}
+
+Let $m_i(t)$ denote the latent biological log-MRD trajectory for patient
+$i$ at treatment time $t$ (years):
+\[
+m_i(t)=\beta_0+\beta_1\log(1+t)+\beta_2\{\log(1+t)\}^2
++b_{0i}+b_{1i}\log(1+t),
+\]
+with independent patient-specific random effects
+\[
+b_{0i}\sim N(0,\tau_{b0}^2), \qquad b_{1i}\sim N(0,\tau_{b1}^2).
+\]
+An earlier specification included a random intercept--slope correlation;
+because it was weakly identified in this cohort, the final model treats the
+random effects as independent, which improved computational stability
+without materially changing the fit. The observation-scale mean includes a
+sample-source adjustment for bone-marrow versus peripheral-blood assays:
+\[
+\mu_{ij}=m_i(t_{ij})+\beta_{\mathrm{BM}}\,I(\mathrm{bone\ marrow}_{ij}).
+\]
+For observations above the reporting floor,
+$y_{ij}\sim N(\mu_{ij},\sigma_y^2)$. For observations reported at the
+assay floor $c_F=-5.0$, the likelihood contribution is left-censored,
+carrying the information that the true value lies at or below the floor:
+\[
+\Pr(y_{ij}^{\ast}\le c_F)=
+\Phi\!\left\{\frac{c_F-\mu_{ij}}{\sigma_y}\right\}.
+\]
+
+\subsection{Interval-observed sub-model for first documented DMR}
+\label{sec:interval}
+
+The event sub-model is an interval-observed likelihood for the time of first
+\emph{documented} DMR. Because DMR is detected only at monitoring visits, the
+event is interval-observed. For each patient the first at-risk interval ending in a
+DMR-positive measurement is coded as the event interval, and preceding
+intervals as at risk without event; patients without documented DMR by
+last follow-up are right-censored. Let $L_{ik}$ and $R_{ik}$ be the start
+and end of at-risk interval $k$, with $\Delta_{ik}=R_{ik}-L_{ik}$ and
+$t_{ik}^{mid}=(L_{ik}+R_{ik})/2$. The interval hazard links the latent
+trajectory to DMR:
+\[
+h_{ik}^{\mathrm{DMR}}=
+\exp\{\gamma_0+\gamma_1\log(1+t_{ik}^{mid})
++\gamma_2\log(1+\Delta_{ik})
++\alpha\, m_i(t_{ik}^{mid})\},
+\qquad
+p_{ik}^{\mathrm{DMR}}=
+1-\exp\{-h_{ik}^{\mathrm{DMR}}\Delta_{ik}\}.
+\]
+The interval length $\Delta_{ik}$ enters in two distinct roles that should
+not be conflated. It first enters as \emph{exposure time} through the
+cumulative-hazard form
+$p_{ik}^{\mathrm{DMR}}=1-\exp\{-h_{ik}^{\mathrm{DMR}}\Delta_{ik}\}$, the
+standard complementary log--log likelihood for a grouped or interval-censored
+event; this encodes the baseline assumption that the opportunity to document
+DMR accumulates \emph{proportionally} with time at risk. The additional term
+$\gamma_2\log(1+\Delta_{ik})$ sits inside the log-hazard and does not
+re-express interval length as exposure: it modulates the per-unit-time
+documentation \emph{intensity} and therefore measures \emph{departure from
+proportional exposure accumulation}. A negative $\gamma_2$ indicates that
+longer at-risk gaps carry a lower documentation intensity per unit time than
+proportional accumulation would predict---an observation- and
+monitoring-process feature (for example, sparser or less informative sampling
+across long gaps), not a biological property of molecular response. Because
+the two contributions enter multiplicatively and in different roles---exposure
+duration versus a log-linear modifier of intensity---the specification does
+not double-count interval length. The shared latent value
+$m_i(t_{ik}^{mid})$ couples the two sub-models, so that lower latent MRD raises
+the probability of documented DMR; this coupling carries the biological
+interpretation. To confirm that the substantive association is not an artefact
+of the observation-process term, we refit the event sub-model without
+$\gamma_2\log(1+\Delta_{ik})$ as a sensitivity analysis (reported in
+Section~\ref{sec:application}).
+
+\subsection{A latent threshold-crossing interpretation}
+\label{sec:threshold}
+
+The interval sub-model treats first DMR as an interval-censored event whose
+likelihood is driven by the biomarker, but DMR is \emph{defined} by the
+latent log-MRD trajectory crossing $c_D=-4.5$. This invites an equivalent
+first-hitting-time reading of the same endpoint
+\cite{LeeWhitmore2006ThresholdRegression,AalenGjessing2001ProcessView}.
+Writing $M_i(t)=\min_{0\le u\le t}m_i(u)$ for the running minimum of the
+latent trajectory, first DMR is
+$T_i^D=\inf\{t\ge 0:m_i(t)\le c_D\}=\inf\{t:M_i(t)\le c_D\}$, so a patient
+with documented first DMR in $(L_i,R_i]$ satisfies $M_i(L_i)>c_D$ and
+$M_i(R_i)\le c_D$, and a censored patient satisfies $M_i(C_i)>c_D$. Allowing
+an effective patient-level threshold $C_i\sim N(c_D,\sigma_{\mathrm{thr}}^2)$
+smooths these indicators for gradient-based sampling and accommodates
+uncertainty in the clinical cut-point. In this cohort every documented DMR was
+reported at the $-5.0$ floor, so the observed endpoint is operationally first
+attainment of the floor; $\sigma_{\mathrm{thr}}$ then also absorbs the gap
+between the nominal $-4.5$ cut-point and the value at which response is
+actually recorded. We record this connection because it
+makes the modelled and clinical endpoints coincide, and because it is the
+natural entry point for a multi-state extension in which durability and
+molecular relapse are further crossings of the same trajectory. We do not
+pursue it as the primary analysis here; the threshold-crossing and
+multi-state formulations are developed as future work (Supplementary
+Material).
+
+\subsection{Dynamic prediction and recalibration}
+\label{sec:dynamic}
+
+For clinical use the framework produces individualized dynamic predictions by
+landmarking \cite{vanHouwelingen2007Landmarking,Rizopoulos2011DynamicPredictions}.
+At landmark time $s$ the target is
+\[
+\Pr(T_i^D\le s+H\mid T_i^D>s,\mathcal H_i(s)),
+\]
+where $\mathcal H_i(s)$ is the MRD history available up to $s$, with
+landmarks $s\in\{6,12,18,24\}$ months and horizons $H\in\{6,12,24\}$
+months. Because absolute probabilities from a mechanistic joint model can
+be miscalibrated, we apply horizon-specific logistic recalibration,
+\[
+\mathrm{logit}\{p_{i,\mathrm{cal}}(s,H)\}
+=a_H+b_H\,\mathrm{logit}\{p_{i,\mathrm{orig}}(s,H)\},
+\]
+with the recalibration layer assessed by patient-clustered bootstrap optimism
+correction, since each patient contributes several landmark--horizon records.
+Strict prospective prediction requires that patient-specific random
+effects be updated using only $\mathcal H_i(s)$; the internal analysis in
+Section~\ref{sec:application} conditions on the full longitudinal record
+and is therefore an apparent (upper-bound) assessment of calibration,
+which we treat accordingly.
+
+\subsection{Priors, estimation, and computation}
+\label{sec:computation}
+
+Estimation is fully Bayesian via Hamiltonian Monte Carlo in Stan.
+Weakly informative priors were fixed before fitting:
+\[
+\beta_0\sim N(-2.5,2^2),\quad
+\beta_1\sim N(-1,1^2),\quad
+\beta_2\sim N(0,0.5^2),\quad
+\beta_{\mathrm{BM}}\sim N(0,1^2),
+\]
+\[
+\sigma_y\sim \mathrm{Exponential}(1),\quad
+\tau_{b0},\tau_{b1}\sim \mathrm{Exponential}(1),\quad
+\gamma_0\sim N(-2,2^2),\quad
+\gamma_1,\gamma_2\sim N(0,1^2),\quad
+\alpha\sim N(-0.5,0.75^2).
+\]
+The $\mathrm{Exponential}(1)$ priors on the scale parameters
+$\sigma_y,\tau_{b0},\tau_{b1}$ are weakly informative but place their mass
+below the fitted values; because every model compared here uses identical
+priors, prior choice does not confound the floor-censored versus exact-floor
+contrast, though a prior-sensitivity analysis (for example half-normal or
+half-Cauchy scales) is advisable when the absolute magnitude of
+between-patient heterogeneity is of primary interest.
+Convergence was assessed by $\widehat{R}$, bulk and tail effective sample
+size, divergent-transition counts, tree depth, and E-BFMI. In the latent
+threshold-crossing and informative-visit models, the running-minimum and
+hard-indicator terms are implemented through smooth approximations to
+preserve differentiability.
+
+\subsection{Model assessment and comparison}
+\label{sec:assessment}
+
+Model adequacy was evaluated with posterior predictive checks for the
+longitudinal component (predictive coverage; observed versus predicted
+assay-floor rate) and with calibration of DMR probabilities at both the
+interval and patient level (calibration-in-the-large, calibration slope,
+and grouped calibration plots). Discrimination and overall accuracy were
+summarized by the Brier score, a strictly proper scoring rule
+\cite{GneitingRaftery2007ProperScoring}. The joint model was compared against four
+simpler alternatives that a practitioner might otherwise use: a
+descriptive Kaplan--Meier analysis of first observed DMR; an interval-only
+model with timing and visit-gap terms; a landmark MRD model; and a joint
+model that treats floor observations as exact $-5.0$. The Kaplan--Meier
+comparator yields a marginal survival curve rather than covariate-specific
+risks; its interval- and patient-level probabilities were obtained by
+evaluating the fitted curve at each unit's follow-up, and its calibration is
+correspondingly limited. Refittable simpler models were internally validated
+by patient-cluster bootstrap with optimism correction; for the Bayesian joint
+models, fixed-posterior bootstrap summaries are reported.
+
+\subsection{Simulation design}
+\label{sec:sim}
+
+To characterize the operating properties of the framework beyond the
+single cohort, we conduct a simulation study focused on the primary joint model: how well
+it recovers the longitudinal parameters and calibrated DMR probabilities, and
+the consequences of mishandling the assay floor. Secondary scenarios that
+probe the latent threshold-crossing estimand and informative monitoring are
+reported in the Supplementary Material. Data-generating
+scenarios cross non-informative versus informative monitoring, exact
+versus floor-censored molecular values, threshold uncertainty around
+$-4.5$, sparse versus dense monitoring, and sample sizes of 87, 150, and
+300 patients; performance is measured by bias, coverage, calibration, and
+Brier score. The study follows the ADEMP structure (aims, data-generating
+mechanisms, estimands, methods, performance measures) and used a fixed seed
+for reproducibility. Results are reported in Section~\ref{sec:simresults}.
+
+\section{Application to the CML cohort}
+\label{sec:application}
+
+We fit the joint longitudinal--interval model to the cohort by Hamiltonian
+Monte Carlo and report its posterior estimates, diagnostics, posterior
+predictive checks, calibration, comparison against simpler alternatives, and
+dynamic prediction. The latent threshold-crossing interpretation of
+Section~\ref{sec:threshold} and its multi-state extension are not fitted
+here; they are outlined as future work.
+
+\subsection{Cohort and endpoint summary}
+
+The final cohort comprised 87 patients, 495 longitudinal log-MRD
+observations, and 275 at-risk intervals; 68 patients had documented DMR
+and 19 were censored. Baseline clinical covariates were complete for 62
+patients (71.3\%) (Table~\ref{tab:baseline}). Molecular response deepened
+over follow-up, and the assay-floor share rose with time
+(Table~\ref{tab:longitudinal-time}), consistent with the trajectory and
+floor-censoring structure in Figure~\ref{fig:log-mrd-trajectories}.
+
+\input{table_01_baseline_characteristics.tex}
+\input{table_02_longitudinal_by_time.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.92\linewidth]{figure_01_log_mrd_trajectories.pdf}
+\caption{Patient-level log-MRD trajectories with smoothed population trend
+and DMR/CMR thresholds. Lines and thresholds are distinguishable in
+grayscale.}
+\label{fig:log-mrd-trajectories}
+\end{figure}
+
+The descriptive Kaplan--Meier curve for first observed DMR
+(Figure~\ref{fig:time-to-dmr}) is retained only as a summary, because its
+event times correspond to visits at which DMR was first documented and
+should not be read as exact biological onset.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.78\linewidth]{figure_02_time_to_dmr_km.pdf}
+\caption{Descriptive Kaplan--Meier curve for time until first observed
+DMR. Event times correspond to monitoring visits and should not be
+interpreted as exact biological onset.}
+\label{fig:time-to-dmr}
+\end{figure}
+
+\subsection{Fitted joint model}
+
+Computation was stable: no divergent transitions, maximum tree depth 7,
+minimum approximate E-BFMI 0.610, maximum $\widehat{R}$ 1.003, minimum
+bulk effective sample size 1359, and minimum tail effective sample size
+1395; no parameter had $\widehat{R}>1.01$ or effective sample size below
+400. Posterior summaries are given in
+Table~\ref{tab:joint-model-posterior}; reported intervals are 95\% credible
+intervals. The latent time effect was strongly negative
+($\beta_{\mathrm{time}}=-3.561$; 95\% credible interval $-4.500$ to
+$-2.641$), indicating marked decline in latent log-MRD over follow-up. The
+quadratic log-time term was positive but only weakly supported
+($\beta_{\mathrm{time}^2}=0.502$; $-0.002$ to $0.999$, marginally including
+zero), so the evidence for curvature beyond a log-linear decline is weak.
+Because almost all assays were bone-marrow samples, the sample-source term
+$\beta_{\mathrm{BM}}$ is weakly identified ($0.607$; $-0.805$ to $2.031$) and
+should not be over-interpreted. The association parameter was negative
+($\alpha_{\mathrm{MRD}}=-1.275$; $-1.848$ to $-0.838$), so lower latent MRD
+was associated with higher interval probability of documented DMR. In a
+sensitivity analysis that removed the interval-length term
+$\gamma_2\log(1+\Delta_{ik})$ from the log-hazard---so that interval length
+entered only as exposure time---the association parameter remained negative
+and, if anything, larger in magnitude, confirming that the latent-MRD--DMR
+association is not an artefact of the observation-process term. These
+are monitoring-oriented associations, not externally validated
+treatment-decision thresholds.
+
+\input{table_05_joint_model_posterior_results.tex}
+
+\subsection{Posterior predictive checks and calibration}
+
+Among non-floor observations, 90\% posterior predictive coverage was 0.957
+and 95\% coverage was 0.984; the observed assay-floor rate (0.483) was
+close to the posterior mean floor probability (0.414)
+(Table~\ref{tab:model-checks}, Figure~\ref{fig:ppc}). Interval-level
+calibration was close in the large (observed interval event rate 0.247
+versus mean predicted 0.247, Brier score 0.082), although the interval
+calibration slope exceeded one ($1.78$; Table~\ref{tab:model-comparison-validation}),
+indicating that predicted interval risks were somewhat too moderate and
+required amplification rather than a shift in level. Patient-level cumulative
+DMR probability was underpredicted (observed 0.782 versus mean predicted
+0.581; calibration slope $2.82$; Figure~\ref{fig:calibration}), which
+motivated the dynamic prediction and recalibration analysis below.
+
+\input{table_06_model_check_summary.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{figure_08_posterior_predictive_longitudinal.pdf}
+\caption{Posterior predictive check for longitudinal log-MRD (left) and
+posterior mean probability of assay-floor response (right); points
+distinguish observed floor and non-floor measurements.}
+\label{fig:ppc}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{figure_09_dmr_calibration.pdf}
+\caption{Grouped calibration of model-estimated DMR probabilities.
+Interval-level calibration is close in aggregate, whereas patient-level
+cumulative DMR probability is underpredicted.}
+\label{fig:calibration}
+\end{figure}
+
+\subsection{Model comparison}
+
+The joint model had lower interval-level and patient-level Brier scores
+than the descriptive Kaplan--Meier, interval-only, landmark, and
+exact-floor alternatives (Table~\ref{tab:model-comparison-validation}). The improvement
+over the exact-floor joint model isolates the contribution of
+left-censored assay-floor handling, and the improvement over the
+interval-only and landmark models isolates the value of coupling the
+longitudinal and event processes. These comparisons carry two caveats: the
+Bayesian joint models are summarised at the fixed posterior rather than
+bootstrap-optimism-corrected like the simpler models, and the landmark model
+is scored on a smaller eligible sample (55 intervals, 32 patients) than the
+interval-level comparators (275 intervals, 87 patients), so the ranking is
+indicative rather than a like-for-like validated comparison. The
+patient-level Brier of the primary model, $0.116$ here, differs slightly from
+the $0.123$ reported for model checking in Table~\ref{tab:model-checks}
+because of the different scoring samples. This supports the joint framework
+for monitoring-oriented inference; it does not by itself establish clinical
+decision readiness.
+
+\input{table_07_model_comparison_validation.tex}
+
+\subsection{Dynamic prediction and recalibration}
+
+The internal dynamic-prediction analysis generated 300 eligible
+landmark--horizon records. Before recalibration, the joint model
+overpredicted 6-month DMR probability (mean predicted 0.506 versus
+observed 0.361; Brier 0.179), modestly overpredicted the 12-month horizon
+(0.626 versus 0.576; Brier 0.162), and underpredicted the 24-month horizon
+(0.721 versus 0.828; Brier 0.081). Horizon-specific logistic recalibration
+aligned mean predicted probabilities with observed rates; bootstrap
+optimism-corrected recalibrated Brier scores were 0.167, 0.172, and 0.063
+at 6, 12, and 24 months (Table~\ref{tab:dynamic-prediction-validation},
+Figure~\ref{fig:dynamic}). Because these predictions used patient-specific
+random effects estimated from the full longitudinal record, they are
+apparent performance; strict prospective prediction requires posterior
+updating restricted to the history available at each landmark.
+
+\input{table_09_dynamic_prediction_validation.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.96\linewidth]{figure_13_dynamic_prediction_calibration.pdf}
+\caption{Dynamic DMR calibration before and after horizon-specific
+logistic recalibration. Points are quantile-based prediction bins, sized by
+bin count; the diagonal indicates perfect calibration.}
+\label{fig:dynamic}
+\end{figure}
+
+\section{Simulation results}
+\label{sec:simresults}
+
+We evaluated the estimators on 40 replicates per scenario, generating data
+from the fitted model as truth (Section~\ref{sec:sim}). Estimation used
+marginal maximum \emph{a posteriori} inference under the priors of
+Section~\ref{sec:computation}, with $8\times8$ Gauss--Hermite quadrature
+over the random effects; this shares the estimating equations of the
+Bayesian model, and Wald intervals approximate posterior credible intervals.
+Because data are generated from the fitted model as truth, the study
+characterises parameter recovery under correct specification rather than
+robustness to misspecification. With 40 replicates per scenario, Monte Carlo
+error in the coverage estimates is up to $\approx0.08$ near $0.5$, so coverage
+figures are indicative rather than precise. The reported coverage is that of
+the asymptotic Wald intervals under marginal MAP estimation and is a proxy for
+the coverage of the Bayesian credible intervals used in the application, which
+we did not recompute by full Hamiltonian Monte Carlo across all scenarios;
+confirming that the credible intervals behave similarly is left to future
+work. Because the data-generating truth equals the fitted posterior means, the
+study cannot detect bias introduced by the priors themselves; the
+floor-censored and exact-floor estimators share the same priors, so the
+attenuation contrast reported below is not a prior artefact, but the absolute
+levels of the variance components should be read alongside a prior-sensitivity
+analysis. Finally, a check on the fitted model indicated that the marginal
+likelihood remains mildly sensitive to the $8\times8$ quadrature order at these
+parameter values, so the marginal-MAP estimates are approximate and
+confirmatory work should use a higher quadrature order or full Hamiltonian
+Monte Carlo.
+
+\subsection{The assay floor cannot be ignored}
+
+Table~\ref{tab:sim-bias} isolates the cost of mishandling the assay floor.
+Treating floor values as exact $-5.0$ collapsed the estimated random-slope
+heterogeneity $\tau_{b1}$ by roughly $56\%$ (for example $2.20\to0.97$ at
+$n=150$) and attenuated the residual standard deviation $\sigma_y$ by about
+one third, while inducing a large positive bias in the time slope
+$\beta_{\mathrm{time}}$. Left-censoring the floor removed almost all of the
+bias in the variance components ($\tau_{b1}$ within $4$--$6\%$ of truth,
+$\sigma_y$ within $5\%$). A residual attenuation in $\beta_{\mathrm{time}}$
+persisted but shrank with sample size (relative bias $22\%$, $19\%$, $15\%$
+at $n=87,150,300$), as shown in Figure~\ref{fig:sim-bias}.
+
+\input{table_10_sim_bias.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.95\linewidth]{figure_15_sim_floor_bias.pdf}
+\caption{Simulation estimates of the random-slope SD $\tau_{b1}$ (left) and
+the time slope $\beta_{\mathrm{time}}$ (right) versus sample size, for the
+assay-floor left-censored estimator and the estimator that treats floor
+values as exact $-5.0$. Error bars are $\pm1.96$ Monte Carlo standard
+errors; dashed lines are the true values.}
+\label{fig:sim-bias}
+\end{figure}
+
+\subsection{Interval coverage and finite-sample attenuation}
+
+Wald $95\%$ interval coverage at $n=150$ (Table~\ref{tab:sim-coverage};
+scale parameters summarised on the log scale used for estimation) was
+close to nominal for the event-process $\gamma$ terms, lower for the
+association $\alpha_{\mathrm{MRD}}$ ($0.70$), and below nominal for the
+longitudinal slope and heterogeneity terms (for example $0.50$ for
+$\beta_{\mathrm{time}}$ and $0.68$ for $\tau_{b1}$). This reflects the
+finite-sample attenuation induced when nearly half of observations lie at
+the floor, and indicates that at cohort sizes typical of single-centre CML
+series the longitudinal slope should be interpreted cautiously; larger
+samples or more informative priors are beneficial.
+
+\input{table_11_sim_coverage.tex}
+
+\subsection{Patient-level calibration}
+
+Table~\ref{tab:sim-calibration} and Figure~\ref{fig:sim-calibration}
+summarize patient-level DMR calibration. The primary floor model reproduced
+the under-prediction observed in the real cohort (mean predicted
+$\approx0.60$ versus observed $\approx0.86$; difference $\approx-0.26$,
+close to the $-0.20$ seen in the data), confirming that the patient-level
+under-prediction is an intrinsic property of the mechanistic joint model
+rather than a data artefact, and justifying the horizon-specific
+recalibration of Section~\ref{sec:dynamic}. The table also reports two
+secondary variants that lie outside the primary model---a latent
+threshold-crossing estimator targeting biological onset, and the floor model
+under informative monitoring; these characterise the distinction between the
+latent-crossing and documented-DMR estimands and the sensitivity of
+calibration to the visit process, and are discussed in the Supplementary
+Material.
+
+\input{table_12_sim_calibration.tex}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.7\linewidth]{figure_16_sim_calibration.pdf}
+\caption{Simulation calibration-in-the-large: mean predicted DMR
+probability versus observed documented-DMR rate, by estimator, sample size,
+and monitoring scheme. Points below the diagonal indicate under-prediction.}
+\label{fig:sim-calibration}
+\end{figure}
+
+\section{Discussion}
+
+\subsection{Principal findings}
+
+We have developed a Bayesian framework that aligns the statistical model
+with the structure of routine CML molecular monitoring: repeated MRD
+measurements, assay-floor reporting, irregular visits, and
+interval-observed DMR. In the motivating cohort, the fitted joint
+longitudinal--interval model was computationally stable, calibrated in the
+large at the interval level, and outperformed Kaplan--Meier,
+interval-only, landmark, and exact-floor alternatives by Brier score. The
+comparison against the exact-floor joint model shows that treating deep
+values as left-censored, rather than as exact $-5.0$ measurements,
+measurably improves fit. A simulation study confirms this is a necessity
+rather than a refinement: ignoring floor censoring roughly halves the
+recovered random-slope heterogeneity (Section~\ref{sec:simresults}).
+
+\subsection{Methodological contribution}
+
+The methodological contribution is a joint model that couples a
+left-censored longitudinal sub-model for log-MRD with an interval-observed
+likelihood for first documented DMR through shared random effects, fitted in
+a fully Bayesian way. Treating assay-floor measurements as left-censored,
+rather than as exact $-5.0$ values, is not a refinement but a necessity: in
+simulation it materially changes the recovered between-patient
+heterogeneity. Because DMR is defined by $\text{log-MRD}\le-4.5$, the
+endpoint also admits a latent threshold-crossing (first-hitting-time)
+reading in which onset is the first crossing of the threshold by the latent
+trajectory (Section~\ref{sec:threshold}); this makes the modelled and
+clinical endpoints coincide and is the natural route to a multi-state
+extension, which we leave to future work.
+
+\subsection{Clinical interpretation}
+
+The fitted model should be read as a monitoring-support framework, not a
+treatment-decision rule. The negative association between latent MRD and
+interval DMR probability is biologically coherent and supports using
+serial molecular history for response assessment, but it does not validate
+the model for TKI discontinuation, treatment-free-remission eligibility,
+or changes in treatment. Dynamic prediction with recalibration improves
+calibration-in-the-large and provides individualized horizon
+probabilities, but the current estimates are apparent rather than strictly
+prospective.
+
+\subsection{Informative monitoring}
+
+Monitoring in this setting is irregular and response-adaptive---guidelines
+increase molecular-testing frequency when the transcript rises---so the
+visit process may be informative. Jointly modelling visit intensity with the
+latent trajectory is a natural extension but introduces additional, weakly
+identified parameters; we do not pursue it here and regard it as a
+sensitivity analysis for larger cohorts. The primary analysis conditions on
+the observed visit schedule, which is appropriate when interest lies in the
+time of first documented DMR given the monitoring actually performed.
+
+\subsection{Limitations}
+
+Several limitations temper these findings. The cohort was modest (87
+patients; complete core covariates in 62) and came from a single centre in
+Kunming, Yunnan Province, China, with no external validation cohort; the
+relatively young age distribution is typical of Chinese CML series and may
+limit transportability. The finite-sample interval coverage of the estimator
+was imperfect at the cohort sizes studied, so we describe the floor-censored
+estimator as recovering the generating parameters more closely than the
+exact-floor coding rather than as unbiased. Monitoring was irregular, so
+patients with longer or denser follow-up had more opportunity to document
+DMR, and the analysis conditions on the observed visit schedule. The
+retained data contained no observations in $(-5.0,-4.5]$, limiting the
+ability to distinguish DMR from CMR descriptively. The dynamic predictions
+use each patient's full longitudinal record to estimate random effects and
+are therefore internal (apparent) rather than strictly prospective. The
+analysis targets first DMR only; durability, molecular relapse, and
+informative monitoring are outside its scope and are treated as future work
+(Supplementary Material). The primary model links the documented-DMR event to
+the latent trajectory through the association parameter $\alpha$ but does not
+fully remove the definitional circularity between predictor and endpoint that
+motivates the analysis; the threshold-crossing formulation (Supplementary
+Material) is designed to close this gap and is left to future work. The model
+is intended to support monitoring, not to serve as a treatment-decision
+rule.
+
+\subsection{Future work}
+
+Several extensions follow naturally. The latent threshold-crossing
+interpretation of first DMR can be developed into a multi-state model in
+which durability and molecular relapse are further crossings of the same
+latent trajectory (Supplementary Material), fitted by full Hamiltonian Monte
+Carlo. The informative visit process can be modelled jointly with the
+trajectory as a sensitivity analysis in larger cohorts. Most importantly,
+strict prospective landmark prediction with history-restricted posterior
+updating, and external or temporal validation, are needed before the
+recalibrated dynamic probabilities could support clinical decisions.
+
+\section{Conclusions}
+
+We have presented a Bayesian left-censored joint longitudinal--interval
+model for CML molecular monitoring that is aligned with irregular clinical
+observation, assay-floor reporting, and interval-observed first DMR. The
+fitted model was computationally stable, calibrated in the large at the
+interval level (with a calibration slope above one), and attained a lower
+Brier score than Kaplan--Meier, interval-only,
+landmark, and exact-floor alternatives; simulation showed that left-censoring
+the assay floor is necessary for recovering between-patient heterogeneity.
+Dynamic predictions are reported as internal accuracy. A latent
+threshold-crossing interpretation, a multi-state extension, and
+informative-visit modelling are promising directions; prospective
+calibration and external validation are required before clinical decision
+use.
+
+\section*{Statements and Declarations}
+
+\subsection*{Ethical considerations}
+The study used de-identified, retrospectively collected molecular
+monitoring data. The relevant Institutional Review Board / Ethics
+Committee approval or waiver (name, institution, and approval number) is
+provided on the Title Page and will be stated here in the non-anonymized
+version.
+
+\subsection*{Consent to participate}
+As detailed on the Title Page, the requirement for informed consent was
+addressed under the approving committee's determination for retrospective,
+de-identified data.
+
+\subsection*{Consent for publication}
+Not applicable; the manuscript reports de-identified aggregate analyses and
+contains no individually identifying data.
+
+\subsection*{Declaration of conflicting interests}
+The authors declared no potential conflicts of interest with respect to the
+research, authorship, and/or publication of this article.
+
+\subsection*{Funding}
+The authors received no specific grant from any funding agency in the
+public, commercial, or not-for-profit sectors. (Confirm or amend on the
+Title Page.)
+
+\subsection*{Data availability}
+The analysis workflow generated privacy-preserving processed datasets,
+model code, tables, and figures. Direct identifiers are excluded from all
+analysis files and retained only in a private linkage file; processed data
+and code supporting the findings are available from the corresponding
+author on reasonable request, subject to institutional and ethical
+approval.
+
+\subsection*{Reporting guidelines}
+Development and reporting of the prediction model followed the TRIPOD
+recommendations; the completed checklist is provided as a supplementary
+file.
+
+% Sage Vancouver style: numbered references by order of appearance.
+% For final submission, replace with the official Sage Vancouver .bst if required.
+\bibliographystyle{unsrtnat}
+\bibliography{../07_References/peer_reviewed_papers_selected}
+
+\end{document}

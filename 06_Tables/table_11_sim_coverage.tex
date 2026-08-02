@@ -1,0 +1,25 @@
+\begin{table}[!htbp]
+\centering
+\caption{Operating characteristics of the Bayesian joint model under full Hamiltonian Monte Carlo, correctly specified central scenario. Data are generated with the visit spacing of the study cohort (median gap $6$ months) and the priors of Section~\ref{sec:computation}. Bias (Monte Carlo standard error) and coverage of the equal-tailed $95\%$ credible interval, at $n=87$ ($199$ replicates), $n=150$ ($199$) and $n=300$ ($99$). Fits failing convergence diagnostics are excluded ($9$ of $1000$; Section~\ref{sec:sim:coverage}). The data-generating values are a fixed parameter vector chosen to be plausible for this setting; they are \emph{not} the posterior means of the cohort fit in Table~\ref{tab:joint-model-posterior} and are not directly comparable with them.}
+\label{tab:sim-coverage}
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+ & & \multicolumn{2}{c}{$n=87$} & \multicolumn{2}{c}{$n=150$} & \multicolumn{2}{c}{$n=300$}\\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
+Parameter & Truth & Bias (MCse) & Cov$_{95}$ & Bias (MCse) & Cov$_{95}$ & Bias (MCse) & Cov$_{95}$\\
+\midrule
+$\beta_0$ & -2.11 & -0.088 (0.023) & 0.95 & -0.042 (0.017) & 0.97 & -0.033 (0.017) & 0.98\\
+$\beta_{\mathrm{time}}$ & -3.23 & +0.673 (0.026) & 0.73 & +0.427 (0.024) & 0.84 & +0.264 (0.025) & 0.90\\
+$\beta_{\mathrm{time}^2}$ & 0.45 & -0.318 (0.013) & 0.79 & -0.201 (0.013) & 0.83 & -0.121 (0.013) & 0.92\\
+$\beta_{\mathrm{BM}}$ & 0.68 & -0.108 (0.017) & 0.93 & -0.081 (0.014) & 0.94 & -0.050 (0.013) & 0.94\\
+$\sigma_y$ & 1.69 & +0.001 (0.004) & 0.95 & -0.006 (0.004) & 0.94 & +0.001 (0.004) & 0.95\\
+$\tau_{b0}$ & 1.37 & -0.017 (0.012) & 0.96 & +0.011 (0.011) & 0.93 & -0.003 (0.008) & 0.99\\
+$\tau_{b1}$ & 2.22 & -0.028 (0.018) & 0.95 & +0.023 (0.015) & 0.95 & +0.014 (0.014) & 0.95\\
+$\gamma_0$ & -5.68 & +0.854 (0.047) & 0.95 & +0.644 (0.044) & 0.96 & +0.435 (0.062) & 0.93\\
+$\gamma_{\mathrm{time}}$ & -0.68 & +0.010 (0.027) & 0.97 & -0.059 (0.025) & 0.96 & -0.024 (0.027) & 0.95\\
+$\gamma_{\mathrm{gap}}$ & -2.32 & +1.069 (0.034) & 0.75 & +0.839 (0.033) & 0.81 & +0.560 (0.042) & 0.83\\
+$\alpha_{\mathrm{MRD}}$ & -1.77 & +0.278 (0.010) & 0.88 & +0.206 (0.011) & 0.92 & +0.144 (0.015) & 0.89\\
+\bottomrule
+\end{tabular}
+\end{table}

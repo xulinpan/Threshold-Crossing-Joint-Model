@@ -1,0 +1,20 @@
+\begin{table}[!htbp]
+\centering
+\caption{Development-cohort dynamic prediction and recalibration performance. Predictions are landmark-level probabilities of documented DMR by the stated horizon among patients who were DMR-free at the landmark and had at least one prior MRD measurement. Optimism correction applies to the recalibration layer only; the Bayesian joint model itself was not refitted in bootstrap samples.}
+\label{tab:dynamic-prediction-validation}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llrrrrrrrr}
+\toprule
+Horizon & Model & n & Events & Observed & Mean predicted & Brier & Opt.-corrected Brier & Cal. intercept & Cal. slope \\
+\midrule
+6 months & Original posterior & 108 & 39 & 0.361 & 0.506 & 0.179 & 0.179 & -1.00 & 0.85 \\
+6 months & Recalibrated & 108 & 39 & 0.361 & 0.361 & 0.157 & 0.167 & -0.00 & 1.00 \\
+12 months & Original posterior & 99 & 57 & 0.576 & 0.626 & 0.162 & 0.162 & -0.36 & 0.81 \\
+12 months & Recalibrated & 99 & 57 & 0.576 & 0.576 & 0.161 & 0.172 & 0.00 & 1.00 \\
+24 months & Original posterior & 93 & 77 & 0.828 & 0.721 & 0.081 & 0.081 & 1.02 & 1.81 \\
+24 months & Recalibrated & 93 & 77 & 0.828 & 0.828 & 0.055 & 0.063 & 0.00 & 1.00 \\
+\bottomrule
+\end{tabular}
+}%
+\end{table}
+

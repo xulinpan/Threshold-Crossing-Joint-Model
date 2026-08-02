@@ -1,0 +1,17 @@
+\begin{table}[!htbp]
+\centering
+\caption{Simulation patient-level calibration for predicted DMR probability. `floor' is the assay-floor left-censored interval model; `threshold' is the latent threshold-crossing model in its soft-minimum grid formulation. Calibration intercept and slope are from the logistic regression of the observed indicator on the logit of the predicted probability; the Monte Carlo standard error of the slope is in parentheses. The final column is the proportion of fits with at least one divergent transition. The threshold row is reported at $17$ replicates and its calibration summaries should not be interpreted: every fit diverged (mean $128$ of $2000$ transitions), so the posterior is not reliable, and the between-replicate spread of the slope is correspondingly large. It is retained to document the behaviour of the grid formulation that the closed-form running minimum of Section~\ref{sec:threshold} replaces.}
+\label{tab:sim-calibration}
+\small
+\begin{tabular}{llrrrrrrr}
+\toprule
+Monitoring & Model ($n$) & Reps & Brier & Cal.\ int. & Cal.\ slope (MCse) & Mean pred. & Obs.\ rate & Div.\ fits\\
+\midrule
+Non-informative & floor ($n{=}87$) & 100 & 0.114 & +1.26 & 1.85 (0.06) & 0.58 & 0.72 & ---\\
+Non-informative & floor ($n{=}150$) & 100 & 0.113 & +1.33 & 1.72 (0.04) & 0.59 & 0.73 & ---\\
+Non-informative & floor ($n{=}300$) & 100 & 0.106 & +1.42 & 1.78 (0.03) & 0.59 & 0.73 & ---\\
+Informative & floor ($n{=}150$) & 100 & 0.089 & +0.88 & 2.33 (0.05) & 0.46 & 0.52 & ---\\
+Non-informative & threshold ($n{=}150$) & 17 & 0.033 & +3.72 & 7.19 (3.48) & 0.69 & 0.73 & 100\%\\
+\bottomrule
+\end{tabular}
+\end{table}

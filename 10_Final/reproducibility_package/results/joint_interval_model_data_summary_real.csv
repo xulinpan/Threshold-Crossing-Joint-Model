@@ -1,0 +1,13 @@
+"metric","value"
+"patients",87
+"longitudinal_observations",495
+"at_risk_intervals",275
+"dmr_event_patients",68
+"censored_patients",19
+"floor_observations_log_mrd_le_minus_5",239
+"median_followup_months",39
+"median_visits_per_patient",5
+"median_visit_gap_months",6
+"visit_gaps_over_6_months_pct",50.3
+"visit_gaps_over_12_months_pct",20
+"complete_core_covariates_pct",71.3

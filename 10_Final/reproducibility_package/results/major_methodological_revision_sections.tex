@@ -1,0 +1,181 @@
+\title{Bayesian Threshold-Crossing Joint Modeling for Irregular Molecular Monitoring and Interval-Observed Deep Molecular Response in Chronic Myeloid Leukemia}
+
+\begin{abstract}
+\textbf{Background:}
+Deep molecular response (DMR) is central to chronic myeloid leukemia monitoring, but routine molecular data are often irregularly observed, floor-limited at deep response levels, and linked to response endpoints detected only at clinic visits. These features complicate standard survival, landmark, and clinical prediction analyses.
+
+\textbf{Methods:}
+We analyzed a real-world CML monitoring cohort of 87 patients with 495 longitudinal log-MRD observations and 275 at-risk intervals for first documented DMR. DMR was defined as log-MRD \(\le -4.5\), and complete molecular response was defined as log-MRD \(\le -5.0\). Treatment time was modeled in years, with clinical summaries reported in months. The repaired primary model was a Bayesian joint longitudinal--interval model with independent patient-specific random intercept and random log-time slope, left-censoring for assay-floor observations, and an interval likelihood for first documented DMR. To address endpoint circularity, we designed a latent threshold-crossing upgrade in which DMR onset is defined as the first time the latent biological MRD trajectory crosses \(-4.5\). Model adequacy was evaluated using posterior predictive checks, calibration summaries, model comparison against simpler alternatives, and dynamic prediction with recalibration.
+
+\textbf{Results:}
+In the processed analysis data, DMR and CMR counts were identical because no retained observations had log-MRD in \((-5.0,-4.5]\); all retained DMR-positive measurements were floor-coded at \(-5.0\). The repaired joint model had acceptable computation, with no divergent transitions, maximum R-hat 1.003, and minimum bulk effective sample size 1359. Interval-level calibration was close in aggregate, whereas patient-level cumulative DMR probability was underpredicted. The primary joint model outperformed Kaplan--Meier, interval-only, landmark, and exact-floor alternatives by Brier score in the current internal comparison. Results for the latent threshold-crossing primary upgrade, informative visit-process extension, and simulation study require reanalysis.
+
+\textbf{Conclusions:}
+The revised framework aligns CML molecular-response modeling with the clinical observation process: repeated MRD measurements, assay-floor reporting, irregular visits, and interval-observed DMR. The repaired model supports monitoring-oriented inference but should not be used as a treatment-decision rule without external validation. A latent threshold-crossing formulation is the preferred methodological upgrade to avoid endpoint circularity.
+\end{abstract}
+
+\section{Methods}
+
+\subsection{Study Cohort, Endpoints, and Time Scale}
+
+The analysis used a privacy-preserving real-world CML molecular-monitoring cohort with 87 coded patients, 495 longitudinal log-MRD observations, and 275 at-risk intervals for first documented DMR. DMR was defined as log-MRD \(\le -4.5\), and complete molecular response (CMR) was defined as log-MRD \(\le -5.0\). Endpoint coding was audited by recomputing both indicators directly from the processed log-MRD values. In the retained analysis data, DMR and CMR counts were identical because no retained observations had log-MRD in \((-5.0,-4.5]\). This finding was treated as an assay-floor/reporting feature rather than as a coding error.
+
+Treatment time was calculated in months for clinical summaries and converted to years for all likelihood components. Thus, if \(t^{(m)}\) denotes months since imatinib initiation, the model used \(t=t^{(m)}/12\). Model coefficients involving time were interpreted on the \(\log(1+t)\) scale in years.
+
+\subsection{Level 1: Repaired Bayesian Joint Longitudinal--Interval Model}
+
+Let \(m_i(t)\) denote the latent biological log-MRD trajectory for patient \(i\) at treatment time \(t\) in years:
+\[
+m_i(t)=\beta_0+\beta_1\log(1+t)+\beta_2\{\log(1+t)\}^2
++b_{0i}+b_{1i}\log(1+t),
+\]
+with independent patient-specific random effects
+\[
+b_{0i}\sim N(0,\tau_0^2), \qquad b_{1i}\sim N(0,\tau_1^2).
+\]
+The observation-scale mean included a sample-source adjustment:
+\[
+\mu_{ij}=m_i(t_{ij})+\beta_{\mathrm{BM}}I(\mathrm{bone\ marrow}_{ij}).
+\]
+For non-floor observations,
+\[
+y_{ij}\sim N(\mu_{ij},\sigma_y^2).
+\]
+For assay-floor observations reported at \(c_F=-5.0\), the likelihood contribution was left-censored:
+\[
+\Pr(y_{ij}^{\ast}\le c_F)=
+\Phi\left\{\frac{c_F-\mu_{ij}}{\sigma_y}\right\}.
+\]
+
+For first documented DMR, let \(L_{ik}\) and \(R_{ik}\) be the start and end of at-risk interval \(k\), with \(\Delta_{ik}=R_{ik}-L_{ik}\) and \(t_{ik}^{mid}=(L_{ik}+R_{ik})/2\). The repaired interval-hazard model used
+\[
+h_{ik}^{\mathrm{DMR}}=
+\exp\{\gamma_0+\gamma_1\log(1+t_{ik}^{mid})
++\gamma_2\log(1+\Delta_{ik})
++\alpha m_i(t_{ik}^{mid})\},
+\]
+and
+\[
+p_{ik}^{\mathrm{DMR}}=
+1-\exp\{-h_{ik}^{\mathrm{DMR}}\Delta_{ik}\}.
+\]
+The random-effect correlation parameter used in an earlier model was removed because it was weakly estimated; the final repaired model retained the random intercept and random slope but treated them as independent.
+
+Weakly informative priors were specified before model fitting:
+\[
+\beta_0\sim N(-2.5,2^2),\quad
+\beta_1\sim N(-1,1^2),\quad
+\beta_2\sim N(0,0.5^2),
+\]
+\[
+\beta_{\mathrm{BM}}\sim N(0,1^2),\quad
+\sigma_y\sim \mathrm{Exponential}(1),\quad
+\tau_0,\tau_1\sim \mathrm{Exponential}(1),
+\]
+\[
+\gamma_0\sim N(-2,2^2),\quad
+\gamma_1,\gamma_2\sim N(0,1^2),\quad
+\alpha\sim N(-0.5,0.75^2).
+\]
+
+\subsection{Level 2: Latent Threshold-Crossing Upgrade}
+
+To address endpoint circularity, the preferred methodological upgrade defines DMR onset directly as a latent threshold-crossing time:
+\[
+T_i^{\mathrm{DMR}}=\inf\{t\ge 0:m_i(t)\le c_{\mathrm{DMR}}\},
+\qquad c_{\mathrm{DMR}}=-4.5.
+\]
+Because molecular response is observed only at clinic visits, first DMR remains interval-observed. For a patient with documented first DMR in \((L_i,R_i]\), the deterministic crossing likelihood is based on
+\[
+M_i(L_i)>c_{\mathrm{DMR}}, \qquad M_i(R_i)\le c_{\mathrm{DMR}},
+\]
+where \(M_i(t)=\min_{0\le u\le t}m_i(u)\). For censored patients, the corresponding condition is \(M_i(C_i)>c_{\mathrm{DMR}}\). In Stan, these hard indicators should be implemented by smooth approximations or replaced by a probabilistic threshold-crossing model.
+
+For the probabilistic version, let
+\[
+C_i\sim N(c_{\mathrm{DMR}},\sigma_{\mathrm{thr}}^2).
+\]
+Then the likelihood contribution for an observed DMR interval is
+\[
+\Phi\left(\frac{M_i(L_i)-c_{\mathrm{DMR}}}{\sigma_{\mathrm{thr}}}\right)
+-
+\Phi\left(\frac{M_i(R_i)-c_{\mathrm{DMR}}}{\sigma_{\mathrm{thr}}}\right),
+\]
+and the censoring contribution is
+\[
+\Phi\left(\frac{M_i(C_i)-c_{\mathrm{DMR}}}{\sigma_{\mathrm{thr}}}\right).
+\]
+Fitting and validating the threshold-crossing models require reanalysis.
+
+\subsection{Model Comparison and Internal Validation}
+
+The repaired joint model was compared against simpler alternatives: a descriptive Kaplan--Meier analysis using first observed DMR visit time, an interval-only model with timing and visit-gap terms, a landmark MRD model, and a joint model that treated floor observations as exact \(-5.0\). Performance was summarized using interval-level and patient-level Brier scores, calibration intercepts, calibration slopes, grouped calibration plots, and patient-cluster bootstrap internal validation where feasible. Threshold-crossing model-comparison results require reanalysis.
+
+\subsection{Dynamic Prediction and Recalibration}
+
+At landmark time \(s\), the dynamic prediction target was
+\[
+\Pr(T_i^{\mathrm{DMR}}\le s+H\mid T_i^{\mathrm{DMR}}>s,\mathcal H_i(s)),
+\]
+where \(\mathcal H_i(s)\) denotes the MRD history available up to \(s\). Landmarks were 6, 12, 18, and 24 months, with horizons \(H=6,12,24\) months. Horizon-specific recalibration used
+\[
+\mathrm{logit}\{p_{i,\mathrm{cal}}(s,H)\}
+=a_H+b_H\mathrm{logit}\{p_{i,\mathrm{orig}}(s,H)\}.
+\]
+The current dynamic prediction analysis is internal and apparent because patient-specific random effects were estimated from the full longitudinal record. Strict prospective landmark prediction requires reanalysis using only history available up to each landmark.
+
+\subsection{Informative Monitoring Sensitivity Analysis}
+
+Because monitoring visits were irregular, an exploratory visit-process extension was specified:
+\[
+\lambda_i^V(t)=
+\exp\{\delta_0+\delta_1[m_i(t)+4.5]+\delta_2\log(1+t)+u_i\},
+\qquad u_i\sim N(0,\sigma_u^2).
+\]
+For visit times \(v_{i1},\ldots,v_{iM_i}\) in \([E_i,C_i]\),
+\[
+L_i^V=
+\left\{\prod_{\ell=1}^{M_i}\lambda_i^V(v_{i\ell})\right\}
+\exp\left\{-\int_{E_i}^{C_i}\lambda_i^V(s)\,ds\right\}.
+\]
+The cumulative intensity is evaluated by quadrature. This extension is exploratory and requires reanalysis.
+
+\subsection{Simulation Study}
+
+A simulation study should evaluate whether the repaired interval-hazard model, deterministic threshold-crossing model, probabilistic threshold-crossing model, and informative visit-process extension recover DMR onset and calibrated DMR probabilities under irregular visits, assay-floor censoring, and informative monitoring. Simulation results require reanalysis.
+
+\section{Results}
+
+\subsection{Verified Endpoint and Data Audit}
+
+The final processed cohort contained 87 patients, 495 longitudinal log-MRD observations, and 275 at-risk intervals. Sixty-eight patients had documented DMR, and 19 were censored. Endpoint recomputation confirmed that DMR and CMR indicators matched their definitions. DMR and CMR counts were identical because no retained observations had log-MRD in \((-5.0,-4.5]\); all retained DMR-positive observations were floor-coded at \(-5.0\). One excluded raw record with low IS and missing essential modeling fields should be clinically adjudicated before final submission.
+
+\subsection{Repaired Primary Model}
+
+The repaired independent-random-effects joint model produced stable computation, with no divergent transitions, maximum treedepth 7, minimum approximate E-BFMI 0.610, maximum R-hat 1.003, minimum bulk effective sample size 1359, and minimum tail effective sample size 1395. The posterior supported a nonlinear decline in latent log-MRD over time and a negative association between latent MRD and interval DMR probability. These estimates describe monitoring-oriented associations and should not be interpreted as externally validated treatment-decision thresholds.
+
+\subsection{Posterior Predictive Checks and Calibration}
+
+Posterior predictive checks supported the longitudinal component among non-floor observations. The observed assay-floor rate was 0.483 and the posterior mean floor probability was 0.414. Interval-level calibration was close in aggregate, but patient-level cumulative DMR probability was underpredicted, motivating dynamic prediction and recalibration.
+
+\subsection{Model Comparison}
+
+In the current internal comparison, the repaired joint model had lower interval-level and patient-level Brier scores than descriptive Kaplan--Meier, interval-only, landmark, and exact-floor alternatives. This supports the joint model as a development model for monitoring-oriented inference. It does not establish clinical decision readiness. Threshold-crossing comparison results require reanalysis.
+
+\subsection{Dynamic Prediction and Advanced Extensions}
+
+The apparent dynamic prediction analysis generated landmark-level DMR probabilities for 6-, 12-, and 24-month horizons and showed that horizon-specific recalibration improved calibration-in-the-large in the development cohort. Strict prospective dynamic prediction requires reanalysis using only MRD history available at each landmark. Informative visit-process results, threshold-crossing results, and simulation results require reanalysis.
+
+\section{Discussion}
+
+This revised framework better aligns the statistical model with the structure of routine CML molecular monitoring. The essential repair clarifies endpoint definitions, standardizes the time scale, treats assay-floor observations as left-censored, removes a weakly identified random-effect correlation, and adds calibration and posterior predictive checks. These changes make the current fitted model suitable as a monitoring-oriented development model.
+
+The most important methodological upgrade is the latent threshold-crossing formulation. Because DMR is defined by log-MRD \(\le -4.5\), using latent MRD as a predictor of a separate DMR event process can appear circular. Defining DMR onset as the first time the latent biological MRD trajectory crosses the DMR threshold resolves this concern and directly represents the clinical endpoint. The irregular monitoring schedule is handled by observing the crossing time only through intervals between visits.
+
+The identical DMR and CMR descriptive counts are not a coding error in the retained analysis data. They reflect assay-floor reporting: all retained DMR-positive values were reported at the \(-5.0\) floor. This feature strengthens the need for left-censored assay-floor modeling and limits the ability of this dataset to distinguish DMR from deeper response.
+
+Model comparison supports the value of combining longitudinal MRD, interval-observed DMR, visit timing, and assay-floor handling. However, the cohort is modest, no external validation cohort is available, and patient-level cumulative probabilities remain undercalibrated without recalibration. Dynamic prediction and recalibration are promising but remain internal development analyses.
+
+The informative visit-process extension addresses a clinically plausible source of bias: patients monitored more frequently have more opportunities to document DMR, and visit frequency may depend on molecular response or clinical concern. In this cohort, that extension should remain exploratory because the visit process introduces additional weakly identified parameters.
+
+Overall, the revised manuscript should claim a statistically coherent monitoring framework, not a validated treatment-decision rule. External or temporal validation, prospective calibration, and simulation evidence are required before model-derived probabilities can be used to guide treatment discontinuation, monitoring intensity, or other clinical actions.

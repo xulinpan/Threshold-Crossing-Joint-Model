@@ -1,0 +1,24 @@
+\begin{table}[!htbp]
+\centering
+\caption{Primary Bayesian joint-model posterior summaries. Posterior intervals are 95\% intervals from the saved Stan chain CSV files.}
+\label{tab:joint-model-posterior}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llrrl}
+\toprule
+Component & Parameter & Posterior mean & 95\% posterior interval & Clinical interpretation \\
+\midrule
+Longitudinal MRD & \(\beta_{\mathrm{time}}\) & -3.539 & -4.497 to -2.613 & Strong decline in latent log-MRD over follow-up \\
+Longitudinal MRD & \(\beta_{\mathrm{time}^2}\) & 0.499 & -0.005 to 1.012 & Evidence of nonlinear response dynamics \\
+Longitudinal MRD & \(\beta_{\mathrm{BM}}\) & 0.613 & -0.826 to 2.065 & Sample-source adjustment; uncertain effect \\
+Longitudinal MRD & \(\sigma_y\) & 1.815 & 1.633 to 2.013 & Residual molecular-measurement variability \\
+Interval DMR & \(\gamma_{\mathrm{time}}\) & -0.215 & -1.062 to 0.601 & Time effect uncertain after latent MRD adjustment \\
+Interval DMR & \(\gamma_{\mathrm{gap}}\) & -1.837 & -2.890 to -0.790 & Visit-gap term; interpret with cumulative interval length \\
+Joint association & \(\alpha_{\mathrm{MRD}}\) & -1.256 & -1.851 to -0.809 & Lower latent MRD associated with higher DMR probability \\
+Random effects & \(\tau_{b0}\) & 0.964 & 0.332 to 1.521 & Patient heterogeneity in baseline latent MRD \\
+Random effects & \(\tau_{b1}\) & 2.212 & 1.550 to 2.963 & Patient heterogeneity in response slope \\
+Random effects & \(\Omega_{12}\) & 0.026 & -0.417 to 0.621 & Weakly estimated; not used as clinical finding \\
+\bottomrule
+\end{tabular}
+}%
+\end{table}
+

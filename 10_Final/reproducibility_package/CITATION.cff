@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the manuscript and the archived release."
+title: "A Bayesian Threshold-Crossing Joint Model for Irregular, Assay-Floor-Censored Molecular Monitoring in Chronic Myeloid Leukemia"
+abstract: >-
+  Reproducibility materials for a Bayesian joint model in which deep molecular
+  response in chronic myeloid leukemia is read off a latent log-MRD trajectory
+  as a threshold crossing, with assay-floor left-censoring and interval-observed
+  endpoint detection. A conventional interval-censored hazard and a multi-state
+  extension arise as options of the same Stan program.
+type: software
+license: MIT
+version: 1.0.0
+date-released: 2026-07-28
+authors:
+  - family-names: Pan
+    given-names: Xulin
+    affiliation: "Pennsylvania State University, University Park, PA, USA"
+    email: xxp5066@psu.edu
+  - family-names: Lv
+    given-names: Jun
+    affiliation: "School of Mathematics and Statistics, Yunnan University, Kunming, China"
+  - family-names: Wang
+    given-names: Chuanming
+    affiliation: "School of Biological and Food Engineering, Honghe University, Mengzi, China"
+  - family-names: Wang
+    given-names: Xueren
+    affiliation: "School of Mathematics and Statistics, Yunnan University, Kunming, China"
+keywords:
+  - joint longitudinal-survival models
+  - left-censored biomarkers
+  - interval-censored events
+  - threshold regression
+  - first-hitting-time models
+  - Bayesian hierarchical modelling
+  - chronic myeloid leukemia
+  - Stan
