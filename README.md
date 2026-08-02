@@ -1,4 +1,6 @@
-# A Bayesian Joint Longitudinal–Interval and Multi-State Threshold-Crossing Framework for Irregular Molecular Monitoring in Chronic Myeloid Leukemia
+# A Bayesian Threshold-Crossing Joint Model for Irregular, Assay-Floor-Censored Molecular Monitoring in Chronic Myeloid Leukemia
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21753041.svg)](https://doi.org/10.5281/zenodo.21753041)
 
 Code, models and reproducible workflow for the manuscript of the same name.
 
